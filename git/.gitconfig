@@ -1,8 +1,53 @@
 [diff]
-	tool = p4mergetool
-	external = extDiff
+	# external = extDiff
 [merge]
 	tool = extMerge
 [mergetool "extMerge"]
 	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 	trustExitCode = false
+
+[alias]
+	s = status
+	c = commit
+	co = checkout
+	cob = checkout -b
+
+	# Checkout and pull
+	cop = "!f() { git checkout \"$1\" && git f $$ git rb; }; f"
+	copm = !"git cop master"
+	copd = !"git cop develop"
+
+	c = commit
+	f = fetch
+	mt = mergetool
+	
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+
+	lbase = log --graph --date-order --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+
+	# Colorful commit log sorted by date
+	l = !"git lbase --all"
+
+	# Colorful commit log sorted by date, showing only ancestors of HEAD
+	lh = !"git lbase HEAD"
+
+	# Push a new branch for the first time
+	pf = !"git push -u origin $(git symbolic-ref --short HEAD)"
+
+	# Gett specific (probably because of branch names)
+	squash = reset --soft $(git merge-base HEAD origin/dev)
+
+
+[user]
+	email = gillyb@gmail.com
+	name = gillyb
+[core]
+	excludesfile = /Users/gillyb/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/gillyb/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
