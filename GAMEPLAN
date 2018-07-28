@@ -1,0 +1,53 @@
+Prerequisites
+==
+homebrew
+git
+
+Utilities
+==
+* homebrew
+* node
+* git + settings
+* nvim + settings
+* zsh + settings  (fzf)
+* iterm2
+* jdk/jre
+* xcode-select
+* tmux
+
+Command line utilities
+* tree
+* htop
+* tig?
+* httpie
+
+
+??
+* docker
+* elasticsearch
+* mongo
+
+
+node
+==
+* webpack
+* npm/yarn
+* 
+
+
+apps
+==
+VS Code + settings
+WebStorm + settings
+Chrome (check extensions)
+Firefox
+Github for Desktop
+Paste
+Pocket
+Wunderlist
+Sublime Text
+Spotify
+Github Desktop
+
+P4Merge
+WireShark

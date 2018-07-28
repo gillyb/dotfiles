@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+source ./helpers.sh
+
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH
+info "Installing zsh"
+brew install zsh zsh-completions
+
+# https://github.com/robbyrussell/oh-my-zsh
+info "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Install some more basic and necessary shell tools
+# Install fzf - https://github.com/junegunn/fzf#using-homebrew-or-linuxbrew
+info "Installing fzf"
+brew install fzf
+$(brew --prefix)/opt/fzf/install
+# Installing fd - https://github.com/sharkdp/fd#on-macos
+info "Installing fd"
+brew install fd
+
+# Create link to zsh configurations
+info "Linking configuration files"
+symlink $DOTF/installations/zsh/.zshrc ~/.zshrc

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+source ./helpers.sh
+
+info "Installing git"
+brew install git
+
+info "Installing tig"
+brew install tig
+
+info "Installing p4merge"
+brew cask install p4merge
+
+info "Linking git config files"
+symlink $DOTF/installations/git/extMerge /usr/local/bin/extMerge
+symlink $DOTF/installations/git/extDiff /usr/local/bin/extDiff
+sudo chmod +x /usr/local/bin/extMerge
+sudo chmod +x /usr/local/bin/extDiff
+symlink $DOTF/installations/git/.gitconfig ~/.gitconfig
+symlink $DOTF/installations/git/.gitignore_global ~/.gitignore_global

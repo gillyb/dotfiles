@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+source ./helpers.sh
+
+info "Installing node"
+brew install node
+
+# Install 'n' - node version manager (https://github.com/tj/n)
+info "Installing 'n' (node version manager)"
+npm install -g n
+
+# Install yarn (yet another package manager)
+info "Installing yarn"
+npm install -g yarn
+
+# Install webpack (i'll definitely need this for something)
+info "Installing webpack globally"
+npm install -g webpack webpack-cli

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source ./helpers.sh
+
+info "Installing neovim"
+brew install neovim
+
+info "Linking configuration files"
+symlink $DOTF/installations/nvim/init.vim ~/.config/nvim/init.vim
