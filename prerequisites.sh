@@ -4,13 +4,25 @@ source ./helpers.sh
 
 # This installs brew and brew cask if we dont have them already.
 
-prerequisites() {
-  HAS_BREW=$(which brew)
+# OS=""
 
-  if [ $? != 0 ]; then
+prerequisites() {
+  set +e
+
+  # If we're not using a mac, then we first need to install ruby (otherwise we can't get brew)
+  # OS=$(uname -s)
+  # if [ $OS != "Darwin" ]; then
+  #   info "Installing ruby"
+  #   sudo pacman -S ruby --noconfirm
+  # fi
+
+  which brew > /dev/null
+
+  if [ $? -ne 0 ]; then
     # Install brew
     info "Installing brew"
     if ! $DRY_RUN; then
+      # This will probably only work on mac (not on mac we should install ruby first)
       /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     success "done"
@@ -18,9 +30,9 @@ prerequisites() {
     info "brew installed already. skipping"
   fi
 
-  HAS_BREW_CASK=$(brew cask)
+  brew cask > /dev/null
 
-  if [ $? != 0 ]; then
+  if [ $? -ne 0 ]; then
     # Install brew cask
     info "Installing brew-cask"
     if ! $DRY_RUN; then
@@ -32,4 +44,5 @@ prerequisites() {
   fi
 
   success "prerequisites stage done."
+  set -e
 }
