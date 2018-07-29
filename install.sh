@@ -13,6 +13,7 @@ source ./prerequisites.sh
 # Parse input parameters
 APP=""
 DRY_RUN=false
+NO_GUI=false
 POSITIONAL=()
 
 while [[ $# -gt 0 ]]
@@ -30,6 +31,11 @@ do
     DRY_RUN=true
     info "(Running in DRY mode)"
     shift # pass argument
+    ;;
+    --no-gui)
+    NO_GUI=true
+    info "'no gui mode' - Won't install any apps that require a gui"
+    shift
     ;;
     *)    # unknown option
     POSITIONAL+=("$1") # save it in an array for later
