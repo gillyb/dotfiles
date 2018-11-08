@@ -13,7 +13,7 @@ set cursorline
 
 set ignorecase
 set smartcase
-set number
+set number relativenumber
 set ruler
 
 set fillchars=                 " set fillchars=vert:\|,fold:-
@@ -22,6 +22,9 @@ set wrapscan
 
 set pastetoggle=<leader>p
 set hidden  " This allows us to change buffers even if we have unsaved changes
+
+" Automatically reload a file if it was edited outside of vim
+set autoread
 
 " PLUGINS (using vim-plug to install plugins) "
 call plug#begin('~/.vim/plugged')
@@ -71,8 +74,9 @@ call plug#end()
 inoremap jk <esc>
 let mapleader = ';'	" set 'leader' key to be '.' (instead of the default '\')
 
-" To split the current screen vertically
+" Split the current screen vertically
 map <leader>j :vsplit<CR>
+" Split the screen horizontally
 map <leader>k :split<CR>
 
 " These 4 lines redefine the shortcuts for moving between splits
@@ -86,6 +90,19 @@ map <leader>n :NERDTreeFind<CR>
 map <leader>qq :q<CR>
 map <leader>ww :w<CR>
 let g:NERDTreeWinSize=41
+
+" Open nerdtree automatically if no file was specified (we opened a dir)
+function! StartUp()
+  if 0 == argc()
+    NERDTree
+  end
+endfunction
+autocmd VimEnter * call StartUp()
+
+" NerdCommenter
+let g:NERDCreateDefaultMappings = 0
+noremap <leader>cc :call NERDComment(0, "toggle")<CR>
+
 
 " Go to next buffer (tab)
 map <leader>f :bn<CR>

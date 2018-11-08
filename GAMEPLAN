@@ -1,12 +1,8 @@
 Prerequisites
 ==
-homebrew
-git
 
 Utilities
 ==
-* homebrew
-* node
 * git + settings
 * nvim + settings
 * zsh + settings  (fzf)
@@ -41,7 +37,6 @@ apps
 ==
 VS Code + settings
 WebStorm + settings
-Chrome (check extensions)
 Firefox
 Github for Desktop
 Paste

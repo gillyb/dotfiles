@@ -9,7 +9,7 @@ info "Installing 'n' (node version manager)"
 npm install -g n
 
 # Install yarn (yet another package manager)
-info "Installing yarn"
+info "Installing yarn globally"
 npm install -g yarn
 
 # Install webpack (i'll definitely need this for something)
