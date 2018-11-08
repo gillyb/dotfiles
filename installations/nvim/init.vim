@@ -2,10 +2,16 @@ set termguicolors
 
 " Set tabs to two spaces
 filetype plugin indent on
+filetype plugin on
 set tabstop=2
 set shiftwidth=2
 set laststatus=2
 set expandtab
+set autoindent
+set smartindent
+
+" Automatically reload a file if it was edited outside of vim
+set autoread
 
 set splitright
 set nowrap
@@ -13,6 +19,7 @@ set cursorline
 
 set ignorecase
 set smartcase
+" set number
 set number relativenumber
 set ruler
 
@@ -22,9 +29,6 @@ set wrapscan
 
 set pastetoggle=<leader>p
 set hidden  " This allows us to change buffers even if we have unsaved changes
-
-" Automatically reload a file if it was edited outside of vim
-set autoread
 
 " PLUGINS (using vim-plug to install plugins) "
 call plug#begin('~/.vim/plugged')
@@ -36,6 +40,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'mattn/emmet-vim'
 
 " Filetype specific plugins
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -74,9 +79,9 @@ call plug#end()
 inoremap jk <esc>
 let mapleader = ';'	" set 'leader' key to be '.' (instead of the default '\')
 
-" Split the current screen vertically
+" To split the current screen vertically
 map <leader>j :vsplit<CR>
-" Split the screen horizontally
+" For horizontal split
 map <leader>k :split<CR>
 
 " These 4 lines redefine the shortcuts for moving between splits
@@ -91,7 +96,7 @@ map <leader>qq :q<CR>
 map <leader>ww :w<CR>
 let g:NERDTreeWinSize=41
 
-" Open nerdtree automatically if no file was specified (we opened a dir)
+" Open nerdtree by default when nvim was opened without any file
 function! StartUp()
   if 0 == argc()
     NERDTree
@@ -102,7 +107,6 @@ autocmd VimEnter * call StartUp()
 " NerdCommenter
 let g:NERDCreateDefaultMappings = 0
 noremap <leader>cc :call NERDComment(0, "toggle")<CR>
-
 
 " Go to next buffer (tab)
 map <leader>f :bn<CR>
