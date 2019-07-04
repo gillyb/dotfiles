@@ -1,0 +1,6 @@
+iterm2
+The better terminal for mac
+This will only install iterm2 - You will need to manually configure it to use the
+settings files that are in this folder.
+
+More info: https://www.iterm2.com

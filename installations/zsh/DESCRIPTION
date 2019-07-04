@@ -1,0 +1,7 @@
+zsh
+ * Install zsh
+ * Install curl
+ * Install oh-my-zsh
+ * Copy zsh configuration file
+
+https://github.com/robbyrussell/oh-my-zsh

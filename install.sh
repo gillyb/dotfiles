@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
-set -euo pipefail
+set -uo pipefail
+
+# Basic dependencies 
+source ./helpers.sh
 
 # $DOTF will be the directory this repo is cloned
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
-source ./helpers.sh
-source ./prerequisites.sh
+echo header "Currently in: ${DOTF}"
+
+
+#source ./prerequisites.sh
 
 # Parse input parameters
-APP=""
-DRY_RUN=false
-NO_GUI=false
-POSITIONAL=()
+export DRY_RUN=false
+export NO_GUI=false
+export POSITIONAL=()   # This is for extra parameters - Not sure I actually need this
 
 while [[ $# -gt 0 ]]
 do
@@ -22,11 +26,6 @@ do
 
   # TODO: add 'help' option that will print explanation
   case $key in
-    -a|--app)     # '-a <app_name>' or '--app <app_name>' to install a specific app
-    APP="$2"
-    shift # pass argument
-    shift # pass value
-    ;;
     -d|--dry-run)
     DRY_RUN=true
     info "(Running in DRY mode)"
@@ -44,64 +43,85 @@ do
   esac
 done
 
-# Check if we only want to install a specific app
-if [ ! -z $APP ]; then
-  header "Preparing to install $APP"
-  install_plugin $APP
-  exit 0
-fi
 
-
-# TODO: Create description file for each app
-# TODO: Create "slow" mode that allows user to confirm each installation
-
-
-header "Before installing apps, there are some prerequisites"
-prerequisites
-
-header "This is going to install all of these:"
-list_plugins
-
-if confirm "\nAre you sure you want to continue?" yes; then
-
-  for app in ./installations/*/ ; do
-    # Extract name of app from dir
-    A=${app##./installations/}
-    CURRENT_APP=${A%/}
-
-    # Install app
-    install_plugin $CURRENT_APP
-  done
-
-fi
-
-update() {
-  header "Updating dotfiles"
-  cd $DOTF
-
-  bullet "Pulling changes... "
-  old_head=`git rev-parse HEAD`
-  git pull
-  new_head=`git rev-parse HEAD`
-
-  if [ "$old_head" != "$new_head" ]; then
-    echo -e "\nPulled the following changes:"
-    git changelog ${old_head}..${new_head}
-
-    echo -ne "\nPress any key to run the installer..."
-    read -n 1
-
-    bullet 'Updating brew... '
-    brew update
-
-    install
+# 
+# Check if brew is installed
+# 
+header "You need brew"
+info "Checking if brew is installed..."
+which -s brew
+if [ $? != 0 ]; then
+  info "Brew is missing"
+  info "Installing brew..."
+  if ! $DRY_RUN; then
+    # This will probably only work on mac
+    # If this doesn't work, then try '/usr/bin/ruby' or ruby might not be installed
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-}
+  info "Done installing brew"
+  info "Installing brew-cask..."
+  if ! $DRY_RUN; then
+    brew tap caskroom/cask
+  fi
+  info "Done installing brew-cask"
+else
+  info "Brew is installed"
+  info "Updating brew"
+  if ! $DRY_RUN; then
+    brew update
+  fi
+  info "Done updating brew"
+  info "Installing brew-cask..."
+  if ! $DRY_RUN; then
+    brew tap caskroom/cask
+  fi
+  info "Done installing brew-cask"
+fi
+if [ $? -eq 0 ]; then
+  success "Done installing/updating brew"
+else
+  error "Failed to install or update brew"
+  exit 1
+fi
 
-show_done() {
-  echo -e "$GREEN=========================="
-  echo "Done ($(benchmark-stop))"
-  echo -e "==========================$RESET"
-}
+
+
+# 
+# Install nodejs & npm (using 'n')
+# 
+header "You need nodejs"
+info "Checking for 'n' (node version manager)"
+which -s n
+if [ $? != 0 ]; then
+  info "Installing 'n'..."
+  if ! $DRY_RUN; then
+    curl -L https://git.io/n-install | bash
+  fi
+  info "'n' installed"
+fi
+info "Making sure you have latest version of node"
+if ! $DRY_RUN; then
+  n latest
+fi
+info "Latest node version installed"
+if [ $? -eq 0 ]; then
+  success "Done installing/updating nodejs"
+else
+  error "Failed to install/update nodejs"
+  exit 1
+fi
+
+
+
+
+#
+# Use nodejs from here to install the rest
+# 
+node node/install.js
+# TODO: Run nodejs install script here...
+if [ $? != 0 ]; then
+  error "An error occurred while running node install script"
+  exit 1
+fi
 
 exit 0

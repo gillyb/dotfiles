@@ -5,7 +5,7 @@ export BLACK="\033[30m"
 export GRAY="\033[1;30m"
 export RED="\033[31m"
 export GREEN="\033[32m"
-export YELLOW="\033[33m"
+export YELLOW="\u001b[33m"
 export BLUE="\033[34m"
 export CYAN="\033[36m"
 export UNDERLINE="\033[4m"
@@ -16,7 +16,6 @@ export BOLD="\033[1m"
 # Special Characters {{{1
 
 export HOURGLASS="⏳ "
-
 
 
 # display methods (header/bullet/info/success/error) {{{1
@@ -122,8 +121,8 @@ install_plugin() {
 # Create a symbolic link.
 # Usage: symlink <src> <destination>
 symlink() {
-  source=$1
-  target=$2
+  source=$1    # This is the file that exists already
+  target=$2    # This is the link we want to create
 
   bullet "Linking $source\n      ==> ${target}... "
   if [ -e "$target" ]; then

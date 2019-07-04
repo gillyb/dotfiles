@@ -1,8 +1,0 @@
-
-#!/usr/bin/env bash
-
-if !$NO_GUI; then
-  brew cask install github
-else
-  info "Can't install github desktop because it requires a gui"
-fi

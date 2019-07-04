@@ -1,5 +1,5 @@
-[diff]
-    external = extDiff
+# [diff]
+    # external = extDiff
 [merge]
     tool = extMerge
 [mergetool "extMerge"]
@@ -19,6 +19,7 @@
 
     f = fetch
     mt = mergetool
+    d = "diff -- ':(exclude)yarn.lock'"
     
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
@@ -35,14 +36,41 @@
     # Push a new branch for the first time
     pf = !"git push -u origin $(git symbolic-ref --short HEAD)"
 
+    # Gett specific (probably because of branch names)
+    squash = reset --soft $(git merge-base HEAD origin/dev)
+
 
 [user]
-	email = gillyb@gmail.com
+	email = gillyb@google.com
 	name = Gilly Barr
 [core]
-    excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX --pattern='^(Date|added|deleted|modified): '
+  editor = nvim
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
+[mergetool "sourcetree"]
+  cmd = /Users/gillyb/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[url "sso://waze-web-internal/"]
+	insteadof = https://waze-web-internal.git.corp.google.com/

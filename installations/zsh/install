@@ -1,24 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-source ./helpers.sh
+const path = require('path');
+const os = require('os');
+const childProcess = require('child_process');
+const files = require('./../../node/files');
+const terminal = require('./../../node/terminal');
 
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH
-info "Installing zsh"
-brew install zsh zsh-completions
+const currentDir = path.resolve(__dirname);
+const homedir = os.homedir();
 
-# https://github.com/robbyrussell/oh-my-zsh
-info "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+terminal.yellow('    * Installing zsh and zsh-completion');
+childProcess.execSync('brew install zsh zsh-completion', [], { stdio: 'inherit' });
 
-# Install some more basic and necessary shell tools
-# Install fzf - https://github.com/junegunn/fzf#using-homebrew-or-linuxbrew
-info "Installing fzf"
-brew install fzf
-$(brew --prefix)/opt/fzf/install
-# Installing fd - https://github.com/sharkdp/fd#on-macos
-info "Installing fd"
-brew install fd
+terminal.yellow('    * Installing curl');
+childProcess.execSync('brew install curl', [], { stdio: 'inherit' });
 
-# Create link to zsh configurations
-info "Linking configuration files"
-symlink $DOTF/installations/zsh/.zshrc ~/.zshrc
+terminal.yellow('    * Installing oh-my-zsh');
+childProcess.execSync('sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"', [], { stdio: 'inherit' });
+
+terminal.yellow('    * Copying configuration file');
+files.createSymLink(path.join(currentDir, '.zshrc'), path.join(homedir, '.zshrc'));
+
+process.exit(0);

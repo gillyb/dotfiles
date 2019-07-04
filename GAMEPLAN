@@ -1,50 +1,63 @@
-Prerequisites
-==
+What this script should do ?
+============================
 
-Utilities
-==
-* git + settings
-* nvim + settings
-* zsh + settings  (fzf)
-* iterm2
-* jdk/jre
-* xcode-select
-* tmux
-* bat
-* tldr (npm install -g tldr)
+*** Create 'help' message for script
 
-Command line utilities
-* tree
-* htop
-* tig?
-* httpie
+1. Online install script:
+  1.1. Download repo to '~/dotfiles/'
+       * Make sure the user has git for this - If not, then ask to install.
+  1.2. Run local install file
+
+2. Local install script:
+  2.1. Install brew & brew cask
+  2.2. Install nodejs
+  2.3. Run nodejs installation, to take it from here..
+       * Install 'n' for node (and possibly yarn)
+
+3. NodeJS installation:
+  3.1 Copy git settings (as symlink)
+  3.2 Install zsh (and copy settings)
+  3.3 Install iterm2 (and copy settings)
+  3.4 Install neovim (and copy settings)
+    3.4.1 Install all neovim plugins
+    3.4.2 Download darcula color scheme and copy it to ~/.config/nvim/colors
+==== HERE ====
+  3.5 Install terminal utilities:
+    3.5.1 bat (better version of 'cat' command)
+    3.5.2 tldr (better man pages)
+    3.5.3 tree
+    3.5.4 htop
+    3.5.5 tig
+    3.5.6 httpie
+    3.5.7 webpack
+    3.5.8 nrun (mine)
+    3.5.9 fzf 
+  3.6 Applications
+    3.6.1 Chrome
+    3.6.2 Firefox
+    3.6.3 Spotify
+    3.6.4 Github Desktop
+    3.6.5 p4merge
+    3.6.6 Paste
+    3.6.7 Wunderlist
+    3.6.8 SublimeText
+    3.6.9 WireShark
+  3.7 Dev Stuff
+    3.7.1 jdk/jre
+    3.7.2 docker
+    3.7.3 elasticsearch
+    3.7.4 mongodb
+    3.7.5 xcode-select
+    3.7.6 WebStorm
+    3.7.7 Dash
+    3.7.8 Disk Inventory X
+    3.7.9 VSCode
+    3.7.10 Whatsapp
+    3.7.11 Kindle
+    3.7.12 Lightshot
+    3.7.13 Giphy
 
 
-??
-* docker
-* elasticsearch
-* mongo
-
-
-node
-==
-* webpack
-* npm/yarn
-* 
-
-
-apps
-==
-VS Code + settings
-WebStorm + settings
-Firefox
-Github for Desktop
-Paste
-Pocket
-Wunderlist
-Sublime Text
-Spotify
-Github Desktop
-
-P4Merge
-WireShark
+4. Make sure this repo is always updated
+  4.1 Create script that will pull repo changes
+  4.2 Save as cronjob

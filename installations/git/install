@@ -1,19 +1,12 @@
-#!/usr/bin/env bash
-source ./helpers.sh
+#!/usr/bin/env node
 
-info "Installing git"
-brew install git
+const path = require('path');
+const os = require('os');
+const files = require('./../../node/files.js');
 
-info "Installing tig"
-brew install tig
+const currentDir = path.resolve(__dirname);
 
-info "Installing p4merge"
-brew cask install p4merge
+files.createSymLink(path.join(currentDir, '.gitconfig'), path.join(os.homedir(), '.gitconfig'));
+files.createSymLink(path.join(currentDir, '.gitignore_global'), path.join(os.homedir(), '.gitignore_global'));
 
-info "Linking git config files"
-symlink $DOTF/installations/git/extMerge /usr/local/bin/extMerge
-symlink $DOTF/installations/git/extDiff /usr/local/bin/extDiff
-sudo chmod +x /usr/local/bin/extMerge
-sudo chmod +x /usr/local/bin/extDiff
-symlink $DOTF/installations/git/.gitconfig ~/.gitconfig
-symlink $DOTF/installations/git/.gitignore_global ~/.gitignore_global
+process.exit(0);

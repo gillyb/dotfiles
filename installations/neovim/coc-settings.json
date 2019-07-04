@@ -1,0 +1,8 @@
+{
+  "workspace.ignoredFiletypes": [
+    "markdown",
+    "log",
+    "txt",
+    "help"
+  ]
+}

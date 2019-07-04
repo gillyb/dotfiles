@@ -37,7 +37,6 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
-
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
@@ -65,14 +64,17 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+source ~/.bash_aliases
 
 # Shortcuts to local dev directories
+alias vim="nvim"
 alias ff="cd /workspace/"
 alias ffb="cd /workspace/beyond-ui/"
-source ~/.bash_aliases
+alias edit_profile="nvim ~/.zshrc"
 alias reload_profile="source ~/.zshrc"
 alias vimrc="nvim ~/.config/nvim/init.vim"
 alias zshrc="nvim ~/.zshrc"
+alias gitconfig="nvim ~/.gitconfig"
 alias lla="ll -a"
 
 alias cat='bat'
@@ -80,8 +82,15 @@ alias du='ncdu --color dark -rr -x'
 alias help='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
 
+alias nr='node /workspace/nrun/index.js'
+
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias morning='/workspace/morning'
+
 # use 'fd' output for 'fzf' command (fd: https://github.com/sharkdp/fd  fzf: https://github.com/junegunn/fzf)
 export FZF_DEFAULT_COMMAND='fd --type f'
+# Default options for 'fzf' command: show 20% of height, show border, show below cursor
+export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235'
 
 # utility functions
 # TODO: add some helpers here...
@@ -113,9 +122,9 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -126,15 +135,22 @@ if [ -f '/Users/gillyb/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/gil
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gillyb/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/gillyb/google-cloud-sdk/completion.zsh.inc'; fi
-source ~/venv/bin/activate
+
 export PATH=$PATH:~/venv/bin/
 export PATH=$PATH:/usr/local/bin/
 export PATH=$PATH:/workspace/
+export PATH=$PATH:/workspace/git-scripts/
+export PATH=$PATH:~/dev/flutter/bin/
 
 alias review="git push origin HEAD:refs/for/develop"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+
+
+# Set up python's virtual environment
+#source ~/venv/bin/activate
 
 
 
@@ -189,3 +205,6 @@ umountdd() {
 
 # TODO: Modify configs for better caching and speed
 alias mg="sshfs -o reconnect gillyb.tlv.corp.google.com:/google/src/cloud/gillyb/ ~/mount/"
+
+#source /Users/gillyb/venv/bin/activate
+#export PATH=$PATH:/Users/gillyb/venv/bin/
