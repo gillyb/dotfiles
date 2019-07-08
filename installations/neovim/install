@@ -2,18 +2,41 @@
 
 source ./helpers.sh
 
-# Install neovim
-brew install neovim
-
 # If you want to install the latest version
 # of neovim (which might be unstable) then
 # uncomment the next line.
 # brew install --HEAD neovim
 
+# Check if neovim is installed
+info "Checking if neovim is installed already"
+which -s nvim
 if [ $? != 0 ]; then
-  error "Failed to install neovim... :("
-  exit 1
+  info "Installing neovim..."
+  brew install neovim
+
+  if [ $? != 0 ]; then
+    echo
+    error "Failed to install neovim"
+    echo "Try running 'brew install neovim' to see the error yourself"
+    echo
+    exit 1
+  fi
+else
+  info "neovim is installed already"
+  info "Update neovim"
+  brew upgrade neovim
+
+  if [ $? != 0 ]; then
+    echo
+    error "Failed to update neovim"
+    echo "Try running 'brew upgrade neovim' to see the error yourself"
+    echo
+    exit 1
+  fi
 fi
+
+info "Done installing/updating neovim."
+
 
 # Now create link to settings files
 info "Linking vim settings files"
@@ -34,3 +57,5 @@ mkdir -p ~/.config/coc/extensions
 cd ~/.config/coc/extensions
 yarn add --ignore-engines $extensions
 symlink "./coc-settings.json" "~/.config/nvim/coc-settings.json"
+
+exit 0

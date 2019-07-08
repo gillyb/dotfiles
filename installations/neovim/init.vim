@@ -33,7 +33,6 @@ set incsearch     " Highlight matches while typing search term
 
 " Show line numbers relative to the selected line
 set number relativenumber
-set ruler
 
 set cmdheight=2       " height of command view under status line
 set pumheight=10      " maximum height of autocomplete menu
@@ -47,7 +46,7 @@ set completeopt=longest,menuone  " This will select longest match in autocomplet
 
 "set fillchars=vert:\|,fold:-
 
-"set colorcolumn=+0
+"set colorcolumn=+0   " Marks the column at a certain length
 "set wrapscan
 
 set nobackup
@@ -68,6 +67,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }    " Filetree
 Plug 'scrooloose/nerdcommenter'    " Easily comment code Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-fugitive' " git integration
+Plug 'rakr/vim-one'       " color scheme
 Plug 'vim-airline/vim-airline'   " Nicer status line
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }    " fuzzy find for file system
 Plug 'junegunn/fzf.vim'
@@ -91,7 +91,7 @@ let g:indentLine_char = "⎸"     " Show a continuous line for indentations
 autocmd Filetype json :IndentLinesDisable      " Disable the indentLine plugin in json files because of some bug
 
 
-" Use the_silver_searcher for ack.vim (when searching directories)
+ "Use the_silver_searcher for ack.vim (when searching directories)
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -199,9 +199,10 @@ nmap <C-o> :Files<CR>
 """
 """ COLORS (and fonts)
 """
-let g:onedark_terminal_italics=1
-"colorscheme onedark
-colorscheme darcula
+let g:one_allow_italics=1
+colorscheme one
+set background=dark
+"colorscheme darcula
 
 
 
@@ -240,3 +241,31 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+if exists('*nvim_create_buf')
+  let $FZF_DEFAULT_OPTS='--layout=reverse --margin 0,2,1,2'
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+  function! FloatingFZF()
+    let buf = nvim_create_buf(v:false, v:true)
+    call setbufvar(buf, '&signcolumn', 'no')
+
+    let height = &lines / 2
+
+    " Dont make the floating window wider than '100'
+    let halfScreen = float2nr(&columns - (&columns / 2))
+    let width = halfScreen > 100 ? 100 : halfScreen
+
+    let col = float2nr((&columns - width) / 2)
+
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': &lines / 5,
+          \ 'col': col,
+          \ 'width': width,
+          \ 'height': height
+          \ }
+
+    call nvim_open_win(buf, v:true, opts)
+    setlocal nonumber norelativenumber
+  endfunction
+endif
