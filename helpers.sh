@@ -124,9 +124,10 @@ symlink() {
   source=$1    # This is the file that exists already
   target=$2    # This is the link we want to create
 
-  bullet "Linking $source\n      ==> ${target}... "
+  info "Linking $source\n      ==> ${target}... "
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
+      echo "HELLO"
       if [ "$source" == "$(readlink "$target")" ]; then
         info " already exists"
         return
@@ -141,7 +142,10 @@ symlink() {
   fi
 
   ln -sf "$source" "$target"
+  echo $?
+  #echo "whoa whoa"
   if [ $? != 0 ]; then
+    echo $?
     info "  Can't create link, trying with sudo:"
     sudo ln -sf "$source" "$target"
     if [ $? != 0 ]; then

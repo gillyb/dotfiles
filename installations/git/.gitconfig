@@ -1,10 +1,10 @@
-# [diff]
-    # external = extDiff
-[merge]
-    tool = extMerge
-[mergetool "extMerge"]
-    cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-    trustExitCode = false
+ ;[diff]
+    ;external = extDiff
+;[merge]
+    ;tool = extMerge
+;[mergetool "extMerge"]
+    ;cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+    ;trustExitCode = false
 
 [alias]
     s = status
@@ -45,7 +45,7 @@
 	name = Gilly Barr
 [core]
   excludesfile = ~/.gitignore_global
-  pager = diff-so-fancy | less --tabs=4 -RFX --pattern='^(Date|added|deleted|modified): '
+  pager = diff-so-fancy | less --tabs=4 -RFX 
   editor = nvim
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"

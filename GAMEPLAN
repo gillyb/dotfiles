@@ -22,6 +22,7 @@ What this script should do ?
     3.4.1 Install all neovim plugins
     3.4.2 Download darcula color scheme and copy it to ~/.config/nvim/colors
 ==== HERE ====
+    3.4.3 Install dev-icons (and also Nerd Fonts)
   3.5 Install terminal utilities:
     3.5.1 bat (better version of 'cat' command)
     3.5.2 tldr (better man pages)

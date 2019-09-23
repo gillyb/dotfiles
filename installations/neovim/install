@@ -2,6 +2,11 @@
 
 source ./helpers.sh
 
+# $HOME is the user's home directory: ~/
+# This is the directory that this script file is in
+CURRENT_DIR=$(dirname $0)
+
+
 # If you want to install the latest version
 # of neovim (which might be unstable) then
 # uncomment the next line.
@@ -19,7 +24,9 @@ if [ $? != 0 ]; then
     error "Failed to install neovim"
     echo "Try running 'brew install neovim' to see the error yourself"
     echo
-    exit 1
+    if ! confirm "Should I continue with the neovim configuration?"; then
+      exit 1
+    fi
   fi
 else
   info "neovim is installed already"
@@ -31,7 +38,9 @@ else
     error "Failed to update neovim"
     echo "Try running 'brew upgrade neovim' to see the error yourself"
     echo
-    exit 1
+    if ! confirm "Should I continue with the neovim configuration?"; then
+      exit 1
+    fi
   fi
 fi
 
@@ -40,11 +49,11 @@ info "Done installing/updating neovim."
 
 # Now create link to settings files
 info "Linking vim settings files"
-symlink "./init.vim" "~/.config/nvim/init.vim"
+symlink "$CURRENT_DIR/init.vim" "$HOME/.config/nvim/init.vim"
 
 # Link vim color theme
 info "Linking darcula color theme"
-symlink "./darcula.vim" "~/.config/nvim/colors/darcula.vim"
+symlink "$CURRENT_DIR/darcula.vim" "$HOME/.config/nvim/colors/darcula.vim"
 
 # Install all relevant plugins
 info "Installing vim plugins"
@@ -53,9 +62,9 @@ vim +PlugInstall +UpdateRemotePlugins +qall
 # Install coc.nvim extensions
 extensions="coc-tsserver coc-eslint coc-json coc-html coc-css"
 info "Installing Coc extensions... "
-mkdir -p ~/.config/coc/extensions
-cd ~/.config/coc/extensions
+mkdir -p "$HOME/.config/coc/extensions"
+cd "$HOME/.config/coc/extensions"
 yarn add --ignore-engines $extensions
-symlink "./coc-settings.json" "~/.config/nvim/coc-settings.json"
+symlink "$CURRENT_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
 
 exit 0
