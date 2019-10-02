@@ -1,5 +1,3 @@
-" Poormans Cheat Sheet
-" 'S' - delete line and put cursor at beginning in insert mode
 "
 " Things to learn:
 " * How to go to beginning of line and set insert mode with deleting current
@@ -15,13 +13,12 @@
 
 
 set termguicolors
-set mouse=a
+set mouse=a 
 set nocompatible	" Turn off vi compatibility mode
 syntax enable		" syntax highlighting
 set encoding=UTF-8
 
-" Set tabs to two spaces filetype plugin indent on
-filetype plugin on
+" Set tabs to two spaces filetype plugin indent on filetype plugin on
 set tabstop=2
 set shiftwidth=2
 set laststatus=2
@@ -39,6 +36,7 @@ set sidescrolloff=5  " Show 5 chars when scrolling horizontally
 set showcmd       " Show typed commands
 
 set splitright
+set splitbelow
 set nowrap
 set cursorline    " highlight the current cursor line
 
@@ -96,6 +94,8 @@ Plug 'mxw/vim-jsx'
 Plug 'ianks/vim-tsx'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+Plug 'gillyb/stable-windows'
 
 call plug#end()
 " PLUGINS EOF
@@ -190,9 +190,9 @@ nmap <leader>ev :e $MYVIMRC<CR>
 nmap <leader>sv :so $MYVIMRC<CR>
 
 " To split the current screen vertically
-map <leader>j :vsplit<CR>
+map <silent> <leader>j :vsplit<CR>
 " For horizontal split
-map <leader>k :split<CR>
+map <silent> <leader>k :split<CR>
 
 " These 4 lines redefine the shortcuts for moving between splits
 " Ctrl + H: moves you to the split on your left
@@ -273,7 +273,7 @@ colorscheme one
 
 
 "" Colors that define split borders and status line
-"hi clear VertSplit
+"hi clear VertSplit 
 hi VertSplit guifg=grey
 
 
@@ -298,7 +298,7 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <C-p> coc#refresh()
 " Use Ctrl+U for 'go to definition'
-nmap <silent> <C-u> <Plug>(coc-definition)
+nmap <silent> <C-u> <Plug>(coc-definition) 
 " Use Ctrl+l for 'view references'
 "nmap <silent> <C-p> <Plug>(coc-references)
 
@@ -323,32 +323,30 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 if exists('*nvim_create_buf')
   let $FZF_DEFAULT_OPTS='--layout=reverse --margin 0,2,1,2'
   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
   function! FloatingFZF()
-    let buf = nvim_create_buf(v:false, v:true)
-    call setbufvar(buf, '&signcolumn', 'no')
+      let buf = nvim_create_buf(v:false, v:true)
+      call setbufvar(buf, '&signcolumn', 'no')
 
-    let height = &lines / 2
+      let height = &lines / 2
 
-    " Dont make the floating window wider than '100'
-    let halfScreen = float2nr(&columns - (&columns / 2))
-    let width = halfScreen > 100 ? 100 : halfScreen
+      " Dont make the floating window wider than '100'
+      let halfScreen = float2nr(&columns - (&columns / 2))
+      let width = halfScreen > 100 ? 100 : halfScreen
 
-    let col = float2nr((&columns - width) / 2)
+      let col = float2nr((&columns - width) / 2)
 
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': &lines / 5,
-          \ 'col': col,
-          \ 'width': width,
-          \ 'height': height
-          \ }
+      let opts = {
+            \ 'relative': 'editor',
+            \ 'row': &lines / 5,
+            \ 'col': col,
+            \ 'width': width,
+            \ 'height': height
+            \ }
 
-    call nvim_open_win(buf, v:true, opts)
-    setlocal nonumber norelativenumber
-  endfunction
+      call nvim_open_win(buf, v:true, opts) 
+      setlocal nonumber norelativenumber
+  endfunction 
 endif
-
 
 " Set mappings for the quickfix window
 function! SetQuickFixMappings()
