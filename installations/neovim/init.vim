@@ -302,6 +302,9 @@ nmap <silent> <C-u> <Plug>(coc-definition)
 " Use Ctrl+l for 'view references'
 "nmap <silent> <C-p> <Plug>(coc-references)
 
+" Rename variable (using coc language server)
+nmap <leader>rn <Plug>(coc-rename)
+
 " ';f' will search for the word under the cursor in the whole project
 " This runs ':Ack <Word_under_cursor>'
 nmap <leader>f :Ack! <cword><CR>
