@@ -75,9 +75,9 @@ set hidden  " This allows us to change buffers even if we have unsaved changes
 " Function to source only if file exists
 function! SourceIfExists(file)
   if filereadable(expand(a:file))
-    exe 'source' a:file
+    execute 'source' a:file
   else
-    echo "File: ".file." not readable"
+    echo 'File not readable'
   endif
 endfunction
 
@@ -88,7 +88,9 @@ endfunction
 """ to upload to github.
 call SourceIfExists("~/dotlocal/nvim/init.vim")
 
-call BeforePlugins()
+if exists("g:is_google3")
+  call BeforePlugins()
+endif
 
 
 """
@@ -133,12 +135,16 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 "Plug 'gillyb/stable-windows'
 
-call MorePlugins()
+if exists("g:is_google3")
+  call MorePlugins()
+endif
 
 call plug#end()
 " PLUGINS EOF
 
-call AfterPlugins()
+if exists("g:is_google3")
+  call AfterPlugins()
+endif
 
 
 " TEMPORARY - PLAYING WITH COC-SNIPPETS
