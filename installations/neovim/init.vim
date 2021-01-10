@@ -1,22 +1,29 @@
+" TODO: Configure coc code actions to open in a floating window
+"       The available actions are retrieved by calling:
+"       CocAction('codeActions')
+"       Returns an array of available actions, and then you can
+"       run a specific action by calling: CocAction('codeAction', <args>)
+"       for 'args' information, check this: https://github.com/neoclide/coc.nvim/blob/master/doc/coc.txt#L1419
 "
 " Things to learn:
-" * How to go to beginning of line and set insert mode with deleting current
-" line
 " * Using tmux - tabs for terminal and vim
 " * tabs in vim
 " * Opening file from ':Files' window or 'NerdTree' in a new split or tab
-" * local rename (via coc)
+" * local rename (via coc) - This can be done with <leader>rn
 " * auto format/indent after pasting code in scope
 " * resize vim buffers with keyboard (make the resizing jumps relative to the
 " viewport size)
+" * Look into elentok's plugin - togglr (elentok/togglr)
 "
 
+set rtp+=/usr/local/opt/fzf
 
 set termguicolors
 set mouse=a 
 set nocompatible	" Turn off vi compatibility mode
 syntax enable		" syntax highlighting
 set encoding=UTF-8
+set clipboard=unnamed    " This allows us to copy/paste from the system clipboard to vim
 
 " Set tabs to two spaces filetype plugin indent on filetype plugin on
 set tabstop=2
@@ -45,8 +52,7 @@ set smartcase
 set incsearch     " Highlight matches while typing search term
 
 
-" Show line numbers relative to the selected line
-set number relativenumber
+set number    " Show line numbers
 
 set cmdheight=2       " height of command view under status line
 set pumheight=10      " maximum height of autocomplete menu
@@ -57,13 +63,32 @@ set completeopt=longest,menuone  " This will select longest match in autocomplet
 
 
 
-
+" Don't use backup or swap files - I don't need these and they just make vim
+" slow.
 set nobackup
 set noswapfile
 
 set pastetoggle=<leader>p
 set hidden  " This allows us to change buffers even if we have unsaved changes
 
+
+" Function to source only if file exists
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  else
+    echo "File: ".file." not readable"
+  endif
+endfunction
+
+
+
+""" WORK SPECIFIC "
+""" This file contains things specific to my workplace that I dont want
+""" to upload to github.
+call SourceIfExists("~/dotlocal/nvim/init.vim")
+
+call BeforePlugins()
 
 
 """
@@ -74,34 +99,46 @@ set hidden  " This allows us to change buffers even if we have unsaved changes
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeFind'] }    " Filetree
-Plug 'scrooloose/nerdcommenter'    " Easily comment code Plug 'joshdick/onedark.vim'
+Plug 'scrooloose/nerdcommenter'    " Easily comment code 
 Plug 'tpope/vim-fugitive' " git integration
-Plug 'rakr/vim-one'       " color scheme
+
+""" Color schemes """
+Plug 'rakr/vim-one'
+"Plug 'morhetz/gruvbox'
+"Plug 'sainnhe/sonokai'
 "Plug 'mhartington/oceanic-next'
+
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'   " Nicer status line
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }    " fuzzy find for file system
+
+Plug 'junegunn/fzf', { 'do': './install --bin' }    " fuzzy find for file system
 Plug 'junegunn/fzf.vim'
+
 Plug 'mileszs/ack.vim'    " Cool searching
 Plug 'mhinz/vim-grepper'
+
 Plug 'mattn/emmet-vim'    " Easily create html tags
 Plug 'leafgarland/typescript-vim'   " typescript syntax highlighting
 Plug 'Yggdroot/indentLine'
 Plug 'digitaltoad/vim-pug'    " For jade/pug template syntax highlighting
+
+Plug 'christoomey/vim-tmux-navigator'    " For navigating between panes in tmux <--> vim
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'ianks/vim-tsx'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'norcalli/nvim-colorizer.lua'
 
-Plug 'gillyb/stable-windows'
+"Plug 'gillyb/stable-windows'
+
+call MorePlugins()
 
 call plug#end()
 " PLUGINS EOF
 
-
-
+call AfterPlugins()
 
 
 " TEMPORARY - PLAYING WITH COC-SNIPPETS
@@ -153,16 +190,22 @@ endif
 
 
 
-" If NERDTree or the quickfix window is the only thing opened, then close vim
-autocmd bufenter * 
-  \ if (winnr("$") == 1 && ((exists("b:NERDTree") && b:NERDTree.isTabTree()) || &buftype == "quickfix")) | q | endif
+ "If NERDTree or the quickfix window is the only thing opened, then close vim
+function CloseVimIfNoOpenWindows()
+      if (winnr('$') == 1 && 
+      \   ((exists('b:NERDTree') && b:NERDTree.isTabTree()) ||
+      \    &buftype == 'quickfix'))
+     q
+  endif
+endfunction
+autocmd bufenter * call CloseVimIfNoOpenWindows()
 
 " Show hidden files in nerdtree
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeStatusline = ''   " Hide status line in NERDTree window to avoid clutter
 " Hide folders i'll probably never want to edit manually
-let g:NERDTreeIgnore = ['^\.DS_Store', '\.git$[[dir]]', '\.idea$[[dir]]']
+let g:NERDTreeIgnore = ['^\.DS_Store', '\.git$[[dir]]', '\.idea$[[dir]]', 'scuba_goldens$[[dir]]']
 
 
 """
@@ -267,10 +310,30 @@ nmap <leader>bb :Buffers<CR>
 let g:one_allow_italics=1
 "colorscheme OceanicNext
 colorscheme one
+"colorscheme gruvbox
+"colorscheme sonokai
 "set background=dark
 "colorscheme darcula
 
 
+" Customize colors for fzf
+"let g:fzf_colors =
+"\ { 'fg':      ['fg', 'Normal'],
+  "\ 'bg':      ['bg', 'Normal'],
+  "\ 'hl':      ['fg', 'Comment'],
+  "\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  "\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  "\ 'hl+':     ['fg', 'Statement'],
+  "\ 'info':    ['fg', 'PreProc'],
+  "\ 'border':  ['fg', 'Ignore'],
+  "\ 'prompt':  ['fg', 'Conditional'],
+  "\ 'pointer': ['fg', 'Exception'],
+  "\ 'marker':  ['fg', 'Keyword'],
+  "\ 'spinner': ['fg', 'Label'],
+  "\ 'header':  ['fg', 'Comment'] }
+
+"let g:fzf_colors.border = ['fg', 'Statement']
+let g:fzf_colors = { 'border': ['fg', 'PreProc'] }
 
 "" Colors that define split borders and status line
 "hi clear VertSplit 
@@ -305,12 +368,13 @@ nmap <silent> <C-u> <Plug>(coc-definition)
 " Rename variable (using coc language server)
 nmap <leader>rn <Plug>(coc-rename)
 
-" ';f' will search for the word under the cursor in the whole project
-" This runs ':Ack <Word_under_cursor>'
-nmap <leader>f :Ack! <cword><CR>
+" Run code action for current line
+nmap <leader>a <Plug>(coc-codeaction)
 
-" map vim-grepper with ripgrep
-nmap <leader>g :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>
+" map vim-grepper with ripgrep (type <leader>gg to trigger)
+let g:grepper = {}
+let g:grepper.side = 0
+nmap <leader>gg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>
 
 
 " Use ';i' to see symbols list (or what coc.nvim calls 'outline' list)
@@ -324,31 +388,10 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 if exists('*nvim_create_buf')
-  let $FZF_DEFAULT_OPTS='--layout=reverse --margin 0,2,1,2'
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-  function! FloatingFZF()
-      let buf = nvim_create_buf(v:false, v:true)
-      call setbufvar(buf, '&signcolumn', 'no')
-
-      let height = &lines / 2
-
-      " Dont make the floating window wider than '100'
-      let halfScreen = float2nr(&columns - (&columns / 2))
-      let width = halfScreen > 100 ? 100 : halfScreen
-
-      let col = float2nr((&columns - width) / 2)
-
-      let opts = {
-            \ 'relative': 'editor',
-            \ 'row': &lines / 5,
-            \ 'col': col,
-            \ 'width': width,
-            \ 'height': height
-            \ }
-
-      call nvim_open_win(buf, v:true, opts) 
-      setlocal nonumber norelativenumber
-  endfunction 
+  let $FZF_DEFAULT_OPTS='--layout=reverse'
+  let $FZF_DEFAULT_COMMAND = "fd --type f --exclude '*.png'"
+  let g:fzf_preview_window = ''
+  let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5 } }
 endif
 
 " Set mappings for the quickfix window
