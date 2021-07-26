@@ -19,6 +19,9 @@ export HOURGLASS="⏳ "
 
 
 # display methods (header/bullet/info/success/error) {{{1
+indent() {
+  printf "    $*"
+}
 title() {
   echo -e "\n${BLUE}$*"
   echo "$*" | sed 's/./=/g'
@@ -34,7 +37,7 @@ bullet() {
 }
 
 progress() {
-  printf "${BLUE}${HOURGLASS} ${PROGRESS_PREFIX}$*..."
+  printf "    ${BLUE}${HOURGLASS} ${PROGRESS_PREFIX}$*..."
 }
 
 clear_line() {
@@ -42,11 +45,19 @@ clear_line() {
 }
 
 info() {
-  echo -e "${CYAN} --> $*$RESET"
+  echo -e "    ${CYAN}--> $*$RESET"
+}
+
+check() {
+  echo -e "${GRAY}??$RESET $*"
 }
 
 success() {
-  printf "${GREEN}✔ $*$RESET\n"
+  printf "    ${GREEN}✔ $*$RESET\n"
+}
+
+minor() {
+  echo -e "    ${GRAY}$*"
 }
 
 error() {
@@ -127,7 +138,6 @@ symlink() {
   info "Linking $source\n      ==> ${target}... "
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
-      echo "HELLO"
       if [ "$source" == "$(readlink "$target")" ]; then
         info " already exists"
         return

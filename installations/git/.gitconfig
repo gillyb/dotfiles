@@ -1,11 +1,3 @@
- ;[diff]
-    ;external = extDiff
-;[merge]
-    ;tool = extMerge
-;[mergetool "extMerge"]
-    ;cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-    ;trustExitCode = false
-
 [alias]
     s = status
     c = commit
@@ -41,7 +33,7 @@
 
 
 [user]
-	email = gillyb@google.com
+	email = gillyb@gmail.com
 	name = Gilly Barr
 [core]
   excludesfile = ~/.gitignore_global
@@ -72,5 +64,3 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
-[url "sso://waze-web-internal/"]
-	insteadof = https://waze-web-internal.git.corp.google.com/

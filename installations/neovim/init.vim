@@ -4,17 +4,17 @@
 "       Returns an array of available actions, and then you can
 "       run a specific action by calling: CocAction('codeAction', <args>)
 "       for 'args' information, check this: https://github.com/neoclide/coc.nvim/blob/master/doc/coc.txt#L1419
+" Ctrl+a opens coc's code actions list
 "
 " Things to learn:
-" * Using tmux - tabs for terminal and vim
-" * tabs in vim
 " * Opening file from ':Files' window or 'NerdTree' in a new split or tab
 " * local rename (via coc) - This can be done with <leader>rn
 " * auto format/indent after pasting code in scope
-" * resize vim buffers with keyboard (make the resizing jumps relative to the
-" viewport size)
 " * Look into elentok's plugin - togglr (elentok/togglr)
 "
+" Resizing -
+" :resize +5 
+" :vertical resize +5
 
 set rtp+=/usr/local/opt/fzf
 
@@ -73,20 +73,20 @@ set hidden  " This allows us to change buffers even if we have unsaved changes
 
 
 " Function to source only if file exists
-function! SourceIfExists(file)
-  if filereadable(expand(a:file))
-    execute 'source' a:file
-  else
-    echo 'File not readable'
-  endif
-endfunction
+"function! SourceIfExists(file)
+  "if filereadable(expand(a:file))
+    "execute 'source' a:file
+  "else
+    "echo 'File not readable'
+  "endif
+"endfunction
 
 
 
 """ WORK SPECIFIC "
 """ This file contains things specific to my workplace that I dont want
 """ to upload to github.
-call SourceIfExists("~/dotlocal/nvim/init.vim")
+"call SourceIfExists("~/dotlocal/nvim/init.vim")
 
 if exists("g:is_google3")
   call BeforePlugins()
@@ -120,20 +120,24 @@ Plug 'mileszs/ack.vim'    " Cool searching
 Plug 'mhinz/vim-grepper'
 
 Plug 'mattn/emmet-vim'    " Easily create html tags
-Plug 'leafgarland/typescript-vim'   " typescript syntax highlighting
+"Plug 'leafgarland/typescript-vim'   " typescript syntax highlighting
 Plug 'Yggdroot/indentLine'
 Plug 'digitaltoad/vim-pug'    " For jade/pug template syntax highlighting
 
 Plug 'christoomey/vim-tmux-navigator'    " For navigating between panes in tmux <--> vim
 
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'ianks/vim-tsx'
+"Plug 'pangloss/vim-javascript'
+"Plug 'mxw/vim-jsx'
+"Plug 'ianks/vim-tsx'
 
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 "Plug 'norcalli/nvim-colorizer.lua'
 
 "Plug 'gillyb/stable-windows'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'nvim-lua/completion-nvim'
+
 
 if exists("g:is_google3")
   call MorePlugins()
@@ -145,26 +149,6 @@ call plug#end()
 if exists("g:is_google3")
   call AfterPlugins()
 endif
-
-
-" TEMPORARY - PLAYING WITH COC-SNIPPETS
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-
-
 
 
 
@@ -318,7 +302,7 @@ let g:one_allow_italics=1
 colorscheme one
 "colorscheme gruvbox
 "colorscheme sonokai
-"set background=dark
+set background=dark
 "colorscheme darcula
 
 
@@ -345,37 +329,16 @@ let g:fzf_colors = { 'border': ['fg', 'PreProc'] }
 "hi clear VertSplit 
 hi VertSplit guifg=grey
 
+" More language server config
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua require("lsp-config")
 
-" Specific to coc.vim (language server)
-autocmd FileType json syntax match Comment +\/\/.\+$+    " Colors comments correctly on json files
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-autocmd FileType typescript let b:coc_root_patterns = ['.git']
-autocmd FileType javascript let b:coc_root_patterns = ['.git']
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <C-p> coc#refresh()
-" Use Ctrl+U for 'go to definition'
-nmap <silent> <C-u> <Plug>(coc-definition) 
-" Use Ctrl+l for 'view references'
-"nmap <silent> <C-p> <Plug>(coc-references)
-
-" Rename variable (using coc language server)
-nmap <leader>rn <Plug>(coc-rename)
-
-" Run code action for current line
-nmap <leader>a <Plug>(coc-codeaction)
 
 " map vim-grepper with ripgrep (type <leader>gg to trigger)
 let g:grepper = {}
@@ -383,15 +346,6 @@ let g:grepper.side = 0
 nmap <leader>gg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>
 
 
-" Use ';i' to see symbols list (or what coc.nvim calls 'outline' list)
-nmap <silent> <leader>i :CocList outline<cr>
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 if exists('*nvim_create_buf')
   let $FZF_DEFAULT_OPTS='--layout=reverse'

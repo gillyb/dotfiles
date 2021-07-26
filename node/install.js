@@ -5,9 +5,7 @@ const fs = require('fs');
 const terminal = require('./terminal');
 const files = require('./files');
 
-// Parse parameters coming from './install.sh' script
-const DRY_RUN = process.env['DRY_RUN'];
-const NO_GUI = process.env['NO_GUI'];
+const DRY_RUN = process.env['DRY_RUN'] && process.env['DRY_RUN'] === 'true';
 
 (async () => {
   const currentPath = path.resolve(__dirname);
@@ -85,4 +83,3 @@ const NO_GUI = process.env['NO_GUI'];
 
   process.exit(0);
 })();
-

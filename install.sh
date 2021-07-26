@@ -10,100 +10,69 @@ source ./helpers.sh
 DOTF=`dirname ${BASH_SOURCE[0]-$0}`
 export DOTF=`cd $DOTF && pwd`
 
-echo header "Currently in: ${DOTF}"
+title "Running install script"
+info "Currently in: ${DOTF}"
 
 
 #source ./prerequisites.sh
 
 # Parse input parameters
 export DRY_RUN=false
-export NO_GUI=false
-export POSITIONAL=()   # This is for extra parameters - Not sure I actually need this
 
-while [[ $# -gt 0 ]]
-do
-  key="$1"
-
-  # TODO: add 'help' option that will print explanation
-  case $key in
-    -d|--dry-run)
+if [[ $# -gt 0 ]]; then
+  if [[ -n "$1" && $1 == "-d" ]]; then
     DRY_RUN=true
-    info "(Running in DRY mode)"
-    shift # pass argument
-    ;;
-    --no-gui)
-    NO_GUI=true
-    info "'no gui mode' - Won't install any apps that require a gui"
-    shift
-    ;;
-    *)    # unknown option
-    POSITIONAL+=("$1") # save it in an array for later
-    shift # pass argument
-    ;;
-  esac
-done
+    info "Running in dry mode"
+  fi
+fi
+
 
 
 # 
 # Check if brew is installed
 # 
-header "You need brew"
-info "Checking if brew is installed..."
+echo ""
+check "Checking if brew is installed"
 which -s brew
 if [ $? != 0 ]; then
   info "Brew is missing"
   info "Installing brew..."
   if ! $DRY_RUN; then
-    # This will probably only work on mac
-    # If this doesn't work, then try '/usr/bin/ruby' or ruby might not be installed
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  info "Done installing brew"
-  info "Installing brew-cask..."
-  if ! $DRY_RUN; then
-    brew tap caskroom/cask
-  fi
-  info "Done installing brew-cask"
+  success "Done installing brew"
 else
-  info "Brew is installed"
-  info "Updating brew"
+  success "Brew is installed"
+  info "Making sure brew is up to date"
   if ! $DRY_RUN; then
     brew update
   fi
-  info "Done updating brew"
-  info "Installing brew-cask..."
-  if ! $DRY_RUN; then
-    brew tap caskroom/cask
-  fi
-  info "Done installing brew-cask"
+  success "Done updating brew"
 fi
-if [ $? -eq 0 ]; then
-  success "Done installing/updating brew"
-else
+if [ $? -ne 0 ]; then
   error "Failed to install or update brew"
   exit 1
 fi
 
-
-
 # 
 # Install nodejs & npm (using 'n')
 # 
-header "You need nodejs"
-info "Checking for 'n' (node version manager)"
+echo ""
+check "Checking if node is installed"
 which -s n
 if [ $? != 0 ]; then
-  info "Installing 'n'..."
+  info "Node is missing"
+  info "Installing node (with 'n')..."
   if ! $DRY_RUN; then
     curl -L https://git.io/n-install | bash
   fi
-  info "'n' installed"
+  success "node installed"
 fi
 info "Making sure you have latest version of node"
 if ! $DRY_RUN; then
   n latest
 fi
-info "Latest node version installed"
+success "Latest node version installed"
 if [ $? -eq 0 ]; then
   success "Done installing/updating nodejs"
 else
@@ -111,17 +80,29 @@ else
   exit 1
 fi
 
+# Install some global node packages
+echo ""
+info "Installing global node packages..."
+NODE_PACKAGES=('webpack' 'webpack-cli' 'typescript' \
+               'typescript-language-server' \
+               'eslint' 'jest' 'concurrently' \
+               'serverless' 'neovim' '@gillyb/nrun')
+for package in "${NODE_PACKAGES[@]}"; do
+  minor "Running: npm install -g ${package}"
+  if ! $DRY_RUN; then
+    eval "npm install -g ${package}"
+    if [ $? -eq 0 ]; then
+      success "Installed ${package}"
+    else
+      error "Failed to install ${package}"
+      exit 1
+    fi
+  fi
+done
 
-
-
-#
-# Use nodejs from here to install the rest
-# 
-node node/install.js
-# TODO: Run nodejs install script here...
-if [ $? != 0 ]; then
-  error "An error occurred while running node install script"
-  exit 1
-fi
-
+echo ""
+echo ""
+success "Installation is complete :)"
+echo ""
+echo ""
 exit 0

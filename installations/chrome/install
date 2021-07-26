@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-source ./helpers.sh
-
-if [ -z $NO_GUI ]; then
-  brew cask install google-chrome
-else
-  error "Can't install chrome, because it requires a gui"
-fi

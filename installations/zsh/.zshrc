@@ -69,7 +69,6 @@ source ~/.bash_aliases
 # Shortcuts to local dev directories
 alias vim="nvim"
 alias ff="cd /workspace/"
-alias ffb="cd /workspace/beyond-ui/"
 alias edit_profile="nvim ~/.zshrc"
 alias reload_profile="source ~/.zshrc"
 alias vimrc="nvim ~/.config/nvim/init.vim"
@@ -79,7 +78,7 @@ alias lla="ll -a"
 
 alias cat='bat'
 alias du='ncdu --color dark -rr -x'
-alias help='tldr'
+alias wtf='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
 
 alias nr='node /workspace/nrun/index.js'
@@ -128,83 +127,15 @@ export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:3
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/gillyb/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/gillyb/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gillyb/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/gillyb/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH=$PATH:~/venv/bin/
 export PATH=$PATH:/usr/local/bin/
 export PATH=$PATH:/workspace/
 export PATH=$PATH:/workspace/git-scripts/
-export PATH=$PATH:~/dev/flutter/bin/
-
-alias review="git push origin HEAD:refs/for/develop"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-
-
-# Set up python's virtual environment
-#source ~/venv/bin/activate
-
-
-
-### Google specific stuff
-#
-# This is so I can work on google3 code from my laptop
-
-# Mounting filesystem
-export DESKTOP_HOSTNAME=gillyb.tlv.corp.google.com
-
-RO_MOUNTS=()
-
-RW_MOUNTS=(
-    /usr/local/google/home/$USER
-    /google/src/cloud/$USER)
-
-mountdd() {
-  (
-    for d in ${RO_MOUNTS[@]} ${RW_MOUNTS[@]}; do
-      if [[ ! -e "$d" ]]; then
-        echo "mountpoint $d does not yet exist; creating it" >&2
-        sudo mkdir -p "$d"
-      fi
-      if [[ ! -w "$d" ]]; then
-        echo "mountpoint $d does not have write permissions; adding them" >&2
-        echo "for user: $USER"
-        sudo chown $USER:eng "$d"
-        chmod 0700 "$d"
-      fi
-    done
-
-    set -x
-    for m in ${RO_MOUNTS[@]}; do sshfs -o reconnect -o ro "$DESKTOP_HOSTNAME:$m" "$m"; done
-    for m in ${RW_MOUNTS[@]}; do sshfs -o reconnect "$DESKTOP_HOSTNAME:$m" "$m"; done
-  )
-}
-
-umountdd() {
-  (
-    set -x
-    for m in ${RO_MOUNTS[@]} ${RW_MOUNTS[@]}; do
-      if type fusermount; then
-        fusermount -u $m
-      else
-        # no fusermount on Mac
-        umount $m
-      fi
-    done
-  )
-}
-
-
-# TODO: Modify configs for better caching and speed
-alias mg="sshfs -o reconnect gillyb.tlv.corp.google.com:/google/src/cloud/gillyb/ ~/mount/"
-
-#source /Users/gillyb/venv/bin/activate
-#export PATH=$PATH:/Users/gillyb/venv/bin/
