@@ -6,6 +6,7 @@ require('packer').startup({function(use)
   use 'folke/tokyonight.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'norcalli/nvim-colorizer.lua'
+  use 'sheerun/vim-polyglot'
   use 'mhinz/vim-grepper'
 
   use 'Yggdroot/indentLine'

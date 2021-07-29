@@ -37,7 +37,7 @@ require('lualine').setup({
         sources = { 'nvim_lsp' }
       }
     },
-    lualine_c = {lsp_progress, 'filename'},
+    lualine_c = {lsp_progress, {'filename', path=1}},
     lualine_x = {},
     lualine_y = {'encoding'},
     -- I just want to see line number out of total lines and col, I don't care about percentage
@@ -51,7 +51,7 @@ require('lualine').setup({
         sources = { 'nvim_lsp' }
       }
     },
-    lualine_c = {'filename'},
+    lualine_c = {{'filename', path=1}},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}

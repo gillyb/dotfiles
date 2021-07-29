@@ -7,7 +7,8 @@ local function init_lsp(client, bufnr)
 
   -- Define mappings
   buf_set_keymap('n', '<C-u>', ':lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', '<C-i>', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', '<C-U>', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help()<CR>', { noremap=true })
 end
 
 -- Attach to language servers
