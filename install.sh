@@ -64,7 +64,7 @@ if [ $? != 0 ]; then
   info "Node is missing"
   info "Installing node (with 'n')..."
   if ! $DRY_RUN; then
-    curl -L https://git.io/n-install | bash
+    brew install n
   fi
   success "node installed"
 fi
