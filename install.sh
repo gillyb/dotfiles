@@ -70,7 +70,7 @@ if [ $? != 0 ]; then
 fi
 info "Making sure you have latest version of node"
 if ! $DRY_RUN; then
-  n latest
+  sudo n latest
 fi
 success "Latest node version installed"
 if [ $? -eq 0 ]; then
@@ -90,7 +90,7 @@ NODE_PACKAGES=('webpack' 'webpack-cli' 'typescript' \
 for package in "${NODE_PACKAGES[@]}"; do
   minor "Running: npm install -g ${package}"
   if ! $DRY_RUN; then
-    eval "npm install -g ${package}"
+    eval "sudo npm install -g ${package}"
     if [ $? -eq 0 ]; then
       success "Installed ${package}"
     else
