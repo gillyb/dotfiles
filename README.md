@@ -20,3 +20,11 @@ curl -L https://github.com/gillyb/dotfiles/raw/master/online-install.sh | bash
 ```
 ./install.sh
 ```
+
+
+## To complete   
+
+* Install neovim
+* Install libraries required for neovim (run `:checkhealth` in neovim to see)
+* fd & ripgrep
+* Nerd Fonts (https://www.nerdfonts.com/font-downloads)
