@@ -31,4 +31,5 @@ echo
 echo "Installing..."
 echo
 cd ~/dotfiles
+chmod +x ./install.sh
 ./install.sh
