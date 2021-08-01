@@ -38,7 +38,7 @@ if [ $? != 0 ]; then
   info "Brew is missing"
   info "Installing brew..."
   if ! $DRY_RUN; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
   success "Done installing brew"
 else
