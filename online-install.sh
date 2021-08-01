@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script should be run directly from the online repository like this:
-# curl -L https://github.com/gillyb/dotfiles/raw/master/online_install.sh | bash
+# curl -L https://github.com/gillyb/dotfiles/raw/master/online-install.sh | bash
 #
 # Prerequisits:
 # sudo apt-get install curl
