@@ -31,4 +31,4 @@ echo
 echo "Installing..."
 echo
 cd ~/dotfiles
-./install
+./install.sh
