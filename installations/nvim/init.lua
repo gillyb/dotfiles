@@ -60,12 +60,6 @@ require'packer-bootstrap'
 require'plugins'
 require'keys'
 
--- airline
-vim.g.airline_powerline_fonts = 1
-vim.g.airline_skip_empty_sections = 1
-vim.g.airline_section_x = ''
-vim.g.airline_section_y = ''
-
 -- indentLine
 vim.g.indentLine_char = "⎸"
 vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')

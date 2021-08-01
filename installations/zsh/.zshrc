@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/gillyb/.oh-my-zsh
+export ZSH=/Users/gbarr/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -63,33 +63,31 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-source ~/.bash_aliases
 
 # Shortcuts to local dev directories
 alias vim="nvim"
-alias ff="cd /workspace/"
+alias v="vim"
 alias edit_profile="nvim ~/.zshrc"
 alias reload_profile="source ~/.zshrc"
-alias vimrc="nvim ~/.config/nvim/init.vim"
+alias vimrc="nvim ~/.config/nvim/init.lua"
 alias zshrc="nvim ~/.zshrc"
 alias gitconfig="nvim ~/.gitconfig"
-alias lla="ll -a"
+alias ll="ls -la"
+alias lla="ls -la"
+alias la="ls -la"
 
-alias cat='bat'
 alias du='ncdu --color dark -rr -x'
 alias wtf='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
 
-alias nr='node /workspace/nrun/index.js'
+# alias nr='node /workspace/nrun/index.js'
 
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
-alias morning='/workspace/morning'
 
 # use 'fd' output for 'fzf' command (fd: https://github.com/sharkdp/fd  fzf: https://github.com/junegunn/fzf)
-export FZF_DEFAULT_COMMAND='fd --type f'
+# export FZF_DEFAULT_COMMAND='fd --type f'
 # Default options for 'fzf' command: show 20% of height, show border, show below cursor
-export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235'
+# export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235'
 
 # utility functions
 # TODO: add some helpers here...
@@ -127,15 +125,7 @@ export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:3
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/gillyb/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/gillyb/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/gillyb/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/gillyb/google-cloud-sdk/completion.zsh.inc'; fi
-
 export PATH=$PATH:/usr/local/bin/
-export PATH=$PATH:/workspace/
-export PATH=$PATH:/workspace/git-scripts/
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

@@ -98,6 +98,7 @@ require('telescope').setup({
       sort_lastused = true
     },
     find_files = {
+      follow = true,
       previewer = false,
       layout_config = {
         height = 0.5
@@ -134,6 +135,7 @@ require('telescope').load_extension('fzy_native')
 _G.edit_my_vimrc = function()
   require('telescope.builtin').find_files({
     prompt_title = 'VimRC Files',
+    follow = true,
     cwd = '~/.config/nvim'
   })
 end
