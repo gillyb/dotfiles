@@ -12,7 +12,7 @@ xcode-select --install
 **Running from online**
 
 ```bash
-curl -L https://github.com/gillyb/dotfiles/raw/master/online_install.sh | bash
+curl -L https://github.com/gillyb/dotfiles/raw/master/online-install.sh | bash
 ```
 
 **Running locally**

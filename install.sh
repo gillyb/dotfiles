@@ -38,7 +38,7 @@ if [ $? != 0 ]; then
   info "Brew is missing"
   info "Installing brew..."
   if ! $DRY_RUN; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
   success "Done installing brew"
 else
@@ -64,13 +64,13 @@ if [ $? != 0 ]; then
   info "Node is missing"
   info "Installing node (with 'n')..."
   if ! $DRY_RUN; then
-    curl -L https://git.io/n-install | bash
+    brew install n
   fi
   success "node installed"
 fi
 info "Making sure you have latest version of node"
 if ! $DRY_RUN; then
-  n latest
+  sudo n latest
 fi
 success "Latest node version installed"
 if [ $? -eq 0 ]; then
@@ -90,7 +90,7 @@ NODE_PACKAGES=('webpack' 'webpack-cli' 'typescript' \
 for package in "${NODE_PACKAGES[@]}"; do
   minor "Running: npm install -g ${package}"
   if ! $DRY_RUN; then
-    eval "npm install -g ${package}"
+    eval "sudo npm install -g ${package}"
     if [ $? -eq 0 ]; then
       success "Installed ${package}"
     else
