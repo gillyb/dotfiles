@@ -72,12 +72,14 @@ require'nvim-treesitter.configs'.setup({
 })
 
 
+-- TODO: Extract to separate file
 -- My custom telescope configuration
 require('telescope').setup({
   defaults = {
     -- Some of these default values don't really apply to all pickers
     -- so I define them again in the pickers I use often.
     file_sorter = require('telescope.sorters').get_fzy_sorter,
+    generic_sorter = require('telescope.sorters').get_fzy_sorter,
     layout_strategy = "center",
     theme = 'dropdown',
     mappings = {
@@ -87,7 +89,9 @@ require('telescope').setup({
         ['<C-k>'] = 'move_selection_previous',
         -- When using 'esc' or 'jk' in insert mode, close the window
         ['<esc>'] = 'close',
-        ['jk'] = 'close'
+        ['jk'] = 'close',
+        -- Send all results to a quickfix list
+        ['<C-q>'] = 'send_to_qflist' 
       }
     }
   },
@@ -101,9 +105,18 @@ require('telescope').setup({
       follow = true,
       previewer = false,
       layout_config = {
-        height = 0.5
+        height = 0.5,
+        width = 0.7
       },
       theme = 'dropdown',
+    },
+    live_grep = {
+      previewer = false,
+      theme = 'dropdown',
+      layout_config = {
+        height = 0.7,
+        width = 0.8
+      }
     },
     help_tags = {
       theme = 'dropdown'
@@ -124,7 +137,7 @@ require('telescope').setup({
   },
   extensions = {
     fzy_native = {
-      override_generic_sorter = false,
+      override_generic_sorter = true,
       override_file_sorter = true
     }
   }
@@ -140,9 +153,11 @@ _G.edit_my_vimrc = function()
   })
 end
 
+-- TODO: Move these to keys.lua
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap=true })
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')

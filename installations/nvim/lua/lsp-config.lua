@@ -6,8 +6,13 @@ local function init_lsp(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Define mappings
-  buf_set_keymap('n', '<C-u>', ':lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', '<C-U>', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', { noremap=true })
+  buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap=true })
+  buf_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', '[d', ':lua vim.lsp.diagnostic.goto_next()<CR>', { noremap=true, silent=true })
+  buf_set_keymap('n', ']d', ':lua vim.lsp.diagnostic.goto_prev()<CR>', { noremap=true, silent=true })
   buf_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help()<CR>', { noremap=true })
 end
 
@@ -35,14 +40,36 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-nvim_lsp.tsserver.setup({
-  on_attach = init_lsp,
-  capabilities = capabilities
-})
+-- Setup all language servers we installed already.
+-- To install more language servers: `:LspInstall <language_server>`
+-- list over here: https://github.com/kabouzeid/nvim-lspinstall#bundled-installers
+local function setup_language_servers()
+  require('lspinstall').setup()
+  local installed_servers = require('lspinstall').installed_servers()
+  for _, server in pairs(installed_servers) do
+    nvim_lsp[server].setup({
+      on_attach = init_lsp,
+      capabilities = capabilities
+    })
+  end
+end
+setup_language_servers()
+-- Automatically reload after installing a new language server so we don't have to
+-- restart neovim
+require('lspinstall').post_install_hook = function()
+  setup_language_servers()
+  vim.cmd('bufdo e')
+end
+
+
+-- nvim_lsp.tsserver.setup({
+--   on_attach = init_lsp,
+--   capabilities = capabilities
+-- })
 
 
 -- I use nvim-compe for completion
-require'compe'.setup {
+require('compe').setup {
   enabled = true;
   autocomplete = true;
   debug = false;

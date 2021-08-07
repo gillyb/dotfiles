@@ -53,4 +53,14 @@ vim.api.nvim_set_keymap('n', '<leader>cc', '<Plug>kommentary_line_default', {})
 vim.api.nvim_set_keymap('x', '<leader>cc', '<Plug>kommentary_visual_default vv', {})
 
 -- Grepper
-vim.api.nvim_set_keymap('n', '<leader>gg', ':Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>', { noremap=true })
+-- vim.api.nvim_set_keymap('n', '<leader>gg', ':Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>', { noremap=true })
+
+-- Add undo 'breakpoints' when typing
+vim.api.nvim_set_keymap('i', ',', ',<C-g>u', { noremap=true })
+vim.api.nvim_set_keymap('i', '.', '.<C-g>u', { noremap=true })
+vim.api.nvim_set_keymap('i', '!', '!<C-g>u', { noremap=true })
+vim.api.nvim_set_keymap('i', '?', '?<C-g>u', { noremap=true })
+
+-- Moving lines around
+vim.api.nvim_set_keymap('v', '<C-j>', ':m \'>+1<CR>gv', { noremap=true })
+vim.api.nvim_set_keymap('v', '<C-k>', ':m \'<-2<CR>gv', { noremap=true })

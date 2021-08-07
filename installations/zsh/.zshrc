@@ -76,6 +76,7 @@ alias ll="ls -la"
 alias lla="ls -la"
 alias la="ls -la"
 
+alias cat='bat'
 alias du='ncdu --color dark -rr -x'
 alias wtf='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
@@ -129,3 +130,9 @@ export PATH=$PATH:/usr/local/bin/
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/gbarr/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gbarr/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/gbarr/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gbarr/google-cloud-sdk/completion.zsh.inc'; fi
