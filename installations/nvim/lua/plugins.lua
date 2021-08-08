@@ -24,6 +24,7 @@ require('packer').startup({function(use)
       require('lsp-config')
     end
   }
+  -- use 'kabouzeid/nvim-lspinstall'
 
   use 'glepnir/lspsaga.nvim'
   use 'hrsh7th/nvim-compe'

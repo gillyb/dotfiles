@@ -43,29 +43,45 @@ end
 -- Setup all language servers we installed already.
 -- To install more language servers: `:LspInstall <language_server>`
 -- list over here: https://github.com/kabouzeid/nvim-lspinstall#bundled-installers
-local function setup_language_servers()
-  require('lspinstall').setup()
-  local installed_servers = require('lspinstall').installed_servers()
-  for _, server in pairs(installed_servers) do
-    nvim_lsp[server].setup({
-      on_attach = init_lsp,
-      capabilities = capabilities
-    })
-  end
-end
-setup_language_servers()
+-- local function setup_language_servers()
+--   require('lspinstall').setup()
+--   local installed_servers = require('lspinstall').installed_servers()
+--   for _, server in pairs(installed_servers) do
+--     nvim_lsp[server].setup({
+--       on_attach = init_lsp,
+--       capabilities = capabilities
+--     })
+--   end
+-- end
+-- setup_language_servers()
 -- Automatically reload after installing a new language server so we don't have to
 -- restart neovim
-require('lspinstall').post_install_hook = function()
-  setup_language_servers()
-  vim.cmd('bufdo e')
-end
+-- require('lspinstall').post_install_hook = function()
+  -- setup_language_servers()
+  -- vim.cmd('bufdo e')
+-- end
 
 
--- nvim_lsp.tsserver.setup({
---   on_attach = init_lsp,
---   capabilities = capabilities
--- })
+-- Install language servers
+-- typescript: npm i -g typescript typescript-language-server
+-- bash: npm i -g bash-language-server
+-- angular: npm i -g @angular/language-server
+-- html: npm i -g vscode-langservers-extracted
+-- json: npm i -g vscode-langservers-extracted
+-- python: npm i -g pyright
+-- vim: npm install -g vim-language-server
+-- Complete list of language servers here: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+local lsp_config = {
+  on_attach = init_lsp,
+  capabilities = capabilities
+}
+nvim_lsp.tsserver.setup(lsp_config)
+nvim_lsp.bashls.setup(lsp_config)
+nvim_lsp.angularls.setup(lsp_config)
+nvim_lsp.html.setup(lsp_config)
+nvim_lsp.jsonls.setup(lsp_config)
+nvim_lsp.pyright.setup(lsp_config)
+nvim_lsp.vimls.setup(lsp_config)
 
 
 -- I use nvim-compe for completion
