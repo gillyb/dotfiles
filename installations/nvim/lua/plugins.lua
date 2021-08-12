@@ -46,6 +46,7 @@ require('packer').startup({function(use)
   use 'nvim-telescope/telescope-fzy-native.nvim'
 
   use 'b3nj5m1n/kommentary'
+  use 'tpope/vim-fugitive'
 
 end,
 config = {
@@ -75,6 +76,7 @@ require'nvim-treesitter.configs'.setup({
 
 -- TODO: Extract to separate file
 -- My custom telescope configuration
+local actions = require('telescope.actions')
 require('telescope').setup({
   defaults = {
     -- Some of these default values don't really apply to all pickers
@@ -92,7 +94,7 @@ require('telescope').setup({
         ['<esc>'] = 'close',
         ['jk'] = 'close',
         -- Send all results to a quickfix list
-        ['<C-q>'] = 'send_to_qflist' 
+        ['<C-q>'] = actions.send_to_qflist + actions.open_qflist
       }
     }
   },
@@ -100,7 +102,10 @@ require('telescope').setup({
     buffers = {
       theme = 'dropdown',
       previewer = false,
-      sort_lastused = true
+      sort_lastused = true,
+      layout_config = {
+        width = 0.6
+      }
     },
     find_files = {
       follow = true,
@@ -132,7 +137,8 @@ require('telescope').setup({
       previewer = false,
       theme = 'dropdown',
       layout_config = {
-        height = 0.6
+        height = 0.6,
+        width = 0.7
       }
     }
   },
@@ -154,11 +160,27 @@ _G.edit_my_vimrc = function()
   })
 end
 
+_G.local_file_browser = function(dir)
+  local currFileDir = vim.fn.expand('%:h')
+  require('telescope.builtin').file_browser({
+      prompt_title = 'Current Dir Files',
+      follow = true,
+      cwd = vim.fn.expand('%:p:h'),
+      theme = 'dropdown',
+      previewer = false,
+      layout_config = {
+        height = 0.5,
+        width = 0.5
+      }
+    })
+end
+
 -- TODO: Move these to keys.lua
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_file_browser()<CR>', { noremap=true })
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')

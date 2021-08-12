@@ -98,3 +98,9 @@ vim.cmd([[
   autocmd InsertLeave,WinEnter * set cursorline
   autocmd InsertEnter,WinLeave * set nocursorline
 ]])
+
+
+-- Always open quickfix window in full width
+vim.cmd([[
+  autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif
+]])

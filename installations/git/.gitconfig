@@ -31,6 +31,11 @@
     # Gett specific (probably because of branch names)
     squash = reset --soft $(git merge-base HEAD origin/dev)
 
+    # Show last commit
+    last-commit = diff HEAD^..HEAD
+    # Show last commit files
+    last-commit-files = show --name-only
+
 
 [user]
 	email = gillyb@gmail.com
