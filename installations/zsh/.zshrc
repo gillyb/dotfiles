@@ -81,6 +81,8 @@ alias du='ncdu --color dark -rr -x'
 alias wtf='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
 
+alias tsnode='npx ts-node'
+
 # alias nr='node /workspace/nrun/index.js'
 
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'

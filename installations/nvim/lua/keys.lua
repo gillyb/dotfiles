@@ -66,3 +66,6 @@ vim.api.nvim_set_keymap('i', '?', '?<C-g>u', { noremap=true })
 -- Moving lines around
 vim.api.nvim_set_keymap('v', '<C-j>', ':m \'>+1<CR>gv', { noremap=true })
 vim.api.nvim_set_keymap('v', '<C-k>', ':m \'<-2<CR>gv', { noremap=true })
+-- Tab to indent lines (or unindent)
+vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap=true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', { noremap=true })

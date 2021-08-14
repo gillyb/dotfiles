@@ -61,7 +61,7 @@ require'plugins'
 require'keys'
 
 -- indentLine
-vim.g.indentLine_char = "⎸"
+vim.g.indentLine_char = "│"
 vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
 vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
 vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable')
