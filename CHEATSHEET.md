@@ -52,3 +52,20 @@ leader key: `;`
 `n`/`p` - Next/Previous occurence  
 `:s/<original_word>/<replace_word>/` - find replace
 
+
+## tmux  
+
+leader key: `Ctrl+a`  
+
+`<leader>j` - Split vertically  
+`<leader>k` - Split horizontally  
+
+`<leader>d` - Detach session  
+`tmux ls` - List running sessions  
+`tmux a -t <session_name>` - Attach to session  
+
+`<leader>c` - New tab  
+`<leader>n` - Next tab  
+`<leader>p` - Previous tab  
+
+`<leader>x` - Close pane/window/tab  
