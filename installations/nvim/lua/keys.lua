@@ -19,6 +19,8 @@ vim.api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', { noremap=true })
 -- NerdTree specific
 vim.api.nvim_set_keymap('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap=false })
 vim.api.nvim_set_keymap('n', '<leader>n', ':NERDTreeFind<CR>', { noremap=false })
+
+-- Save and close windows
 vim.api.nvim_set_keymap('n', '<leader>q', ':q<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>w', ':w<CR>', { noremap=true })
 
