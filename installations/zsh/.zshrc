@@ -93,7 +93,9 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235'
 
 # utility functions
-# TODO: add some helpers here...
+dev() {
+  DIR=`fd . ~/dev -d 1 | fzf` && cd $DIR
+}
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -129,6 +131,7 @@ export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:3
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=$PATH:/usr/local/bin/
+export JAVA_HOME=/usr/bin/java
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

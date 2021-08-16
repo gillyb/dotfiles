@@ -24,6 +24,8 @@ require('packer').startup({function(use)
       require('lsp-config')
     end
   }
+  use 'dylon/vim-antlr'
+  -- This doesn't really work well yet..
   -- use 'kabouzeid/nvim-lspinstall'
 
   use 'glepnir/lspsaga.nvim'

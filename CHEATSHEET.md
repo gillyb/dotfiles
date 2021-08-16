@@ -63,6 +63,7 @@ leader key: `Ctrl+a`
 `<leader>d` - Detach session  
 `tmux ls` - List running sessions  
 `tmux a -t <session_name>` - Attach to session  
+`tmux new -t <session_name>` - Create new session with given name  
 
 `<leader>c` - New tab  
 `<leader>n` - Next tab  

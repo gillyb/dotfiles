@@ -118,3 +118,8 @@ require('compe').setup {
     luasnip = true;
   };
 }
+
+-- Configure .g4 files as antlr syntax
+vim.cmd([[
+  au BufRead,BufNewFile *.g4 set filetype=antlr4
+]])
