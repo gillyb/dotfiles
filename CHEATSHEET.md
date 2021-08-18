@@ -52,6 +52,10 @@ leader key: `;`
 `n`/`p` - Next/Previous occurence  
 `:s/<original_word>/<replace_word>/` - find replace
 
+**Lsp**  
+`:LspInfo` - Get lsp status of active language servers  
+`:LsRestart` - Restarts the language server  
+
 
 ## tmux  
 
