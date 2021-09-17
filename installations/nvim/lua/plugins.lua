@@ -12,6 +12,7 @@ require('packer').startup({function(use)
   use 'Yggdroot/indentLine'
 
   use 'christoomey/vim-tmux-navigator'
+  use 'rrethy/vim-illuminate'
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -24,9 +25,12 @@ require('packer').startup({function(use)
       require('lsp-config')
     end
   }
+  use 'romgrk/nvim-treesitter-context'
   use 'dylon/vim-antlr'
   -- This doesn't really work well yet..
   -- use 'kabouzeid/nvim-lspinstall'
+
+  use 'nvim-treesitter/nvim-treesitter-textobjects';
 
   use 'glepnir/lspsaga.nvim'
   use 'hrsh7th/nvim-compe'
@@ -70,10 +74,35 @@ require('kommentary.config').configure_language('default', {
 })
 
 -- Turn on highlighting with treesitter
-require'nvim-treesitter.configs'.setup({
-  highlight = { enable = true },
-  autopairs = { enable = true }
+require('nvim-treesitter.configs').setup({
+  highlight = { 
+    enable = true,
+    additional_vim_regex_highlighting = false
+  },
+  autopairs = { enable = true },
+  textobjects = {
+    move = {
+      enable= true,
+      set_jumps = true,
+      go_to_next_start = {
+        ["]]"] = "@function.inner"
+      },
+      go_to_previous_start = {
+        ["[["] = "@function.inner"
+      }
+    }
+  }
 })
+
+-- Highlighting the word under the cursor (with vim-illuminate)
+vim.g.Illuminate_delay = 0
+vim.g.Illuminate_ftblacklist = { 'nerdtree', 'qf' }
+vim.cmd([[
+  augroup illuminate_augroup
+    autocmd!
+    autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
+  augroup END
+]])
 
 
 -- TODO: Extract to separate file
@@ -106,7 +135,8 @@ require('telescope').setup({
       previewer = false,
       sort_lastused = true,
       layout_config = {
-        width = 0.6
+        width = 0.6,
+        height = 0.6
       }
     },
     find_files = {
@@ -186,3 +216,9 @@ vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_file_browser()<CR>', { no
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')
+
+-- require('treesitter-context').setup({
+--     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+--     throttle = true, -- Throttles plugin updates (may improve performance)
+-- })
+

@@ -13,6 +13,7 @@
     fa = fetch --all
     mt = mergetool
     d = "diff -- ':(exclude)yarn.lock'"
+    u = pull
     
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
@@ -37,6 +38,8 @@
     # Show last commit files
     last-commit-files = show --name-only
 
+    # Update current branch (assuming i'm not on dev)
+    ub = "git checkout dev && git pull && git checkout - && git merge dev"
 
 [user]
 	email = gillyb@gmail.com

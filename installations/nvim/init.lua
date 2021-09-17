@@ -90,6 +90,8 @@ function! SetQuickFixMappings()
   nnoremap <buffer> <silent> o <CR>
   " Use 'q' to close the quickfix window
   nnoremap <buffer> <silent> q :q<CR>
+  " Set quickfix height to 15
+  resize 15
 endfunction
 autocmd BufReadPost quickfix silent call SetQuickFixMappings()
 ]])
