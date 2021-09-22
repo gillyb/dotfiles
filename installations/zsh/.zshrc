@@ -132,6 +132,7 @@ dev() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=$PATH:/usr/local/bin/
+export PATH=$PATH:~/Library/Python/3.8/bin
 export JAVA_HOME=/usr/bin/java
 
 export LC_ALL=en_US.UTF-8
