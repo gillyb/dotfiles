@@ -83,8 +83,9 @@ alias wtf='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
 
 alias tsnode='npx ts-node'
+alias sb='switch_branch'
 
-# alias nr='node /workspace/nrun/index.js'
+alias nr='npm_run'
 
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
@@ -96,6 +97,13 @@ export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:3
 # utility functions
 dev() {
   DIR=`fd . ~/dev -d 1 | fzf` && cd $DIR
+}
+switch_branch() {
+  SELECTED_BRANCH=`git branch | fzf | xargs` && git checkout $SELECTED_BRANCH
+}
+npm_run() {
+  CHOSEN_SCRIPT=`cat package.json | jq '.scripts | keys | .[]' | grep -v '\[' | grep -v '\]' | fzf`
+  npm run ${CHOSEN_SCRIPT:1:-1}
 }
 
 # export MANPATH="/usr/local/man:$MANPATH"

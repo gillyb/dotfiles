@@ -3,6 +3,7 @@
     c = commit
     co = checkout
     cob = checkout -b
+    b = branch
 
     # Checkout and pull
     cop = "!f() { git checkout \"$1\" && git f $$ git rb; }; f"

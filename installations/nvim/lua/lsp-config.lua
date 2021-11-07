@@ -16,7 +16,9 @@ local function init_lsp(client, bufnr)
   buf_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>', { noremap=true })
 
   -- For illuminating word under the cursor
-  require('illuminate').on_attach(client)
+  if client.resolved_capabilities.document_highlight then
+    require('illuminate').on_attach(client)
+  end
 end
 
 -- Attach to language servers
@@ -132,7 +134,3 @@ require('compe').setup {
 vim.cmd([[
   au BufRead,BufNewFile *.g4 set filetype=antlr4
 ]])
-require('treesitter-context').setup({
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-    throttle = true, -- Throttles plugin updates (may improve performance)
-})
