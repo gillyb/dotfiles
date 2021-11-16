@@ -50,6 +50,7 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 
 vim.o.background = 'dark'
+-- require('onedarkpro').load()
 vim.cmd('colorscheme one')
 -- vim.cmd('colorscheme tokyonight')
 vim.cmd('hi VertSplit guifg=grey')

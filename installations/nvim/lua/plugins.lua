@@ -2,16 +2,20 @@ require('packer').startup({function(use)
   
   use 'scrooloose/nerdtree'
   
+  -- Theme
+  use 'olimorris/onedarkpro.nvim'
   use 'rakr/vim-one'
   use 'folke/tokyonight.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'norcalli/nvim-colorizer.lua'
+
   use 'sheerun/vim-polyglot'
   use 'mhinz/vim-grepper'
 
   use 'Yggdroot/indentLine'
 
   use 'christoomey/vim-tmux-navigator'
+  use 'szw/vim-maximizer'
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -84,6 +88,7 @@ require('packer').startup({function(use)
     event = 'CursorHold',
     module = 'illuminate'
   }
+  use 'ray-x/lsp_signature.nvim'
 
   use 'dylon/vim-antlr'
   -- This doesn't really work well yet..
@@ -116,7 +121,6 @@ require('packer').startup({function(use)
     -- 'pwntester/octo.nvim'
   }
 
-
 end,
 config = {
   display = {
@@ -124,12 +128,16 @@ config = {
   }
 }})
 
+require('onedarkpro').setup({
+    theme = 'onedark'
+  })
 require('colorizer').setup()
 require('nvim-autopairs').setup()
 require('nvim-autopairs.completion.compe').setup({
   map_cr = true,
   map_complete = true
 })
+require('lsp_signature').setup()
 
 require('kommentary.config').configure_language('default', {
   prefer_single_line_comments = true,

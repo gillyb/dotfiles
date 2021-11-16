@@ -1,6 +1,8 @@
 [alias]
     s = status
     c = commit
+    cm = commit -m
+    cam = commit -am
     co = checkout
     cob = checkout -b
     b = branch
@@ -38,6 +40,9 @@
     last-commit = diff HEAD^..HEAD
     # Show last commit files
     last-commit-files = show --name-only
+
+    # reset --hard
+    hard-reset = reset --hard
 
     # Update current branch (assuming i'm not on dev)
     ub = "git checkout dev && git pull && git checkout - && git merge dev"
