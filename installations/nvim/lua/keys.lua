@@ -69,3 +69,6 @@ vim.api.nvim_set_keymap('v', '<C-k>', ':m \'<-2<CR>gv', { noremap=true })
 -- Tab to indent lines (or unindent)
 -- vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap=true })
 -- vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', { noremap=true })
+
+-- Select previously pasted text
+vim.api.nvim_set_keymap('n', 'gp', '`[v`]', { noremap=true })

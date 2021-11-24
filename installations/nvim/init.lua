@@ -41,6 +41,7 @@ vim.g.kommentary_create_default_mappings = false
 
 -- Set color scheme
 --- Example config in Lua
+vim.g.sonokai_style = 'andromeda'
 vim.g.tokyonight_dev = true
 vim.g.nvcode_termcolors = true
 vim.g.tokyonight_style = "storm"
@@ -52,6 +53,8 @@ vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 vim.o.background = 'dark'
 -- require('onedarkpro').load()
 vim.cmd('colorscheme one')
+-- vim.cmd('colorscheme darcula')
+-- vim.cmd('colorscheme sonokai')
 -- vim.cmd('colorscheme tokyonight')
 vim.cmd('hi VertSplit guifg=grey')
 

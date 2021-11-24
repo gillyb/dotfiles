@@ -3,6 +3,8 @@ require('packer').startup({function(use)
   use 'scrooloose/nerdtree'
   
   -- Theme
+  use 'doums/darcula'
+  use 'sainnhe/sonokai'
   use 'olimorris/onedarkpro.nvim'
   use 'rakr/vim-one'
   use 'folke/tokyonight.nvim'
