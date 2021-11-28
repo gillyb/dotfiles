@@ -3,7 +3,7 @@
 source ./helpers.sh
 
 if [ -z $NO_GUI ]; then
-  brew cask install iterm2
+  brew install --cask iterm2
 
   if [ $? != 0 ]; then
     error "Failed to install iterm2... :("
