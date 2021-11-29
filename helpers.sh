@@ -95,7 +95,7 @@ ask() {
 }
 
 pause() {
-  local text=${1:-Press any key to continue... }
+  local text=${1:-Press any key to continue, or Ctrl+C to quit... }
   echo -ne "$text"
   read -n 1
 }
@@ -121,8 +121,9 @@ install_plugin() {
     if [ $? -eq 0 ]; then
       success "done\n"
     else
-      error "Failure..."
-      exit 1
+      error "Failed to install $1..."
+      echo "\n\n"
+      pause
     fi
   else
     success "done\n"
@@ -130,7 +131,7 @@ install_plugin() {
 }
 
 # Create a symbolic link.
-# Usage: symlink <src> <destination>
+# Usage: symlink <src-file> <link-file>
 symlink() {
   source=$1    # This is the file that exists already
   target=$2    # This is the link we want to create
@@ -152,19 +153,16 @@ symlink() {
   fi
 
   ln -sf "$source" "$target"
-  echo $?
-  #echo "whoa whoa"
   if [ $? != 0 ]; then
-    echo $?
     info "  Can't create link, trying with sudo:"
     sudo ln -sf "$source" "$target"
     if [ $? != 0 ]; then
-      error "failed"
+      error "failed to create link"
       exit 1
     fi
   fi
   if [ $? == 0 ]; then
-    success "done"
+    success "done!"
   fi
 }
 

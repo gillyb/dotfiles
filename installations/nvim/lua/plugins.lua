@@ -19,71 +19,13 @@ require('packer').startup({function(use)
   use 'christoomey/vim-tmux-navigator'
   use 'szw/vim-maximizer'
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    opt = true,
-    event = "BufRead",
-    requires = {
-      "nvim-treesitter/playground",
-      "nvim-treesitter/nvim-treesitter-textobjects"
-    },
-    config = function()
-      require('nvim-treesitter.configs').setup({
-        highlight = { 
-          enable = true,
-          additional_vim_regex_highlighting = false
-        },
-        autopairs = { enable = true },
-        textobjects = {
-          move = {
-            enable= true,
-            set_jumps = true,
-            go_to_next_start = {
-              ["]]"] = "@function.inner"
-            },
-            go_to_previous_start = {
-              ["[["] = "@function.inner"
-            }
-          }
-        },
-        playground = {
-          enable = true,
-          disable = {},
-          updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-          persist_queries = true, -- Whether the query persists across vim sessions
-          keybindings = {
-            toggle_query_editor = "o",
-            toggle_hl_groups = "i",
-            toggle_injected_languages = "t",
-            toggle_anonymous_nodes = "a",
-            toggle_language_display = "I",
-            focus_language = "f",
-            unfocus_language = "F",
-            update = "R",
-            goto_node = "<cr>",
-            show_help = "?",
-          },
-        },
-      })
-    end
-  } 
-  use {
-    'neovim/nvim-lspconfig',
-    event = 'BufReadPre',
-    config = function()
-      require('lsp-config')
-    end
-  }
+  use 'nvim-treesitter/playground'
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'neovim/nvim-lspconfig'
   use {
     'romgrk/nvim-treesitter-context',
-    after = 'nvim-treesitter',
-    config = function()
-      require('treesitter-context').setup({
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        throttle = true, -- Throttles plugin updates (may improve performance)
-      })
-    end
+    after = 'nvim-treesitter'
   }
   use {
     'RRethy/vim-illuminate',
@@ -103,10 +45,10 @@ require('packer').startup({function(use)
   use {
     'hoob3rt/lualine.nvim',
     event = 'VimEnter',
-    config = function()
-      require('custom_lualine')
-    end,
-    requires = {'kyazdani42/nvim-web-devicons', opt=true}
+    requires = {'kyazdani42/nvim-web-devicons', opt=true},
+    -- config = function()
+    --   require('custom_lualine')
+    -- end
   }
 
   use {
@@ -130,6 +72,8 @@ config = {
   }
 }})
 
+require('lsp-config')
+
 require('onedarkpro').setup({
     theme = 'onedark'
   })
@@ -140,6 +84,9 @@ require('nvim-autopairs.completion.compe').setup({
   map_complete = true
 })
 require('lsp_signature').setup()
+
+-- This doesn't work at the moment, but should be fixed
+-- require('custom_lualine')
 
 require('kommentary.config').configure_language('default', {
   prefer_single_line_comments = true,

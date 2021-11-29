@@ -42,6 +42,11 @@ done
 info "DRY_RUN = ${DRY_RUN}"
 info "VERBOSE = ${VERBOSE}"
 
+export BE_QUIET="&>/dev/null"
+if [ $VERBOSE == true ]; then
+  BE_QUIET=""
+fi
+
 
 
 # 
@@ -104,24 +109,59 @@ NODE_PACKAGES=('webpack' 'webpack-cli' 'typescript' \
                'eslint' 'jest' 'concurrently' \
                'serverless' 'neovim' '@gillyb/nrun')
 
-# QUIET=([$VERBOSE] && '' || &>/dev/null')
 for package in "${NODE_PACKAGES[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
-    if [ $VERBOSE == true ]; then
-      eval "sudo npm install -g ${package}"
-    else
-      eval "sudo npm install -g ${package} &>/dev/null"
-    fi
+    eval "sudo npm install -g ${package} ${BE_QUIET}"
     if [ $? -eq 0 ]; then
       success "Installed ${package}"
     else
       error "Failed to install '${package}'"
-      error "Try running this script again with --verbose"
-      exit 1
+      error "You can try running this script again with --verbose"
+      pause
     fi
   fi
 done
+
+
+
+
+# Go through various installations
+
+# Start with some basic utilities
+info "Installing some basic utils with brew"
+BREW_UTILS=('bat' 'fd')
+for package in "${BREW_UTILS[@]}"; do
+  minor "Installing '${package}'"
+  if ! $DRY_RUN; then
+    eval "brew install bat ${BE_QUEIT}"
+    if [ $? -eq 0 ]; then
+      success "Installed '${package}'"
+    else
+      error "Failed to install '${package}'"
+      error "You can try running this script again with --verbose"
+      pause
+    fi
+  fi
+done
+
+info "Installing some basic utils with brew-cask"
+BREW_CASK_UTILS=('sublime-text' 'iterm2' 'font-hack-nerd-font')
+for package in "${BREW_CASK_UTILS[@]}"; do
+  minor "Installing '${package}'"
+  if ! $DRY_RUN; then
+    eval "brew install bat ${BE_QUEIT}"
+    if [ $? -eq 0 ]; then
+      success "Installed '${package}'"
+    else
+      error "Failed to install '${package}'"
+      error "You can try running this script again with --verbose"
+      pause
+    fi
+  fi
+done
+
+
 
 echo ""
 echo ""

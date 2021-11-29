@@ -6,6 +6,8 @@ A repo for all my settings (dot) files, and some cheatsheets to go along
 
 * iterm2 (brew install --cask iterm2)
 * install fd (brew install fd)
+* install bat (brew install bat)
+* install ripgrep (github - BurntSushi/ripgrep)
 * neovim (brew install nvim)
   * sudo gem install neovim
   * brew install python
