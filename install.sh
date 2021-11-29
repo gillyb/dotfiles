@@ -14,17 +14,33 @@ title "Running install script"
 info "Currently in: ${DOTF}"
 
 
-#source ./prerequisites.sh
-
 # Parse input parameters
 export DRY_RUN=false
+export VERBOSE=false
 
-if [[ $# -gt 0 ]]; then
-  if [[ -n "$1" && $1 == "-d" ]]; then
-    DRY_RUN=true
-    info "Running in dry mode"
-  fi
-fi
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+  key="$1"
+
+  case $key in
+    # TODO: Add 'help' option
+    -d|--dry-run)
+      DRY_RUN=true
+      shift # pass argument
+      ;;
+    -v|--verbose)
+      VERBOSE=true
+      shift # pass argument
+      ;;
+    *)    # unknown option
+      POSITIONAL+=("$1") # save it in an array for later
+      shift # pass argument
+      ;;
+  esac
+done
+
+info "DRY_RUN = ${DRY_RUN}"
+info "VERBOSE = ${VERBOSE}"
 
 
 
@@ -87,14 +103,21 @@ NODE_PACKAGES=('webpack' 'webpack-cli' 'typescript' \
                'typescript-language-server' \
                'eslint' 'jest' 'concurrently' \
                'serverless' 'neovim' '@gillyb/nrun')
+
+# QUIET=([$VERBOSE] && '' || &>/dev/null')
 for package in "${NODE_PACKAGES[@]}"; do
-  minor "Running: npm install -g ${package}"
+  minor "Installing '${package}'"
   if ! $DRY_RUN; then
-    eval "sudo npm install -g ${package}"
+    if [ $VERBOSE == true ]; then
+      eval "sudo npm install -g ${package}"
+    else
+      eval "sudo npm install -g ${package} &>/dev/null"
+    fi
     if [ $? -eq 0 ]; then
       success "Installed ${package}"
     else
-      error "Failed to install ${package}"
+      error "Failed to install '${package}'"
+      error "Try running this script again with --verbose"
       exit 1
     fi
   fi
@@ -105,4 +128,5 @@ echo ""
 success "Installation is complete :)"
 echo ""
 echo ""
+
 exit 0
