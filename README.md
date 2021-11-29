@@ -1,6 +1,22 @@
 # dotfiles
 A repo for all my settings (dot) files, and some cheatsheets to go along
 
+
+## Things to add
+
+* iterm2 (brew install --cask iterm2)
+* install fd (brew install fd)
+* neovim (brew install nvim)
+  * sudo gem install neovim
+  * brew install python
+  * python3 -m pip install --user --upgrade pynvim
+  * python2 -m pip install --user --upgrade pynvim
+* tmux (brew install tmux)
+* install sublimetext (brew install --cask sublime-text)
+* install nerdfonts (brew tap homebrew/cask-fonts && brew install --cask font-hack-nerd-font)
+* Make sure initial installations works (brew and node)
+  * Make sure the beginning of the installation process works on the default mac terminal
+
 ## Prerequisites - need to install manually  
 
 * git

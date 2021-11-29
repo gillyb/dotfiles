@@ -118,10 +118,10 @@ require('packer').startup({function(use)
   use 'b3nj5m1n/kommentary'
   use 'tpope/vim-fugitive'
 
-  use {
-    '~/dev/octo.nvim'
-    -- 'pwntester/octo.nvim'
-  }
+  -- use {
+  --  '~/dev/octo.nvim'
+  --  -- 'pwntester/octo.nvim'
+  -- }
 
 end,
 config = {
@@ -266,6 +266,7 @@ vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<
 vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_file_browser()<CR>', { noremap=true })
 
+--[[
 require('octo').setup({
   default_remote = {"upstream", "origin"}; -- order to try remotes
   gitlab = {
@@ -395,6 +396,7 @@ require('octo').setup({
     }
   }
 })
+--]]
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')
