@@ -130,7 +130,7 @@ done
 
 # Start with some basic utilities
 info "Installing some basic utils with brew"
-BREW_UTILS=('bat' 'fd')
+BREW_UTILS=('bat' 'fd' 'ripgrep' 'python')
 for package in "${BREW_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
