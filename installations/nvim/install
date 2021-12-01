@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const os = require('os');
+const childProcess = require('child_process');
+const files = require('./../../node/files');
+const terminal = require('./../../node/terminal');
+
+const currentDir = path.resolve(__dirname);
+const homedir = os.homedir();
+
+terminal.yellow('    * Installing neovim');
+childProcess.execSync('brew install nvim');
+
+terminal.yellow('      --> Ruby configuration');
+childProcess.execSync('sudo gem install neovim');
+
+terminal.yellow('      --> Python configuration');
+childProcess.execSync('brew install python');
+childProcess.execSync('python3 -m pip install --user --upgrade pynvim');
+
+
+
+terminal.yellow('    * Copying configuration file');
+files.createSymLink(path.join(currentDir, '.zshrc'), path.join(homedir, '.zshrc'));
+
+process.exit(0);

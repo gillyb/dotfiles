@@ -25,8 +25,14 @@ require('packer').startup({function(use)
   use 'neovim/nvim-lspconfig'
   use {
     'romgrk/nvim-treesitter-context',
-    after = 'nvim-treesitter'
+    config = function()
+      require('treesitter-context').setup({
+        enable = true,
+        throttle = true
+      })
+    end
   }
+
   use {
     'RRethy/vim-illuminate',
     event = 'CursorHold',

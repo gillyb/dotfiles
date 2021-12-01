@@ -104,10 +104,18 @@ fi
 # Install some global node packages
 echo ""
 info "Installing global node packages..."
-NODE_PACKAGES=('webpack' 'webpack-cli' 'typescript' \
-               'typescript-language-server' \
-               'eslint' 'jest' 'concurrently' \
-               'serverless' 'neovim' '@gillyb/nrun')
+NODE_PACKAGES=('webpack'                     \
+               'webpack-cli'                 \
+               'typescript'                  \
+               'ts-node'                     \
+               'typescript-language-server'  \
+               'eslint'                      \
+               'jest'                        \
+               'concurrently'                \
+               'serverless'                  \
+               'neovim'                      \
+               '@gillyb/nrun'                \
+)
 
 for package in "${NODE_PACKAGES[@]}"; do
   minor "Installing '${package}'"
@@ -129,8 +137,19 @@ done
 # Go through various installations
 
 # Start with some basic utilities
+echo ""
 info "Installing some basic utils with brew"
-BREW_UTILS=('bat' 'fd' 'ripgrep' 'python')
+BREW_UTILS=(       \
+  'tmux'           \
+  'bat'            \
+  'fd'             \
+  'ripgrep'        \
+  'jq'             \
+  'python'         \
+  'python@3.8'     \
+  'htop'           \
+  'diff-so-fancy'  \
+)
 for package in "${BREW_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
@@ -145,8 +164,20 @@ for package in "${BREW_UTILS[@]}"; do
   fi
 done
 
+echo ""
 info "Installing some basic utils with brew-cask"
-BREW_CASK_UTILS=('sublime-text' 'iterm2' 'font-hack-nerd-font')
+BREW_CASK_UTILS=(       \
+  'chrome'              \
+  'sublime-text'        \
+  'iterm2'              \
+  'font-hack-nerd-font' \
+  'whatsapp'            \
+  'visual-studio-code'  \
+  'github'              \
+  'spotify'             \
+  'prusaslicer'         \
+  'autodesk-fusion360'  \
+)
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
@@ -160,6 +191,19 @@ for package in "${BREW_CASK_UTILS[@]}"; do
     fi
   fi
 done
+
+
+# Now use node to install the rest
+echo ""
+echo ""
+echo ""
+info "  Starting app installations.. "
+echo ""
+node node/install.js
+if [ $? != 0 ]; then
+  error "\nFailed to run node installations.."
+  exit 1
+end
 
 
 

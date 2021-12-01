@@ -2,11 +2,42 @@
 
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
+const childProcess = require('child_process');
 const files = require('./../../node/files.js');
+const terminal = require('./../../node/terminal.js');
 
 const currentDir = path.resolve(__dirname);
 
 files.createSymLink(path.join(currentDir, '.gitconfig'), path.join(os.homedir(), '.gitconfig'));
 files.createSymLink(path.join(currentDir, '.gitignore_global'), path.join(os.homedir(), '.gitignore_global'));
+
+
+// Create ssh key for working via terminal
+const githubUsername = "gillyb@gmail.com";
+const sshKeyFile = "~/.ssh/id_ed25519_github";
+const sshKeyPassphrase = "";
+terminal.yellow('Generating ssh key for github');
+fs.mkdirSync('~/.ssh');
+childProcess.execSync(`ssh-keygen -t ed25519 -C "${githubUsername}" -f "${sshKeyFile}" -P "${sshKeyPassphrase}"`);
+childProcess.execSync('eval "$(ssh-agent -s)"');
+childProcess.execSync('touch config');
+
+const hostDefinition = `Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ${sshKeyFile}`;
+childProcess.execSync(`echo "${hostDefinition}" >> ~/.ssh/config`);
+childProcess.execSync(`ssh-add -K ${sshKeyFile}`);
+
+console.log('\n\n');
+terminal.cyan(`Now run this: "pbcopy < ${sshKeyFile}.pub"`);
+console.log('\n\n');
+terminal.confirmAction('Did you copy the ssh key?');
+
+terminal.cyan('Now go to: https://github.com/settings/ssh/new');
+terminal.cyan('paste the ssh key you created and save it.');
+
+terminal.confirmAction('Are you done adding the ssh key?');
 
 process.exit(0);

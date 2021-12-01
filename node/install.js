@@ -6,13 +6,15 @@ const terminal = require('./terminal');
 const files = require('./files');
 
 const DRY_RUN = process.env['DRY_RUN'] && process.env['DRY_RUN'] === 'true';
+const VERBOSE = process.env['VERBOSE'] && process.env['VERBOSE'] === 'true';
+
+const currentPath = path.resolve(__dirname);
+const installationsPath = path.join(currentPath, './../installations');
+
+// Go through installations directory
+const installDirs = files.getDirectoryList(installationsPath);
 
 (async () => {
-  const currentPath = path.resolve(__dirname);
-  const installationsPath = path.join(currentPath, './../installations');
-
-  // Go through installations directory
-  const installDirs = files.getDirectoryList(installationsPath);
 
   const install = async dirName => {
     terminal.blue(`\nInstalling ${dirName}:`);
@@ -74,7 +76,6 @@ const DRY_RUN = process.env['DRY_RUN'] && process.env['DRY_RUN'] === 'true';
   }
 
   for (let i=0; i<installDirs.length; i++) {
-    // Ask the user if we want to install this app?
     const dirName = installDirs[i];
     await shouldInstall(dirName);
   }
