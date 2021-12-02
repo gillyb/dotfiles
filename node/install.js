@@ -14,6 +14,8 @@ const installationsPath = path.join(currentPath, './../installations');
 // Go through installations directory
 const installDirs = files.getDirectoryList(installationsPath);
 
+// TODO: Check if there's a bash script, and run it instead if there is
+
 (async () => {
 
   const install = async dirName => {

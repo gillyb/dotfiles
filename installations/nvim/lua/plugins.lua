@@ -50,7 +50,6 @@ require('packer').startup({function(use)
 
   use {
     'hoob3rt/lualine.nvim',
-    event = 'VimEnter',
     requires = {'kyazdani42/nvim-web-devicons', opt=true},
     -- config = function()
     --   require('custom_lualine')
@@ -92,7 +91,7 @@ require('nvim-autopairs.completion.compe').setup({
 require('lsp_signature').setup()
 
 -- This doesn't work at the moment, but should be fixed
--- require('custom_lualine')
+require('custom_lualine')
 
 require('kommentary.config').configure_language('default', {
   prefer_single_line_comments = true,

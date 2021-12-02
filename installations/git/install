@@ -1,43 +1,38 @@
-#!/usr/bin/env node
+#!/usr/bin/env bash
 
-const path = require('path');
-const os = require('os');
-const fs = require('fs');
-const childProcess = require('child_process');
-const files = require('./../../node/files.js');
-const terminal = require('./../../node/terminal.js');
+set -uo pipefail
 
-const currentDir = path.resolve(__dirname);
+source ./helpers.sh
 
-files.createSymLink(path.join(currentDir, '.gitconfig'), path.join(os.homedir(), '.gitconfig'));
-files.createSymLink(path.join(currentDir, '.gitignore_global'), path.join(os.homedir(), '.gitignore_global'));
+# Creating links to configuration files
+DOTFILES=~/dotfiles
+
+info "Linking git configuration files"
+symlink "${DOTFILES}/installations/git/.gitconfig" ~/.gitconfig
+symlink "${DOTFILES}/installations/git/.gitignore_global" ~/.gitignore_global
+success "Finished linking configuration files"
 
 
-// Create ssh key for working via terminal
-const githubUsername = "gillyb@gmail.com";
-const sshKeyFile = "~/.ssh/id_ed25519_github";
-const sshKeyPassphrase = "";
-terminal.yellow('Generating ssh key for github');
-fs.mkdirSync('~/.ssh');
-childProcess.execSync(`ssh-keygen -t ed25519 -C "${githubUsername}" -f "${sshKeyFile}" -P "${sshKeyPassphrase}"`);
-childProcess.execSync('eval "$(ssh-agent -s)"');
-childProcess.execSync('touch config');
+# Creating ssh key for github
+GIT_USER="gillyb@gmail.com"
+SSH_FILE=~/.ssh/id_ed25519_github
 
-const hostDefinition = `Host *
+info "Setting up ssh keys for github"
+mkdir ~/.ssh
+ssh-keygen -t ed25519 -C ${GIT_USER} -f ${SSH_FILE} -P ""
+eval "$(ssh-agent -s)"
+touch ~/.ssh/config
+cat >~/.ssh/config <<EOL
+Host github.com
   AddKeysToAgent yes
   UseKeychain yes
-  IdentityFile ${sshKeyFile}`;
-childProcess.execSync(`echo "${hostDefinition}" >> ~/.ssh/config`);
-childProcess.execSync(`ssh-add -K ${sshKeyFile}`);
+  IdentityFile ${SSH_FILE}
+EOL
+ssh-add -K $SSH_FILE
 
-console.log('\n\n');
-terminal.cyan(`Now run this: "pbcopy < ${sshKeyFile}.pub"`);
-console.log('\n\n');
-terminal.confirmAction('Did you copy the ssh key?');
+pbcopy < $SSH_FILE.pub
+info "ssh key copied to clipboard"
+info "Now go to https://github.com/settings/keys and add the key to your account"
+pause
 
-terminal.cyan('Now go to: https://github.com/settings/ssh/new');
-terminal.cyan('paste the ssh key you created and save it.');
-
-terminal.confirmAction('Are you done adding the ssh key?');
-
-process.exit(0);
+exit 0

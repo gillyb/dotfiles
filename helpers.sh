@@ -136,7 +136,7 @@ symlink() {
   source=$1    # This is the file that exists already
   target=$2    # This is the link we want to create
 
-  info "Linking $source\n      ==> ${target}... "
+  info "Linking $source      ==> ${target}... "
   if [ -e "$target" ]; then
     if [ -h "$target" ]; then
       if [ "$source" == "$(readlink "$target")" ]; then
@@ -145,17 +145,15 @@ symlink() {
       fi
     fi
 
-    # TODO: Implement backup mechanism!
-    error "Symbolic link already exists"
-    info "Won't override until I implement a backup helper method."
-    exit 1
-    # backup "$target"
+    cp $target "${target}_backup"
+    info "  Link target existed. Made backup."
+    ln -i -s $source $target
   fi
 
-  ln -sf "$source" "$target"
+  ln -sf $source $target
   if [ $? != 0 ]; then
     info "  Can't create link, trying with sudo:"
-    sudo ln -sf "$source" "$target"
+    sudo ln -sf $source $target
     if [ $? != 0 ]; then
       error "failed to create link"
       exit 1

@@ -24,6 +24,7 @@ while [[ $# -gt 0 ]]; do
 
   case $key in
     # TODO: Add 'help' option
+    # TODO: Add option to install only specific folder
     -d|--dry-run)
       DRY_RUN=true
       shift # pass argument
@@ -177,6 +178,7 @@ BREW_CASK_UTILS=(       \
   'spotify'             \
   'prusaslicer'         \
   'autodesk-fusion360'  \
+  'notion'              \
 )
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
