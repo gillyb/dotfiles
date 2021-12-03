@@ -1,27 +1,27 @@
-#!/usr/bin/env node
+#!/usr/bin/env bash
 
-const path = require('path');
-const os = require('os');
-const childProcess = require('child_process');
-const files = require('./../../node/files');
-const terminal = require('./../../node/terminal');
+source ./helpers.sh
+DOTFILES=~/dotfiles
 
-const currentDir = path.resolve(__dirname);
-const homedir = os.homedir();
+info "Installing neovim"
+brew install nvim
 
-terminal.yellow('    * Installing neovim');
-childProcess.execSync('brew install nvim');
+info "Ruby configuration"
+sudo gem install neovim
 
-terminal.yellow('      --> Ruby configuration');
-childProcess.execSync('sudo gem install neovim');
+info "Python configuration"
+brew install python
+python3 -m pip install --user --upgrade pynvim
 
-terminal.yellow('      --> Python configuration');
-childProcess.execSync('brew install python');
-childProcess.execSync('python3 -m pip install --user --upgrade pynvim');
+info "Installing packer"
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
+info "Linking all configuration files"
+mkdir ~/.config/nvim
+symlink "${DOTFILES}/installations/nvim/init.lua" ~/.config/nvim/init.lua
+symlink "${DOTFILES}/installations/nvim/lua" ~/.config/nvim/lua
 
+info "nvim installation complete."
+info "Open nvim and run :PackerInstall to install plugins"
 
-terminal.yellow('    * Copying configuration file');
-files.createSymLink(path.join(currentDir, '.zshrc'), path.join(homedir, '.zshrc'));
-
-process.exit(0);
+exit 0
