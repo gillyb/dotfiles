@@ -130,6 +130,13 @@ require('compe').setup {
   }
 }
 
+require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false
+  }
+})
+
 -- Configure .g4 files as antlr syntax
 vim.cmd([[
   au BufRead,BufNewFile *.g4 set filetype=antlr4
