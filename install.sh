@@ -179,6 +179,7 @@ BREW_CASK_UTILS=(       \
   'prusaslicer'         \
   'autodesk-fusion360'  \
   'notion'              \
+  'docker'              \
 )
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
