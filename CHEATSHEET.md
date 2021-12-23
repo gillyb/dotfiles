@@ -74,3 +74,9 @@ leader key: `Ctrl+a`
 `<leader>p` - Previous tab  
 
 `<leader>x` - Close pane/window/tab  
+
+
+## Git stuff
+
+Checkout file from another branch: `git checkout <branch> -- <file>`  
+
