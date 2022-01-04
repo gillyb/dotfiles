@@ -85,7 +85,6 @@ require('nvim-autopairs.completion.compe').setup({
 })
 require('lsp_signature').setup()
 
--- This doesn't work at the moment, but should be fixed
 require('custom_lualine')
 
 require('kommentary.config').configure_language('default', {
