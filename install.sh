@@ -154,7 +154,7 @@ BREW_UTILS=(       \
 for package in "${BREW_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
-    eval "brew install bat ${BE_QUEIT}"
+    eval "brew install ${package} ${BE_QUIET}"
     if [ $? -eq 0 ]; then
       success "Installed '${package}'"
     else
@@ -184,7 +184,7 @@ BREW_CASK_UTILS=(       \
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
-    eval "brew install bat ${BE_QUEIT}"
+    eval "brew install ${package} ${BE_QUIET}"
     if [ $? -eq 0 ]; then
       success "Installed '${package}'"
     else
