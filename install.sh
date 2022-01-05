@@ -142,6 +142,7 @@ echo ""
 info "Installing some basic utils with brew"
 BREW_UTILS=(       \
   'tmux'           \
+  'fzf'            \
   'bat'            \
   'fd'             \
   'ripgrep'        \
@@ -177,10 +178,10 @@ BREW_CASK_UTILS=(       \
   'github'              \
   'spotify'             \
   'prusaslicer'         \
-  'autodesk-fusion360'  \
   'notion'              \
   'docker'              \
 )
+brew tap homebrew/cask-fonts
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then

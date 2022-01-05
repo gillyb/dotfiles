@@ -77,7 +77,6 @@ alias ll="ls -la"
 alias lla="ls -la"
 alias la="ls -la"
 
-alias cat='bat'
 alias du='ncdu --color dark -rr -x'
 alias wtf='tldr'
 alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
