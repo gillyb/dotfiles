@@ -14,7 +14,7 @@ require('lualine').setup({
       'branch',
       { 
         'diagnostics', 
-        sources = { 'nvim_lsp' }
+        sources = { 'nvim_diagnostic' }
       }
     },
     lualine_c = {{'filename', path=1}},
@@ -28,7 +28,7 @@ require('lualine').setup({
     lualine_b = {
       {
         'diagnostics',
-        sources = { 'nvim_lsp' }
+        sources = { 'nvim_diagnostic' }
       }
     },
     lualine_c = {{'filename', path=1}},
