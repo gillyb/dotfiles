@@ -5,9 +5,12 @@ A repo for all my settings (dot) files, and some cheatsheets to go along
 ## Things to add
 
 * Check if there's a way to install the java runtime
+* Create install file for tmux
+* Fix installation for zsh
+* Check all brew packages before reinstalling
+* When an installation fails, print the command it tried to run, so it's easy to copy/paste
 
 * Make sure initial installations works (brew and node)
-  * Make sure the beginning of the installation process works on the default mac terminal
 
 ## Usage
 
