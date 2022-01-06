@@ -9,6 +9,8 @@ A repo for all my settings (dot) files, and some cheatsheets to go along
 * Fix installation for zsh
 * Check all brew packages before reinstalling
 * When an installation fails, print the command it tried to run, so it's easy to copy/paste
+* After installing fzf, the user needs to run `$(brew --prefix)/opt/fzf/install` for it to create shortcuts in the terminal
+* Fix installation for nvim - so it will install the plugins automatically (and I need to disable the color scheme until the plugins are installed i think)
 
 * Make sure initial installations works (brew and node)
 
