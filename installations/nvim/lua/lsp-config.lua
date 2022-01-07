@@ -71,6 +71,7 @@ end
 
 
 -- Install language servers
+-- TODO: Add these to the installation steps of nvim
 -- typescript: npm i -g typescript typescript-language-server
 -- bash: npm i -g bash-language-server
 -- angular: npm i -g @angular/language-server

@@ -115,6 +115,7 @@ NODE_PACKAGES=('webpack'                     \
                'concurrently'                \
                'serverless'                  \
                'neovim'                      \
+               'pyright'                     \
                '@gillyb/nrun'                \
 )
 

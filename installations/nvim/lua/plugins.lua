@@ -33,11 +33,7 @@ require('packer').startup({function(use)
     end
   }
 
-  use {
-    'RRethy/vim-illuminate',
-    event = 'CursorHold',
-    as = 'illuminate'
-  }
+  use { 'RRethy/vim-illuminate' }
   use 'ray-x/lsp_signature.nvim'
 
   use 'dylon/vim-antlr'
