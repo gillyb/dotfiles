@@ -139,7 +139,8 @@ npm_run() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=$PATH:/usr/local/bin/
-export PATH=$PATH:~/Library/Python/3.8/bin
+# export PATH=$PATH:~/Library/Python/3.8/bin
+# export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 export LC_ALL=en_US.UTF-8
