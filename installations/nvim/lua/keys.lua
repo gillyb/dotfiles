@@ -31,9 +31,10 @@ vim.api.nvim_set_keymap('n', '<C-f>', ':nohls<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '}', ':<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '{', ':<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>', { noremap=true, silent=true })
 
--- When deleting a single line, don't paste it in the clipboard
+-- When deleting a single line or character don't paste it in the clipboard
 -- NOTE: In order to delete a line and place in clipboard, you can use d_
 vim.api.nvim_set_keymap('n', 'dd', '"_dd', { noremap=true })
+vim.api.nvim_set_keymap('n', 'x', '"_x', { noremap=true })
 
 
 -- lspsaga (Code actions)

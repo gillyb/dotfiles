@@ -178,6 +178,7 @@ require('telescope').setup({
 
 require('telescope').load_extension('fzy_native')
 
+-- Opens all my vimrc configuration files
 _G.edit_my_vimrc = function()
   require('telescope.builtin').find_files({
     prompt_title = 'VimRC Files',
@@ -186,16 +187,17 @@ _G.edit_my_vimrc = function()
   })
 end
 
-_G.local_file_browser = function(dir)
+-- Opens telescope with all the files in the current dir
+_G.local_find_files = function()
   local currFileDir = vim.fn.expand('%:h')
-  require('telescope.builtin').file_browser({
-      prompt_title = 'Current Dir Files',
+  require('telescope.builtin').find_files({
+      prompt_title = 'Local dir files',
       follow = true,
       cwd = vim.fn.expand('%:p:h'),
       theme = 'dropdown',
       previewer = false,
       layout_config = {
-        height = 0.5,
+        height = 0.4,
         width = 0.5
       }
     })
@@ -207,7 +209,7 @@ vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { norem
 vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope grep_string<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_file_browser()<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { noremap=true })
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')

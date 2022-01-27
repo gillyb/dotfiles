@@ -105,6 +105,25 @@ npm_run() {
   npm run ${CHOSEN_SCRIPT:1:-1}
 }
 
+install_language_servers() {
+  npm i -g typescript typescript-language-server
+  npm i -g bash-language-server
+  npm i -g @angular/language-server
+  npm i -g vscode-langservers-extracted
+  npm i -g pyright
+  npm i -g vim-language-server
+}
+update_language_servers() {
+  sudo npm update -g typescript typescript-language-server
+  sudo npm update -g bash-language-server
+  sudo npm update -g @angular/language-server
+  sudo npm update -g vscode-langservers-extracted
+  sudo npm update -g pyright
+  sudo npm update -g vim-language-server
+}
+alias ilangservers='install_language_servers'
+alias ulangservers='update_language_servers'
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

@@ -40,6 +40,8 @@
     last-commit = diff HEAD^..HEAD
     # Show last commit files
     last-commit-files = show --name-only
+    # Show my last commit
+    my-last-commit = !"git show $(git log --date-order --format=format:'%h' --author=gbarr -n 1)"
 
     # reset --hard
     hard-reset = reset --hard
