@@ -23,6 +23,7 @@ require('packer').startup({function(use)
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig'
+  use 'onsails/lspkind-nvim'
   use {
     'romgrk/nvim-treesitter-context',
     config = function()
@@ -39,17 +40,26 @@ require('packer').startup({function(use)
   use 'dylon/vim-antlr'
   -- This doesn't really work well yet..
   -- use 'kabouzeid/nvim-lspinstall'
-
+  
   use 'tami5/lspsaga.nvim'
-  use 'hrsh7th/nvim-compe'
+
+  -- Completion plugin
+  -- TODO: Extract to separate file
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+  -- Completion support for luasnip
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
+
+
   use 'windwp/nvim-autopairs'
 
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt=true},
-    -- config = function()
-    --   require('custom_lualine')
-    -- end
   }
 
   use {
@@ -75,10 +85,6 @@ require('onedarkpro').setup({
   })
 require('colorizer').setup()
 require('nvim-autopairs').setup()
-require('nvim-autopairs.completion.compe').setup({
-  map_cr = true,
-  map_complete = true
-})
 require('lsp_signature').setup()
 
 require('custom_lualine')
@@ -177,6 +183,9 @@ require('telescope').setup({
 })
 
 require('telescope').load_extension('fzy_native')
+
+
+-- require('snippets')
 
 -- Opens all my vimrc configuration files
 _G.edit_my_vimrc = function()

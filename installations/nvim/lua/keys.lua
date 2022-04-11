@@ -73,3 +73,7 @@ vim.api.nvim_set_keymap('v', '<C-k>', ':m \'<-2<CR>gv', { noremap=true })
 
 -- Select previously pasted text
 vim.api.nvim_set_keymap('n', 'gp', '`[v`]', { noremap=true })
+
+-- When searching for next/prev instance, always center the found word
+vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap=true });
+vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap=true });

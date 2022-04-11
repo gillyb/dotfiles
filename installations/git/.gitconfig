@@ -43,6 +43,9 @@
     # Show my last commit
     my-last-commit = !"git show $(git log --date-order --format=format:'%h' --author=gbarr -n 1)"
 
+    # Undo last local commit (This keeps the changes but removes the commit)
+    undo-last-commit = "reset HEAD~"
+
     # reset --hard
     hard-reset = reset --hard
 

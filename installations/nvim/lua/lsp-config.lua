@@ -1,36 +1,16 @@
 local nvim_lsp = require('lspconfig')
+local cmp_lsp = require('cmp_nvim_lsp')
 
 local function init_lsp(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Define mappings
-  buf_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', { noremap=true })
-  buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap=true })
-  buf_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover({ border="rounded" })<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', '[d', ':lua vim.lsp.diagnostic.goto_next({ border="rounded" })<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', ']d', ':lua vim.lsp.diagnostic.goto_prev({ border="rounded" })<CR>', { noremap=true, silent=true })
-  buf_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>', { noremap=true })
-
   -- For illuminating word under the cursor
-  if client.resolved_capabilities.document_highlight then
-    require('illuminate').on_attach(client)
-  end
+  -- if client.resolved_capabilities.document_highlight then
+  --   require('illuminate').on_attach(client)
+  -- end
 end
 
 -- Attach to language servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = { "documentation", "detail", "additionalTextEdits" },
-}
+local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-
--- Automatically update diagnostics
--- This doesn't really work - don't know why yet...
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
   update_in_insert = false,
@@ -93,48 +73,71 @@ nvim_lsp.pyright.setup(lsp_config)
 nvim_lsp.vimls.setup(lsp_config)
 
 
--- I use nvim-compe for completion
-require('compe').setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = 'enable',
-  throttle_time = 80,
-  source_timeout = 200,
-  resolve_timeout = 800,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  border = "rounded",
-  documentation = {
-    -- border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    -- border = {"╔", "═" ,"╗", "║", "╝", "═", "╚", "║"},
-    border = "rounded",
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  },
+-- I use nvim-cmp for completion
+-- Setup for nvim-cmp
+local cmp = require('cmp')
+local lspkind = require("lspkind")
 
-  source = {
-    path = true,
-    buffer = true,
-    calc = false,
-    nvim_lsp = true,
-    nvim_lua = true,
-    vsnip = true,
-    ultisnips = true,
-    luasnip = true,
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
+    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), {"i", "s"}),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({select = true})
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
+  }),
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol_text', -- show symbols and text
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      preset = 'codicons',
+      symbol_map = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+      },
+    })
   }
-}
+})
 
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true
+    additional_vim_regex_highlighting = false
   }
 })
 
@@ -142,3 +145,14 @@ require('nvim-treesitter.configs').setup({
 vim.cmd([[
   au BufRead,BufNewFile *.g4 set filetype=antlr4
 ]])
+
+
+-- Define mappings
+vim.api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover({ border="rounded" })<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', '[d', ':lua vim.lsp.diagnostic.goto_next({ border="rounded" })<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', ']d', ':lua vim.lsp.diagnostic.goto_prev({ border="rounded" })<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>', { noremap=true })
