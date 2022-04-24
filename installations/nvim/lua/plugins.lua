@@ -21,6 +21,7 @@ require('packer').startup({function(use)
 
   use 'nvim-treesitter/playground'
   use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/nvim-treesitter-angular'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig'
   use 'onsails/lspkind-nvim'
@@ -100,7 +101,7 @@ vim.g.Illuminate_ftblacklist = { 'nerdtree', 'qf' }
 vim.cmd([[
   augroup illuminate_augroup
     autocmd!
-    autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
+    autocmd VimEnter * hi link illuminatedWord CursorLine
   augroup END
 ]])
 

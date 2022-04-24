@@ -39,3 +39,5 @@ require('lualine').setup({
   tabline = {},
   extensions = {'nvim-tree'}
 })
+
+vim.cmd('set laststatus=3')

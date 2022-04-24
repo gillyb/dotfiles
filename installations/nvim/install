@@ -4,7 +4,7 @@ source ./helpers.sh
 DOTFILES=~/dotfiles
 
 info "Installing neovim"
-brew install nvim
+brew install neovim
 
 info "Ruby configuration"
 sudo gem install neovim
