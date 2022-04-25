@@ -4,12 +4,11 @@ vim.o.compatible = false
 vim.o.termguicolors = true
 vim.o.mouse = 'a'
 vim.o.bg = 'dark'
-vim.o.fillchars = "vert:┃"
 vim.o.encoding = 'utf-8'
 vim.o.clipboard = 'unnamed'
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
-vim.o.laststatus = 3
+vim.o.laststatus = 2
 vim.o.autoindent = true
 vim.o.expandtab = true
 vim.o.smartindent = true
@@ -57,7 +56,7 @@ vim.cmd('call one#highlight("CursorLine", "", "3f3f3f", "none")');
 -- vim.cmd('colorscheme darcula')
 -- vim.cmd('colorscheme sonokai')
 -- vim.cmd('colorscheme tokyonight')
-vim.cmd('hi VertSplit guifg=grey')
+vim.cmd('highlight VertSplit guibg=None')
 vim.cmd('highlight WinSeparator guibg=None')
 
 

@@ -19,10 +19,10 @@ require('packer').startup({function(use)
   use 'christoomey/vim-tmux-navigator'
   use 'szw/vim-maximizer'
 
-  use 'nvim-treesitter/playground'
   use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/nvim-treesitter-angular'
+  -- use 'nvim-treesitter/nvim-treesitter-angular'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'nvim-treesitter/playground'
   use 'neovim/nvim-lspconfig'
   use 'onsails/lspkind-nvim'
   use {
