@@ -102,13 +102,8 @@ autocmd BufReadPost quickfix silent call SetQuickFixMappings()
 ]])
 
 -- Don't show cursor line in inactive windows
-vim.cmd([[
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]])
-
+vim.api.nvim_create_autocmd({'InsertLeave', 'WinEnter'}, {pattern='*', command='set cursorline'})
+vim.api.nvim_create_autocmd({'InsertEnter', 'WinLeave'}, {pattern='*', command='set nocursorline'})
 
 -- Always open quickfix window in full width
-vim.cmd([[
-  autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif
-]])
+vim.api.nvim_create_autocmd({'FileType'}, {pattern='qf', command=[[ if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif ]]})

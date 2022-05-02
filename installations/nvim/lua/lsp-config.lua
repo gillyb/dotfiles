@@ -153,9 +153,7 @@ require('nvim-treesitter.configs').setup({
 })
 
 -- Configure .g4 files as antlr syntax
-vim.cmd([[
-  au BufRead,BufNewFile *.g4 set filetype=antlr4
-]])
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {pattern='*.g4', command='set filetype=antlr4'})
 
 
 -- Define mappings
