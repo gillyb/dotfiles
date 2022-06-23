@@ -8,7 +8,7 @@ vim.o.encoding = 'utf-8'
 vim.o.clipboard = 'unnamed'
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 vim.o.autoindent = true
 vim.o.expandtab = true
 vim.o.smartindent = true
@@ -50,9 +50,13 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 
 vim.o.background = 'dark'
--- require('onedarkpro').load()
-vim.cmd('colorscheme one')
-vim.cmd('call one#highlight("CursorLine", "", "3f3f3f", "none")');
+require('onedarkpro').load()
+vim.g.gruvbox_contrast_dark = 'soft'
+vim.cmd('colorscheme edge')
+-- vim.cmd('colorscheme one')
+-- vim.cmd('colorscheme gruvbox')
+-- vim.cmd('colorscheme onenord')
+-- vim.cmd('call one#highlight("CursorLine", "", "3f3f3f", "none")');
 -- vim.cmd('colorscheme darcula')
 -- vim.cmd('colorscheme sonokai')
 -- vim.cmd('colorscheme tokyonight')

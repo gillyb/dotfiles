@@ -8,8 +8,11 @@ require('packer').startup({function(use)
   use 'olimorris/onedarkpro.nvim'
   use 'rakr/vim-one'
   use 'folke/tokyonight.nvim'
+  use 'sainnhe/edge'
   use 'kyazdani42/nvim-web-devicons'
   use 'norcalli/nvim-colorizer.lua'
+  use 'rmehri01/onenord.nvim'
+  use 'morhetz/gruvbox'
 
   use 'sheerun/vim-polyglot'
   use 'mhinz/vim-grepper'
@@ -19,11 +22,12 @@ require('packer').startup({function(use)
   use 'christoomey/vim-tmux-navigator'
   use 'szw/vim-maximizer'
 
-  use 'nvim-treesitter/nvim-treesitter'
-  -- use 'nvim-treesitter/nvim-treesitter-angular'
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'nvim-treesitter/playground'
   use 'neovim/nvim-lspconfig'
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/nvim-treesitter-angular'
+  -- use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'nvim-treesitter/playground'
+
   use 'onsails/lspkind-nvim'
   use {
     'romgrk/nvim-treesitter-context',
@@ -71,6 +75,7 @@ require('packer').startup({function(use)
 
   use 'b3nj5m1n/kommentary'
   use 'tpope/vim-fugitive'
+  use "b0o/incline.nvim"
 
 end,
 config = {
@@ -185,6 +190,30 @@ require('telescope').setup({
 
 require('telescope').load_extension('fzy_native')
 
+require('incline').setup({
+  window = {
+    placement = {
+      horizontal = "right",
+      vertical = "bottom"
+    },
+    margin = {
+      vertical = 0,
+      horizontal = 0
+    }
+  },
+  highlight = {
+    groups = {
+      InclineNormal = {
+        guifg = "yellow3",
+        guibg = "#3f3f3f"
+      },
+      InclineNormalNC = {
+        guifg = "yellow3",
+        guibg = "#3f3f3f"
+      }
+    }
+  }
+})
 
 -- require('snippets')
 
@@ -223,3 +252,17 @@ vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { nore
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')
+
+
+-- Close all buffers that are in the background
+-- TODO: Complete this!
+_G.close_background_buffers = function()
+  local all_buffers = vim.fn.getbufinfo()
+  local keys = ''
+  for key, value in pairs(all_buffers) do
+    if value.hidden ~= 1 then
+      keys = keys .. key .. ", "
+    end
+  end
+  print("hello " .. keys)
+end
