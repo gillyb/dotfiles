@@ -152,6 +152,7 @@ BREW_UTILS=(       \
   'python@3.8'     \
   'htop'           \
   'diff-so-fancy'  \
+  'ncdu'           \
 )
 for package in "${BREW_UTILS[@]}"; do
   minor "Installing '${package}'"
