@@ -74,6 +74,23 @@ vim.api.nvim_set_keymap('v', '<C-k>', ':m \'<-2<CR>gv', { noremap=true })
 -- Select previously pasted text
 vim.api.nvim_set_keymap('n', 'gp', '`[v`]', { noremap=true })
 
+-- Use 'zz' to place cursor at top third of window
+_G.move_one_sixth_up = function()
+  local window_lines = vim.fn.winheight(0)
+  local one_sixth = math.floor(window_lines / 6)
+  vim.cmd(':normal! zz')
+
+  -- move the cursor down one-sixth of the screen
+  vim.cmd(':normal! '..one_sixth..'j')
+
+  -- recenter
+  vim.cmd(':normal! zz')
+
+  -- move cursor up one-sixth of the screen
+  vim.cmd(':normal! '..one_sixth..'k')
+end
+vim.api.nvim_set_keymap('n', 'zz', ':lua move_one_sixth_up()<CR>', { noremap=true })
+
 -- When searching for next/prev instance, always center the found word
 vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap=true });
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap=true });
