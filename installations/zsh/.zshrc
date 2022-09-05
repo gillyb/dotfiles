@@ -74,7 +74,6 @@ alias vimrc="nvim ~/.config/nvim/init.lua"
 alias zshrc="nvim ~/.zshrc"
 alias gitconfig="nvim ~/.gitconfig"
 alias ll="ls -la"
-alias lla="ls -la"
 alias la="ls -la"
 
 alias du='ncdu --color dark -rr -x'
@@ -110,12 +109,13 @@ npm_run() {
 }
 
 install_language_servers() {
-  npm i -g typescript typescript-language-server
-  npm i -g bash-language-server
-  npm i -g @angular/language-server
-  npm i -g vscode-langservers-extracted
-  npm i -g pyright
-  npm i -g vim-language-server
+  sudo npm i -g typescript typescript-language-server
+  sudo npm i -g bash-language-server
+  sudo npm i -g @angular/language-server
+  sudo npm i -g vscode-langservers-extracted
+  sudo npm i -g pyright
+  sudo npm i -g vim-language-server
+  sudo npm i -g yaml-language-server
 }
 update_language_servers() {
   sudo npm update -g typescript typescript-language-server
@@ -124,6 +124,7 @@ update_language_servers() {
   sudo npm update -g vscode-langservers-extracted
   sudo npm update -g pyright
   sudo npm update -g vim-language-server
+  sudo npm update -g yaml-language-server
 }
 alias ilangservers='install_language_servers'
 alias ulangservers='update_language_servers'
@@ -177,3 +178,7 @@ if [ -f '/Users/gbarr/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gbarr/goo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gbarr/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gbarr/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

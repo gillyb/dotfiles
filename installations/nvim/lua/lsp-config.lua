@@ -71,6 +71,7 @@ nvim_lsp.html.setup(lsp_config)
 nvim_lsp.jsonls.setup(lsp_config)
 nvim_lsp.pyright.setup(lsp_config)
 nvim_lsp.vimls.setup(lsp_config)
+nvim_lsp.clangd.setup(lsp_config)
 
 
 -- I use nvim-cmp for completion
@@ -150,6 +151,9 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false
+  },
+  indent = {
+    enable = true
   }
 })
 

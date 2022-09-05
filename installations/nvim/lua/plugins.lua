@@ -22,7 +22,11 @@ require('packer').startup({function(use)
   use 'christoomey/vim-tmux-navigator'
   use 'szw/vim-maximizer'
 
-  use 'neovim/nvim-lspconfig'
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-angular'
   -- use 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -84,6 +88,8 @@ config = {
   }
 }})
 
+require('mason').setup()
+require('mason-lspconfig').setup()
 require('lsp-config')
 
 require('onedarkpro').setup({
