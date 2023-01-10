@@ -9,7 +9,7 @@ local function init_lsp(client, bufnr)
 end
 
 -- Attach to language servers
-local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
@@ -143,6 +143,7 @@ cmp.setup({
 })
 
 require('nvim-treesitter.configs').setup({
+  auto_install = true,
   playground = {
     enable = true,
     disable = {},
@@ -167,6 +168,6 @@ vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { norema
 vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover({ border="rounded" })<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', '[d', ':lua vim.lsp.diagnostic.goto_next({ border="rounded" })<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', ']d', ':lua vim.lsp.diagnostic.goto_prev({ border="rounded" })<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', '[d', ':lua vim.diagnostic.goto_next({ border="rounded" })<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', ']d', ':lua vim.diagnostic.goto_prev({ border="rounded" })<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>', { noremap=true })

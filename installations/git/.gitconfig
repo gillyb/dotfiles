@@ -17,6 +17,7 @@
     mt = mergetool
     d = "diff -- ':(exclude)yarn.lock'"
     u = pull
+    mc = merge --continue
     
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
@@ -59,6 +60,8 @@
   excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
   editor = nvim
+[push]
+  autoSetupRemote = true
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path = 

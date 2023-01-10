@@ -11,8 +11,8 @@ vim.api.nvim_set_keymap('n', '<leader>j', ':vsplit<CR>', { noremap=false, silent
 vim.api.nvim_set_keymap('n', '<leader>k', ':split<CR>', { noremap=false, silent=true })
 
 -- Moving between splits
-vim.api.nvim_set_keymap('n', '<C-J>', '<C-W><C-J>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<C-K>', '<C-W><C-K>', { noremap=true })
+vim.keymap.set('n', '<C-J>', '<C-W><C-J>')
+vim.keymap.set('n', '<C-K>', '<C-W><C-K>')
 vim.api.nvim_set_keymap('n', '<C-L>', '<C-W><C-L>', { noremap=true })
 vim.api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', { noremap=true })
 
@@ -65,8 +65,8 @@ vim.api.nvim_set_keymap('i', '!', '!<C-g>u', { noremap=true })
 vim.api.nvim_set_keymap('i', '?', '?<C-g>u', { noremap=true })
 
 -- Moving lines around
-vim.api.nvim_set_keymap('v', '<C-j>', ':m \'>+1<CR>gv', { noremap=true })
-vim.api.nvim_set_keymap('v', '<C-k>', ':m \'<-2<CR>gv', { noremap=true })
+vim.keymap.set('v', '<C-J>', ":m '>+1<CR>gv")
+vim.keymap.set('v', '<C-K>', ":m '<-2<CR>gv")
 -- Tab to indent lines (or unindent)
 -- vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap=true })
 -- vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', { noremap=true })

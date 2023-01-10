@@ -82,6 +82,7 @@ alias diff-so-fancy="~/.dotfiles/diff-so-fancy"
 
 alias tsnode='npx ts-node'
 alias sb='switch_branch'
+alias st='switch_tmux_env'
 
 alias nr='npm_run'
 
@@ -99,6 +100,9 @@ export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:3
 # utility functions
 dev() {
   DIR=`fd . ~/dev -d 1 | fzf` && cd $DIR
+}
+switch_tmux_env() {
+  SELECTED_ENV=`tmux ls | awk -F ":" '{print $1}' | fzf` && tmux a -t $SELECTED_ENV
 }
 switch_branch() {
   SELECTED_BRANCH=`git branch | fzf | xargs` && git checkout $SELECTED_BRANCH

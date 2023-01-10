@@ -19,7 +19,16 @@ require('packer').startup({function(use)
 
   use 'Yggdroot/indentLine'
 
-  use 'christoomey/vim-tmux-navigator'
+  use { 'alexghergh/nvim-tmux-navigation', config = function()
+      local nvim_tmux_nav = require('nvim-tmux-navigation')
+      vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+      vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+      vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+      vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+      vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+      vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+    end
+  }
   use 'szw/vim-maximizer'
 
   use {
@@ -27,8 +36,11 @@ require('packer').startup({function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/nvim-treesitter-angular'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+  -- use 'nvim-treesitter/nvim-treesitter-angular'
   -- use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'nvim-treesitter/playground'
 
@@ -79,7 +91,6 @@ require('packer').startup({function(use)
 
   use 'b3nj5m1n/kommentary'
   use 'tpope/vim-fugitive'
-  use "b0o/incline.nvim"
 
 end,
 config = {
@@ -196,30 +207,30 @@ require('telescope').setup({
 
 require('telescope').load_extension('fzy_native')
 
-require('incline').setup({
-  window = {
-    placement = {
-      horizontal = "right",
-      vertical = "bottom"
-    },
-    margin = {
-      vertical = 0,
-      horizontal = 0
-    }
-  },
-  highlight = {
-    groups = {
-      InclineNormal = {
-        guifg = "yellow3",
-        guibg = "#3f3f3f"
-      },
-      InclineNormalNC = {
-        guifg = "yellow3",
-        guibg = "#3f3f3f"
-      }
-    }
-  }
-})
+-- require('incline').setup({
+  -- window = {
+    -- placement = {
+      -- horizontal = "right",
+      -- vertical = "bottom"
+    -- },
+    -- margin = {
+      -- vertical = 0,
+      -- horizontal = 0
+    -- }
+  -- },
+  -- highlight = {
+    -- groups = {
+      -- InclineNormal = {
+        -- guifg = "yellow3",
+        -- guibg = "#3f3f3f"
+      -- },
+      -- InclineNormalNC = {
+        -- guifg = "yellow3",
+        -- guibg = "#3f3f3f"
+      -- }
+    -- }
+  -- }
+-- })
 
 -- require('snippets')
 
