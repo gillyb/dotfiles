@@ -64,15 +64,17 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 
-# Shortcuts to local dev directories
 alias vim="nvim"
 alias v="vim"
+
 alias dotfiles="cd ~/dotfiles/"
+alias dotsave="cd ~/dotfiles/ && git add . && git commit -m \"HYCYBH\" && cd -"
 alias edit_profile="nvim ~/.zshrc"
 alias reload_profile="source ~/.zshrc"
 alias vimrc="nvim ~/.config/nvim/init.lua"
 alias zshrc="nvim ~/.zshrc"
 alias gitconfig="nvim ~/.gitconfig"
+
 alias ll="ls -la"
 alias la="ls -la"
 
