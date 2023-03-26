@@ -38,6 +38,7 @@ vim.api.nvim_set_keymap('n', 'x', '"_x', { noremap=true })
 
 
 -- lspsaga (Code actions)
+vim.keymap.set({'n', 'v'}, '<leader>a', '<cmd>Lspsaga code_action<CR>')
 vim.api.nvim_set_keymap('n', '<leader>rn', ':lua require("lspsaga.rename").rename()<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>a', ':lua require("lspsaga.codeaction").code_action()<CR>', {})
 vim.api.nvim_set_keymap('v', '<leader>a', ':lua require("lspsaga.codeaction").range_code_action()<CR>', {})

@@ -90,6 +90,9 @@ alias nr='npm_run'
 
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
+# jc = "just commit" - for super fast commits
+alias jc='git c -am "HYCYBH"'
+
 # eslint - fix staged git files
 alias fix-staged='eslint $(git diff --name-only --cached) --fix'
 

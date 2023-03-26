@@ -39,43 +39,36 @@ vim.cmd('syntax on')
 -- Don't use kommentary's default mappings
 vim.g.kommentary_create_default_mappings = false
 
--- Set color scheme
---- Example config in Lua
-vim.g.sonokai_style = 'andromeda'
-vim.g.tokyonight_dev = true
 vim.g.nvcode_termcolors = true
-vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_italic_functions = true
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
--- Change the "hint" color to the "orange" color, and make the "error" color bright red
-vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 
 vim.o.background = 'dark'
--- require('onedarkpro').load()
-vim.g.gruvbox_contrast_dark = 'soft'
-vim.cmd('colorscheme edge')
--- vim.cmd('colorscheme one')
--- vim.cmd('colorscheme gruvbox')
--- vim.cmd('colorscheme onenord')
--- vim.cmd('call one#highlight("CursorLine", "", "3f3f3f", "none")');
--- vim.cmd('colorscheme darcula')
--- vim.cmd('colorscheme sonokai')
--- vim.cmd('colorscheme tokyonight')
-vim.cmd('highlight VertSplit guibg=None')
-vim.cmd('highlight WinSeparator guibg=None')
 
 
--- Plugins
-require'packer-bootstrap'
-require'plugins'
-require'keys'
+
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('plugins')
+require('keys')
 
 -- indentLine
-vim.g.indentLine_char = "⎜"
 vim.g.indentLine_color_term = 239
-vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
-vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
-vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable')
+-- vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
+-- vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
+-- vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable')
 
 -- NERDTree
 vim.g.NERDTreeShowHidden = 1
@@ -83,6 +76,7 @@ vim.g.NERDTreeMinimalUI = 1
 vim.g.NERDTreeStatusLine = ''
 vim.g.NERDTreeWinSize = 40
 vim.cmd("let g:NERDTreeIgnore = ['^\\.DS_Store', '\\.git$[[dir]]', '\\.idea$[[dir]]']")
+
 -- Open NERDTree immediately when opening vim
 vim.cmd([[
 function! StartUp()

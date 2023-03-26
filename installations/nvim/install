@@ -20,6 +20,7 @@ info "Linking all configuration files"
 mkdir -p ~/.config/nvim
 symlink "${DOTFILES}/installations/nvim/init.lua" ~/.config/nvim/init.lua
 symlink "${DOTFILES}/installations/nvim/lua" ~/.config/nvim/lua
+symlink "${DOTFILES}/installations/nvim/after" ~/.config/nvim/after
 
 info "nvim installation complete."
 info "Open nvim and run :PackerInstall to install plugins"

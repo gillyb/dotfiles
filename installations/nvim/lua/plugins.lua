@@ -1,25 +1,36 @@
-require('packer').startup({function(use)
-  
-  use 'scrooloose/nerdtree'
-  
-  -- Theme
-  use 'doums/darcula'
-  use 'sainnhe/sonokai'
-  use 'olimorris/onedarkpro.nvim'
-  use 'rakr/vim-one'
-  use 'folke/tokyonight.nvim'
-  use 'sainnhe/edge'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'rmehri01/onenord.nvim'
-  use 'morhetz/gruvbox'
+require('lazy').setup({
 
-  use 'sheerun/vim-polyglot'
-  use 'mhinz/vim-grepper'
+  -- NERDTree file explorer
+  'scrooloose/nerdtree',
 
-  use 'Yggdroot/indentLine'
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
 
-  use { 'alexghergh/nvim-tmux-navigation', config = function()
+  { -- My color scheme
+    'sainnhe/edge',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('edge')
+      vim.cmd('highlight VertSplit cterm=None')
+      vim.cmd('highlight WinSeparator cterm=None')
+    end
+  },
+
+  -- mhinz/vim-grepper
+
+  { -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help indent_blankline.txt`
+    opts = {
+      char = '┊',
+      show_trailing_blankline_indent = false,
+    },
+  },
+
+  { -- tmux <--> nvim navigation
+    'alexghergh/nvim-tmux-navigation',
+    config = function()
       local nvim_tmux_nav = require('nvim-tmux-navigation')
       vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
       vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
@@ -28,24 +39,87 @@ require('packer').startup({function(use)
       vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
       vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
     end
-  }
-  use 'szw/vim-maximizer'
+  },
 
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-  }
-  use {
+  -- NOTE: This is where your plugins related to LSP can be installed.
+  --  The configuration is done below. Search for lspconfig to find it below.
+  { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', opts = {} },
+
+      -- Additional lua configuration, makes nvim stuff amazing!
+      'folke/neodev.nvim',
+    },
+  },
+
+  { -- Autocompletion
+    'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  },
+
+  {
+    "glepnir/lspsaga.nvim",
+    event = "BufRead",
+    config = function()
+        require("lspsaga").setup({})
+    end,
+    dependencies = {
+      {"nvim-tree/nvim-web-devicons"},
+      --Please make sure you install markdown and markdown_inline parser
+      {"nvim-treesitter/nvim-treesitter"}
+    }
+  },
+
+  {
+    'nvim-lualine/lualine.nvim',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = 'edge',
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
+
+  { -- Fuzzy Finder (files, lsp, etc)
+    'nvim-telescope/telescope.nvim',
+    version = '*',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+  -- Only load if `make` is available. Make sure you have the system
+  -- requirements installed.
+   {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    -- NOTE: If you are having trouble with this installation,
+    --       refer to the README for telescope-fzf-native for more instructions.
+    build = 'make',
+    cond = function()
+      return vim.fn.executable 'make' == 1
+    end,
+  },
+
+  { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  -- use 'nvim-treesitter/nvim-treesitter-angular'
-  -- use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'nvim-treesitter/playground'
-
-  use 'onsails/lspkind-nvim'
-  use {
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    config = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  },
+  'nvim-treesitter/playground', -- To see how treesitter parses our code
+  {
     'romgrk/nvim-treesitter-context',
     config = function()
       require('treesitter-context').setup({
@@ -53,233 +127,10 @@ require('packer').startup({function(use)
         throttle = true
       })
     end
-  }
-
-  use { 'RRethy/vim-illuminate' }
-  use 'ray-x/lsp_signature.nvim'
-
-  use 'dylon/vim-antlr'
-  -- This doesn't really work well yet..
-  -- use 'kabouzeid/nvim-lspinstall'
-  
-  use 'tami5/lspsaga.nvim'
-
-  -- Completion plugin
-  -- TODO: Extract to separate file
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  -- Completion support for luasnip
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
-
-
-  use 'windwp/nvim-autopairs'
-
-  use {
-    'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt=true},
-  }
-
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-  }
-  use 'nvim-telescope/telescope-fzy-native.nvim'
-
-  use 'b3nj5m1n/kommentary'
-  use 'tpope/vim-fugitive'
-
-end,
-config = {
-  display = {
-    open_fn = require('packer.util').float,
-  }
-}})
-
-require('mason').setup()
-require('mason-lspconfig').setup()
-require('lsp-config')
-
-require('onedarkpro').setup({
-    theme = 'onedark'
-  })
-require('colorizer').setup()
-require('nvim-autopairs').setup()
-require('lsp_signature').setup()
-
-require('custom_lualine')
-
-require('kommentary.config').configure_language('default', {
-  prefer_single_line_comments = true,
-  use_consistent_indentation = true
-})
-
--- Highlighting the word under the cursor (with vim-illuminate)
-vim.g.Illuminate_delay = 0
-vim.g.Illuminate_ftblacklist = { 'nerdtree', 'qf' }
-vim.cmd([[
-  augroup illuminate_augroup
-    autocmd!
-    autocmd VimEnter * hi link illuminatedWord CursorLine
-  augroup END
-]])
-
-
--- TODO: Extract to separate file
--- My custom telescope configuration
-local actions = require('telescope.actions')
-require('telescope').setup({
-  defaults = {
-    -- Some of these default values don't really apply to all pickers
-    -- so I define them again in the pickers I use often.
-    file_sorter = require('telescope.sorters').get_fzy_sorter,
-    generic_sorter = require('telescope.sorters').get_fzy_sorter,
-    layout_strategy = "center",
-    theme = 'dropdown',
-    mappings = {
-      i = {
-        -- Move up/down with Ctrl+j/k
-        ['<C-j>'] = 'move_selection_next',
-        ['<C-k>'] = 'move_selection_previous',
-        -- When using 'esc' or 'jk' in insert mode, close the window
-        ['<esc>'] = 'close',
-        ['jk'] = 'close',
-        -- Send all results to a quickfix list
-        ['<C-q>'] = actions.send_to_qflist + actions.open_qflist
-      }
-    }
   },
-  pickers = {
-    buffers = {
-      theme = 'dropdown',
-      previewer = false,
-      sort_lastused = true,
-      layout_config = {
-        width = 0.6,
-        height = 0.6
-      }
-    },
-    find_files = {
-      follow = true,
-      previewer = false,
-      layout_config = {
-        height = 0.5,
-        width = 0.7
-      },
-      theme = 'dropdown',
-    },
-    live_grep = {
-      previewer = false,
-      theme = 'dropdown',
-      layout_config = {
-        height = 0.7,
-        width = 0.8
-      }
-    },
-    help_tags = {
-      theme = 'dropdown'
-    },
-    commands = {
-      theme = 'dropdown',
-      layout_config = {
-        height = 0.6
-      }
-    },
-    lsp_document_symbols = {
-      previewer = false,
-      theme = 'dropdown',
-      layout_config = {
-        height = 0.6,
-        width = 0.7
-      }
-    }
-  },
-  extensions = {
-    fzy_native = {
-      override_generic_sorter = true,
-      override_file_sorter = true
-    }
-  }
+
+  'b3nj5m1n/kommentary', -- Easy commenting/uncommenting
+  'tpope/vim-fugitive',  -- git actions
+  'dylon/vim-antlr',     -- lsp plugin for ANTLR
+
 })
-
-require('telescope').load_extension('fzy_native')
-
--- require('incline').setup({
-  -- window = {
-    -- placement = {
-      -- horizontal = "right",
-      -- vertical = "bottom"
-    -- },
-    -- margin = {
-      -- vertical = 0,
-      -- horizontal = 0
-    -- }
-  -- },
-  -- highlight = {
-    -- groups = {
-      -- InclineNormal = {
-        -- guifg = "yellow3",
-        -- guibg = "#3f3f3f"
-      -- },
-      -- InclineNormalNC = {
-        -- guifg = "yellow3",
-        -- guibg = "#3f3f3f"
-      -- }
-    -- }
-  -- }
--- })
-
--- require('snippets')
-
--- Opens all my vimrc configuration files
-_G.edit_my_vimrc = function()
-  require('telescope.builtin').find_files({
-    prompt_title = 'VimRC Files',
-    follow = true,
-    cwd = '~/.config/nvim'
-  })
-end
-
--- Opens telescope with all the files in the current dir
-_G.local_find_files = function()
-  local currFileDir = vim.fn.expand('%:h')
-  require('telescope.builtin').find_files({
-      prompt_title = 'Local dir files',
-      follow = true,
-      cwd = vim.fn.expand('%:p:h'),
-      theme = 'dropdown',
-      previewer = false,
-      layout_config = {
-        height = 0.4,
-        width = 0.5
-      }
-    })
-end
-
--- TODO: Move these to keys.lua
-vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope grep_string<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { noremap=true })
-
--- Type :Vimrc to edit my personal vimrc files
-vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')
-
-
--- Close all buffers that are in the background
--- TODO: Complete this!
-_G.close_background_buffers = function()
-  local all_buffers = vim.fn.getbufinfo()
-  local keys = ''
-  for key, value in pairs(all_buffers) do
-    if value.hidden ~= 1 then
-      keys = keys .. key .. ", "
-    end
-  end
-  print("hello " .. keys)
-end
