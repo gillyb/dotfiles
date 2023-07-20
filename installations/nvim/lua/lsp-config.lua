@@ -64,6 +64,16 @@ local lsp_config = {
   on_attach = init_lsp,
   capabilities = capabilities
 }
+
+lsp_config.eslint.setup({
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
+
 nvim_lsp.tsserver.setup(lsp_config)
 nvim_lsp.bashls.setup(lsp_config)
 nvim_lsp.angularls.setup(lsp_config)
@@ -72,6 +82,7 @@ nvim_lsp.jsonls.setup(lsp_config)
 nvim_lsp.pyright.setup(lsp_config)
 nvim_lsp.vimls.setup(lsp_config)
 nvim_lsp.clangd.setup(lsp_config)
+
 
 
 -- I use nvim-cmp for completion

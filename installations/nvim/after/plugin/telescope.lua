@@ -5,6 +5,7 @@ require('telescope').setup({
     -- so I define them again in the pickers I use often.
     -- file_sorter = require('telescope.sorters').get_fzy_sorter,
     -- generic_sorter = require('telescope.sorters').get_fzy_sorter,
+    file_ignore_patterns = {"package-lock.json"},
     layout_strategy = "center",
     theme = 'dropdown',
     mappings = {
@@ -25,6 +26,7 @@ require('telescope').setup({
       theme = 'dropdown',
       previewer = false,
       sort_lastused = true,
+      ignore_current_buffer = true,
       layout_config = {
         width = 0.6,
         height = 0.6

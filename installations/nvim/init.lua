@@ -26,6 +26,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.incsearch = true
 vim.o.number = true
+vim.o.signcolumn = 'yes'
 vim.o.cmdheight = 2
 vim.o.pumheight = 11
 vim.o.updatetime = 300
@@ -34,6 +35,7 @@ vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.hidden = true
+vim.o.fixeol = false
 vim.cmd('syntax on')
 
 -- Don't use kommentary's default mappings
@@ -66,9 +68,9 @@ require('keys')
 
 -- indentLine
 vim.g.indentLine_color_term = 239
--- vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
--- vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
--- vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable')
+vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
+vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
+vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable')
 
 -- NERDTree
 vim.g.NERDTreeShowHidden = 1

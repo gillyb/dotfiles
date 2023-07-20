@@ -96,6 +96,9 @@ alias jc='git c -am "HYCYBH"'
 # eslint - fix staged git files
 alias fix-staged='eslint $(git diff --name-only --cached) --fix'
 
+# When i have no patience and I just want a super fast commit!
+alias fp='git add . && git c -am "Fast commit baby" --no-verify && git push'
+
 # use 'fd' output for 'fzf' command (fd: https://github.com/sharkdp/fd  fzf: https://github.com/junegunn/fzf)
 export FZF_DEFAULT_COMMAND='fd --type f'
 # Default options for 'fzf' command: show 20% of height, show border, show below cursor
@@ -174,7 +177,7 @@ alias ulangservers='update_language_servers'
 # Import local configurations if they exist (mostly for work-related stuff)
 [ -f ~/.local.config.sh ] && source ~/.local.config.sh
 
-export PATH=$PATH:/usr/local/bin/
+export PATH=$PATH:/usr/local/bin/:/Users/gbarr/dev/frontend/projects/proxy-tool/.bin/
 # export PATH=$PATH:~/Library/Python/3.8/bin
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home)
