@@ -68,7 +68,7 @@ alias vim="nvim"
 alias v="vim"
 
 alias dotfiles="cd ~/dotfiles/"
-alias dotsave="cd ~/dotfiles/ && git add . && git commit -m \"HYCYBH\" && cd -"
+alias dotsave="cd ~/dotfiles/ && git add . && git commit -m \"HYCYBH\" && git push && cd -"
 alias edit_profile="nvim ~/.zshrc"
 alias reload_profile="source ~/.zshrc"
 alias vimrc="nvim ~/.config/nvim/init.lua"
