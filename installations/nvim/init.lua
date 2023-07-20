@@ -4,14 +4,17 @@ vim.o.compatible = false
 vim.o.termguicolors = true
 vim.o.mouse = 'a'
 vim.o.bg = 'dark'
+
+-- hello
+
 vim.o.encoding = 'utf-8'
 vim.o.clipboard = 'unnamed'
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.laststatus = 3
+
 vim.o.winbar = '%f'
 vim.o.autoindent = true
-vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.showmatch = true
 vim.o.autoread = true

@@ -121,7 +121,15 @@ require('lazy').setup({
   },
 
   'b3nj5m1n/kommentary', -- Easy commenting/uncommenting
+
   'tpope/vim-fugitive',  -- git actions
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  },
+
   'dylon/vim-antlr',     -- lsp plugin for ANTLR
 
   'alexghergh/nvim-tmux-navigation', -- nvim <--> tmux navigation
