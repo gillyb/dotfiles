@@ -38,7 +38,7 @@ vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.hidden = true
-vim.o.fixeol = false
+vim.o.nofixendofline = true
 vim.cmd('syntax on')
 
 -- Don't use kommentary's default mappings
@@ -71,9 +71,9 @@ require('keys')
 
 -- indentLine
 vim.g.indentLine_color_term = 239
-vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
+--[[ vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
 vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
-vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable')
+vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable') ]]
 
 -- NERDTree
 vim.g.NERDTreeShowHidden = 1
@@ -106,8 +106,9 @@ autocmd BufReadPost quickfix silent call SetQuickFixMappings()
 ]])
 
 -- Don't show cursor line in inactive windows
-vim.api.nvim_create_autocmd({'InsertLeave', 'WinEnter'}, {pattern='*', command='set cursorline'})
-vim.api.nvim_create_autocmd({'InsertEnter', 'WinLeave'}, {pattern='*', command='set nocursorline'})
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, { pattern = '*', command = 'set cursorline' })
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, { pattern = '*', command = 'set nocursorline' })
 
 -- Always open quickfix window in full width
-vim.api.nvim_create_autocmd({'FileType'}, {pattern='qf', command=[[ if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif ]]})
+vim.api.nvim_create_autocmd({ 'FileType' },
+  { pattern = 'qf', command = [[ if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif ]] })
