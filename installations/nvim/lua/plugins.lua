@@ -15,7 +15,7 @@ require('lazy').setup({
       vim.cmd('highlight WinSeparator cterm=None')
     end
   }, ]]
-  {
+  { -- Current color scheme
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000
@@ -166,7 +166,7 @@ format_on_save.setup({
     javascript = formatters.lsp,
     json = formatters.lsp,
     lua = formatters.lsp,
-    markdown = formatters.prettierd,
+    -- markdown = formatters.prettierd,
     openscad = formatters.lsp,
     rust = formatters.lsp,
     scad = formatters.lsp,
@@ -176,9 +176,9 @@ format_on_save.setup({
     typescriptreact = formatters.prettierd,
     yaml = formatters.lsp,
 
-    typescript = {
+    --[[ typescript = {
       formatters.prettierd
-    },
+    }, ]]
 
     -- Add your own shell formatters:
     myfiletype = formatters.shell({ cmd = { "myformatter", "%" } }),
@@ -192,7 +192,7 @@ format_on_save.setup({
       end
     end,
 
-    -- Add custom formatter
+    -- -- Add custom formatter
     filetype1 = formatters.remove_trailing_whitespace,
     filetype2 = formatters.custom({
       format = function(lines)
@@ -220,12 +220,6 @@ format_on_save.setup({
       formatters.shell({ cmd = { "gofmt" } }),
     },
   },
-
-  -- Optional: fallback formatter to use when no formatters match the current filetype
-  fallback_formatter = {
-    formatters.remove_trailing_whitespace,
-    formatters.prettierd,
-  }
 })
 
 -- Color scheme setup
