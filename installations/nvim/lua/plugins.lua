@@ -25,12 +25,12 @@ require('lazy').setup({
 
   { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
+    main = 'ibl',
     -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+    -- opts = {
+    -- char = '┊'
+    -- char = 'center aligned dashed'
+    -- },
   },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -150,6 +150,16 @@ require('lazy').setup({
 
 })
 
+-- Config setup for indent-blankline
+require('ibl').setup({
+  indent = {
+    char = '╎'
+  },
+  scope = {
+    enabled = false
+  }
+});
+
 -- TODO: Extract this to separate file
 local format_on_save = require("format-on-save")
 local formatters = require("format-on-save.formatters")
@@ -161,7 +171,7 @@ format_on_save.setup({
   },
   formatter_by_ft = {
     css = formatters.lsp,
-    html = formatters.lsp,
+    -- html = formatters.lsp,
     java = formatters.lsp,
     javascript = formatters.lsp,
     json = formatters.lsp,
@@ -173,7 +183,7 @@ format_on_save.setup({
     scss = formatters.lsp,
     sh = formatters.shfmt,
     terraform = formatters.lsp,
-    typescriptreact = formatters.prettierd,
+    -- typescriptreact = formatters.prettierd,
     yaml = formatters.lsp,
 
     --[[ typescript = {

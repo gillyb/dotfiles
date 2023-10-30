@@ -5,7 +5,7 @@ require('telescope').setup({
     -- so I define them again in the pickers I use often.
     -- file_sorter = require('telescope.sorters').get_fzy_sorter,
     -- generic_sorter = require('telescope.sorters').get_fzy_sorter,
-    file_ignore_patterns = {"package-lock.json"},
+    file_ignore_patterns = { "package-lock.json" },
     layout_strategy = "center",
     theme = 'dropdown',
     mappings = {
@@ -91,26 +91,24 @@ end
 _G.local_find_files = function()
   local currFileDir = vim.fn.expand('%:h')
   require('telescope.builtin').find_files({
-      prompt_title = 'Local dir files',
-      follow = true,
-      cwd = vim.fn.expand('%:p:h'),
-      theme = 'dropdown',
-      previewer = false,
-      layout_config = {
-        height = 0.4,
-        width = 0.5
-      }
-    })
+    prompt_title = 'Local dir files',
+    follow = true,
+    cwd = vim.fn.expand('%:p:h'),
+    theme = 'dropdown',
+    previewer = false,
+    layout_config = {
+      height = 0.4,
+      width = 0.5
+    }
+  })
 end
 
-vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope grep_string<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope grep_string<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { noremap = true })
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')
-
-
