@@ -194,3 +194,11 @@ if [ -f '/Users/gbarr/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gba
 
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
+
+# pnpm
+export PNPM_HOME="/Users/gbarr/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

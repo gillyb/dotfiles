@@ -39,7 +39,6 @@ vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.hidden = true
-vim.o.nofixendofline = true
 vim.cmd('syntax on')
 
 -- Don't use kommentary's default mappings

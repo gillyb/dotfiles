@@ -51,6 +51,11 @@ require('lazy').setup({
     },
   },
 
+  { -- Snippets support
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+    build = "make install_jsregexp"
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -89,7 +94,16 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     version = '*',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      "nvim-telescope/telescope-live-grep-args.nvim" ,
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+    },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end
   },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -173,9 +187,9 @@ format_on_save.setup({
     css = formatters.lsp,
     -- html = formatters.lsp,
     java = formatters.lsp,
-    javascript = formatters.lsp,
+    -- javascript = formatters.lsp,
     json = formatters.lsp,
-    lua = formatters.lsp,
+    -- lua = formatters.lsp,
     -- markdown = formatters.prettierd,
     openscad = formatters.lsp,
     rust = formatters.lsp,
@@ -186,9 +200,9 @@ format_on_save.setup({
     -- typescriptreact = formatters.prettierd,
     yaml = formatters.lsp,
 
-    --[[ typescript = {
-      formatters.prettierd
-    }, ]]
+    -- typescript = {
+    -- formatters.prettierd
+    -- },
 
     -- Add your own shell formatters:
     myfiletype = formatters.shell({ cmd = { "myformatter", "%" } }),

@@ -6,6 +6,13 @@ local function init_lsp(client, bufnr)
   -- if client.resolved_capabilities.document_highlight then
   --   require('illuminate').on_attach(client)
   -- end
+  vim.api.nvim_set_keymap('n', ']e',
+    ':lua vim.diagnostic.goto_prev({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
+    { noremap = true, silent = true })
+
+  vim.api.nvim_set_keymap('n', '[e',
+    ':lua vim.diagnostic.goto_next({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
+    { noremap = true, silent = true })
 end
 
 -- Attach to language servers
@@ -45,8 +52,8 @@ end
 -- Automatically reload after installing a new language server so we don't have to
 -- restart neovim
 -- require('lspinstall').post_install_hook = function()
-  -- setup_language_servers()
-  -- vim.cmd('bufdo e')
+-- setup_language_servers()
+-- vim.cmd('bufdo e')
 -- end
 
 
@@ -104,13 +111,13 @@ cmp.setup({
     end,
   },
   mapping = {
-    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
-    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), {"i", "s"}),
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({select = true})
+    ["<CR>"] = cmp.mapping.confirm({ select = true })
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -120,7 +127,7 @@ cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol_text', -- show symbols and text
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       preset = 'codicons',
       symbol_map = {
         Text = "",
@@ -170,15 +177,28 @@ require('nvim-treesitter.configs').setup({
 })
 
 -- Configure .g4 files as antlr syntax
-vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {pattern='*.g4', command='set filetype=antlr4'})
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.g4', command = 'set filetype=antlr4' })
 
 
 -- Define mappings
-vim.api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover({ border="rounded" })<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', '[d', ':lua vim.diagnostic.goto_next({ border="rounded" })<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', ']d', ':lua vim.diagnostic.goto_prev({ border="rounded" })<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover({ border="rounded" })<CR>', { noremap = true, silent = true })
+--[[ vim.api.nvim_set_keymap('n', '[d',
+  ':lua vim.diagnostic.goto_next({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ']d', ':lua vim.diagnostic.goto_prev({ border="rounded" })<CR>',
+  { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', ']e',
+  ':lua vim.diagnostic.goto_prev({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
+  { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '[e',
+  ':lua vim.diagnostic.goto_next({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
+  { noremap = true, silent = true }) ]]
+
+vim.api.nvim_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>',
+  { noremap = true })
