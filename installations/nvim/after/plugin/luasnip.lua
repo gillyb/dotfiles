@@ -1,24 +1,3 @@
--- require('lazy').setup({
-  -- mhinz/vim-grepper
-  -- 'dylon/vim-antlr',                 -- lsp plugin for ANTLR
--- }, {
-  -- concurrency = 4
--- })
-
--- Config setup for indent-blankline
-require('ibl').setup({
-  indent = {
-    char = '╎'
-  },
-  scope = {
-    enabled = false
-  }
-});
-
-
-
--- Snippets --
--- TODO: Move this to separate file
 local ls = require('luasnip');
 local s = ls.snippet
 local sn = ls.snippet_node
