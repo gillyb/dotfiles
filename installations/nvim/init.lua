@@ -1,3 +1,5 @@
+vim.g.mapleader = ';'
+
 vim.loader.enable()
 
 require('gillyb/startup')
@@ -13,7 +15,6 @@ vim.g.nvcode_termcolors = true
 
 
 
-require('keys')
 
 -- indentLine
 vim.g.indentLine_color_term = 239
@@ -21,22 +22,7 @@ vim.g.indentLine_color_term = 239
 vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
 vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable') ]]
 
--- NERDTree
-vim.g.NERDTreeShowHidden = 1
-vim.g.NERDTreeMinimalUI = 1
-vim.g.NERDTreeStatusLine = ''
-vim.g.NERDTreeWinSize = 40
-vim.cmd("let g:NERDTreeIgnore = ['^\\.DS_Store', '\\.git$[[dir]]', '\\.idea$[[dir]]']")
 
--- Open NERDTree immediately when opening vim
-vim.cmd([[
-function! StartUp()
-  if 0 == argc()
-    NERDTree
-  end
-endfunction
-autocmd VimEnter * call StartUp()
-]])
 
 -- Quickfix lists
 vim.cmd([[
