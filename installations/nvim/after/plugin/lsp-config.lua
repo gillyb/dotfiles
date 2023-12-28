@@ -72,7 +72,7 @@ local lsp_config = {
   capabilities = capabilities
 }
 
-lsp_config.eslint.setup({
+nvim_lsp.eslint.setup({
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
@@ -160,24 +160,6 @@ cmp.setup({
   }
 })
 
-require('nvim-treesitter.configs').setup({
-  auto_install = true,
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25,
-  },
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false
-  },
-  indent = {
-    enable = true
-  }
-})
-
--- Configure .g4 files as antlr syntax
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.g4', command = 'set filetype=antlr4' })
 
 
 -- Define mappings
@@ -200,5 +182,4 @@ vim.api.nvim_set_keymap('n', '[e',
   ':lua vim.diagnostic.goto_next({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
   { noremap = true, silent = true }) ]]
 
-vim.api.nvim_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>',
-  { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gk', ':lua vim.lsp.buf.signature_help({ border="rounded" })<CR>', { noremap = true })
