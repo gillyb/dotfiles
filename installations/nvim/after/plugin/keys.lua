@@ -46,8 +46,8 @@ vim.api.nvim_set_keymap('v', '<leader>a', ':lua require("lspsaga.codeaction").ra
 
 -- Completion
 -- Use <Tab> and <S-Tab> to navigate through completion popup menu
-vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "<C-n>" : "<Tab>"', { expr=true, noremap=true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : "<S-Tab>"', { expr=true, noremap=true })
+-- vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "<C-n>" : "<Tab>"', { expr=true, noremap=true })
+-- vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : "<S-Tab>"', { expr=true, noremap=true })
 -- Avoid showing message extra message when using completion
 vim.cmd('set shortmess+=c')
 

@@ -13,8 +13,8 @@ require('telescope').setup({
     mappings = {
       i = {
         -- Move up/down with Ctrl+j/k
-        ['<C-j>'] = 'move_selection_next',
-        ['<C-k>'] = 'move_selection_previous',
+        -- ['<c-p>'] = 'move_selection_next',
+        -- ['<c-n>'] = 'move_selection_previous',
         -- When using 'esc' or 'jk' in insert mode, close the window
         ['<esc>'] = 'close',
         ['jk'] = 'close',
@@ -43,7 +43,7 @@ require('telescope').setup({
         height = 0.5,
         width = 0.7
       },
-      theme = 'dropdown',
+      theme = 'dropdown'
     },
     live_grep = {
       previewer = false,

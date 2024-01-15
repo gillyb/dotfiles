@@ -8,8 +8,8 @@ require('gillyb/startup')
 
 
 -- Don't use kommentary's default mappings
-vim.g.kommentary_create_default_mappings = false
-vim.g.nvcode_termcolors = true
+-- vim.g.kommentary_create_default_mappings = false
+-- vim.g.nvcode_termcolors = true
 
 
 
@@ -17,7 +17,7 @@ vim.g.nvcode_termcolors = true
 
 
 -- indentLine
-vim.g.indentLine_color_term = 239
+-- vim.g.indentLine_color_term = 239
 --[[ vim.api.nvim_command('autocmd Filetype json :IndentLinesDisable')
 vim.api.nvim_command('autocmd BufNewFile json :IndentLinesDisable')
 vim.api.nvim_command('autocmd BufEnter json :IndentLinesDisable') ]]
