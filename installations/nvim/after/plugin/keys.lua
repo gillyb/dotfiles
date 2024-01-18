@@ -1,3 +1,6 @@
+
+-- To check what a key is mapped to, inside vim type ':imap _key_'
+
 -- escape key
 vim.api.nvim_set_keymap('i', 'jk', '<esc>', { noremap=true })
 
@@ -38,10 +41,8 @@ vim.api.nvim_set_keymap('n', 'x', '"_x', { noremap=true })
 
 
 -- lspsaga (Code actions)
-vim.keymap.set({'n', 'v'}, '<leader>a', '<cmd>Lspsaga code_action<CR>')
-vim.api.nvim_set_keymap('n', '<leader>rn', ':lua require("lspsaga.rename").rename()<CR>', {})
-vim.api.nvim_set_keymap('n', '<leader>a', ':lua require("lspsaga.codeaction").code_action()<CR>', {})
-vim.api.nvim_set_keymap('v', '<leader>a', ':lua require("lspsaga.codeaction").range_code_action()<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>Lspsaga rename', {})
+vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', {})
 
 
 -- Completion
