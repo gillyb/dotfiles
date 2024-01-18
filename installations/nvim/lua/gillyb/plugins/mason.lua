@@ -4,7 +4,6 @@ return {
     version = "*",
     build = ":MasonUpdate",
     opts = {
-
       ui = {
         border = "rounded",
       },

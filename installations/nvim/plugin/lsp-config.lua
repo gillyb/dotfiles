@@ -1,22 +1,60 @@
-local nvim_lsp = require('lspconfig')
+-- Neodev must be setup before the Lua language server
+require("neodev").setup()
+
+local lsp = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-local function init_lsp(client, bufnr)
-  -- For illuminating word under the cursor
-  -- if client.resolved_capabilities.document_highlight then
-  --   require('illuminate').on_attach(client)
-  -- end
-  vim.api.nvim_set_keymap('n', ']e',
-    ':lua vim.diagnostic.goto_prev({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
-    { noremap = true, silent = true })
-
-  vim.api.nvim_set_keymap('n', '[e',
-    ':lua vim.diagnostic.goto_next({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
-    { noremap = true, silent = true })
-end
+-- Add border to hover floats (when pressing K)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
 
 -- Setup capabilities
 local capabilities = vim.tbl_extend(
+  "force",
+  vim.lsp.protocol.make_client_capabilities(),
+  cmp_nvim_lsp.default_capabilities()
+)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = false,
+  update_in_insert = false,
+  virtual_text = { spacing = 4, prefix = "●" },
+  severity_sort = true,
+})
+
+
+
+local function setup(lang_server, opts)
+  local merged_opts = vim.tbl_extend('force', {
+    capabilities = capabilities
+  }, opts or {})
+
+  lsp[lang_server].setup(merged_opts)
+end
+
+setup('tsserver')
+setup('eslint')
+setup('angularls')
+setup('bashls')
+setup('lua_ls')
+setup('pyright')
+setup('yamlls')
+setup('jsonls')
+setup('html')
+setup('cssls')
+setup('clangd')
+
+
+
+
+
+-- OLD STUFF HERE.. --
+
+
+-- Setup capabilities
+--[[ local capabilities = vim.tbl_extend(
   "force",
   vim.lsp.protocol.make_client_capabilities(),
   cmp_nvim_lsp.default_capabilities()
@@ -42,28 +80,8 @@ local signs = { Error = " ", Warning = " ", Hint = " ", Information = "
 for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+end ]]
 
--- Setup all language servers we installed already.
--- To install more language servers: `:LspInstall <language_server>`
--- list over here: https://github.com/kabouzeid/nvim-lspinstall#bundled-installers
--- local function setup_language_servers()
---   require('lspinstall').setup()
---   local installed_servers = require('lspinstall').installed_servers()
---   for _, server in pairs(installed_servers) do
---     nvim_lsp[server].setup({
---       on_attach = init_lsp,
---       capabilities = capabilities
---     })
---   end
--- end
--- setup_language_servers()
--- Automatically reload after installing a new language server so we don't have to
--- restart neovim
--- require('lspinstall').post_install_hook = function()
--- setup_language_servers()
--- vim.cmd('bufdo e')
--- end
 
 
 -- Install language servers
@@ -76,7 +94,7 @@ end
 -- python: npm i -g pyright
 -- vim: npm install -g vim-language-server
 -- Complete list of language servers here: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-local lsp_config = {
+--[[ local lsp_config = {
   on_attach = init_lsp,
   capabilities = capabilities
 }
@@ -88,16 +106,16 @@ nvim_lsp.eslint.setup({
       command = "EslintFixAll",
     })
   end,
-})
+}) ]]
 
-nvim_lsp.tsserver.setup(lsp_config)
-nvim_lsp.bashls.setup(lsp_config)
-nvim_lsp.angularls.setup(lsp_config)
-nvim_lsp.html.setup(lsp_config)
-nvim_lsp.jsonls.setup(lsp_config)
-nvim_lsp.pyright.setup(lsp_config)
-nvim_lsp.vimls.setup(lsp_config)
-nvim_lsp.clangd.setup(lsp_config)
+-- nvim_lsp.tsserver.setup(lsp_config)
+-- nvim_lsp.bashls.setup(lsp_config)
+-- nvim_lsp.angularls.setup(lsp_config)
+-- nvim_lsp.html.setup(lsp_config)
+-- nvim_lsp.jsonls.setup(lsp_config)
+-- nvim_lsp.pyright.setup(lsp_config)
+-- nvim_lsp.vimls.setup(lsp_config)
+-- nvim_lsp.clangd.setup(lsp_config)
 
 
 
@@ -113,13 +131,10 @@ nvim_lsp.clangd.setup(lsp_config)
 -- vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover({ border="rounded" })<CR>', { noremap = true, silent = true })
---[[ vim.api.nvim_set_keymap('n', '[d',
-  ':lua vim.diagnostic.goto_next({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
-  { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ']d', ':lua vim.diagnostic.goto_prev({ border="rounded" })<CR>',
-  { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '[d', ':lua vim.diagnostic.goto_next({ border="rounded" })<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', ']d', ':lua vim.diagnostic.goto_prev({ border="rounded" })<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', ']e',
+--[[ vim.api.nvim_set_keymap('n', ']e',
   ':lua vim.diagnostic.goto_prev({ severity=vim.diagnostic.severity.ERROR, border="rounded" })<CR>',
   { noremap = true, silent = true })
 
