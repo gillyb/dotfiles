@@ -41,7 +41,8 @@ vim.api.nvim_set_keymap('n', 'x', '"_x', { noremap=true })
 
 
 -- lspsaga (Code actions)
-vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>Lspsaga rename', {})
+-- TODO: Move these to lsp-config
+vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', {})
 
 
