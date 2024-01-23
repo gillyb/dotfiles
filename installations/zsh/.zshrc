@@ -19,6 +19,8 @@ setopt autopushd
 alias vim="nvim"
 alias v="vim"
 
+alias tn="tmux new -t" # Create a new tmux session easily
+
 alias dotfiles="cd ~/dotfiles/"
 alias dotsave="cd ~/dotfiles/ && git add . && git commit -m \"HYCYBH\" && git push && cd -"
 
@@ -64,6 +66,9 @@ export FZF_DEFAULT_OPTS='--height 20 --reverse --border --color dark,hl:33,hl+:3
 
 
 # utility functions
+mkdircd() {
+  mkdir -p $1 && cd $1
+}
 dev() {
   DIR=`fd . ~/dev -d 1 | fzf` && cd $DIR
 }
@@ -98,6 +103,17 @@ update_language_servers() {
 }
 alias ilangservers='install_language_servers'
 alias ulangservers='update_language_servers'
+
+spinner() {
+  while
+  do
+    for i in "-" "\\" "|" "/"
+    do
+      echo -n " $i \r\r"
+      sleep .1
+    done
+  done
+}
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
