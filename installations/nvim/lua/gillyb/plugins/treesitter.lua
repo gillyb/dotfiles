@@ -11,7 +11,6 @@ return {
   'nvim-treesitter/playground', -- To see how treesitter parses our code
   {
     'romgrk/nvim-treesitter-context',
-    enabled = false,
     config = function()
       require('treesitter-context').setup({
         enable = true,

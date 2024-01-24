@@ -56,6 +56,7 @@
 [user]
 	email = gillyb@gmail.com
 	name = Gilly Barr
+	signingkey = /Users/gbarr/.ssh/id_ed25519.primary
 [core]
   excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
@@ -89,3 +90,7 @@
 	whitespace = red reverse
 [credential]
 	helper = osxkeychain
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true

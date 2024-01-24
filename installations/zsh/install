@@ -15,8 +15,9 @@ childProcess.execSync('brew install zsh zsh-completion', [], { stdio: 'inherit' 
 terminal.yellow('    * Installing curl');
 childProcess.execSync('brew install curl', [], { stdio: 'inherit' });
 
-terminal.yellow('    * Installing oh-my-zsh');
-childProcess.execSync('sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"', [], { stdio: 'inherit' });
+terminal.yellow('    * Installing powerlevel10k');
+childProcess.execSync('sh -c "$(git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k)"', [], { stdio: 'inherit' });
+files.createSymLink(path.join(currentDir, '.p10k.zsh', path.join(homedir, '.p10k.zsh')))
 
 terminal.yellow('    * Copying configuration file');
 files.createSymLink(path.join(currentDir, '.zshrc'), path.join(homedir, '.zshrc'));
