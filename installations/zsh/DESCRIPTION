@@ -1,7 +1,7 @@
 zsh
  * Install zsh
  * Install curl
- * Install oh-my-zsh
+ * Install powerlevel10k
  * Copy zsh configuration file
 
-https://github.com/robbyrussell/oh-my-zsh
+https://github.com/romkatv/powerlevel10k
