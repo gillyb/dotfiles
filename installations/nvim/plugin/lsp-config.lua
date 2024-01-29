@@ -1,6 +1,8 @@
 -- Neodev must be setup before the Lua language server
 require("neodev").setup()
 
+-- TODO: Configure luasnip
+
 local lsp = require('lspconfig')
 local cmp = require('cmp')
 cmp.setup({
@@ -63,11 +65,11 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 
--- TODO: Fix icons here. THIS WORKS!!!
-vim.fn.sign_define('DiagnosticSignWarn', {name = 'DiagnosticSignWarn', text = ' ', texthl = 'DiagnosticSignWarn'})
-vim.fn.sign_define('DiagnosticSignError', {name = 'DiagnosticSignError', text = '⁉️ ', texthl = 'DiagnosticSignError'})
+-- Configure gutter icons from lsp diagnostics
+vim.fn.sign_define('DiagnosticSignWarn', {name = 'DiagnosticSignWarn', text = '', texthl = 'DiagnosticSignWarn'})
+vim.fn.sign_define('DiagnosticSignError', {name = 'DiagnosticSignError', text = '', texthl = 'DiagnosticSignError'})
 vim.fn.sign_define('DiagnosticSignHint', {name = 'DiagnosticSignHint', text = ' ', texthl = 'DiagnosticSignHint'})
-vim.fn.sign_define('DiagnosticSignInfo', {name = 'DiagnosticSignInfo', text = ' ', texthl = 'DiagnosticSignInfo'})
+vim.fn.sign_define('DiagnosticSignInfo', {name = 'DiagnosticSignInfo', text = '', texthl = 'DiagnosticSignInfo'})
 
 
 
