@@ -13,8 +13,8 @@ require('telescope').setup({
     mappings = {
       i = {
         -- Move up/down with Ctrl+j/k
-        -- ['<c-p>'] = 'move_selection_next',
-        -- ['<c-n>'] = 'move_selection_previous',
+        ['<c-j>'] = 'move_selection_next',
+        ['<c-k>'] = 'move_selection_previous',
         -- When using 'esc' or 'jk' in insert mode, close the window
         ['<esc>'] = 'close',
         ['jk'] = 'close',
