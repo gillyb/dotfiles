@@ -29,7 +29,9 @@ return {
       mason = true,
       lsp_saga = true,
       fidget = true,
-      nvim_lspconfig = true
+      native_lsp = {
+        enabled = true
+      }
     }
   }
 }
