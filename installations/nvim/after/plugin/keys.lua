@@ -98,6 +98,7 @@ vim.api.nvim_set_keymap('n', 'zz', ':lua move_to_top_third()<CR>', { noremap=tru
 vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap=true });
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap=true });
 
+-- Navigate between tmux and nvim windows easily
 local nvim_tmux_nav = require('nvim-tmux-navigation')
 vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
 vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
@@ -127,6 +128,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', opts)
     vim.keymap.set('n', 'go', '<cmd>Lspsaga outline<CR>', opts)
+
+    vim.keymap.set('n', '<space>ic', '<cmd>Lspsaga incoming_calls<CR>', opts)
+    vim.keymap.set('n', '<space>oc', '<cmd>Lspsaga outgoing_calls<CR>', opts)
+
     vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)

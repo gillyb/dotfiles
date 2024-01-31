@@ -10,6 +10,9 @@ if [ -z $NO_GUI ]; then
     exit 1
   fi
 
+  # Loads the terminfo file - so we have italics defined properly
+  tic ./xterm-256colo-italic.terminfo
+
   # We have the settings files in this folder
   # Now we just need to make the user configures
   # iterm2 to take the settings files from here.

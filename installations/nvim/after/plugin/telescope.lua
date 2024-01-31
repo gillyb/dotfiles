@@ -7,7 +7,9 @@ require('telescope').setup({
     -- so I define them again in the pickers I use often.
     -- file_sorter = require('telescope.sorters').get_fzy_sorter,
     -- generic_sorter = require('telescope.sorters').get_fzy_sorter,
-    file_ignore_patterns = { "package-lock.json" },
+    file_ignore_patterns = { 
+      "package-lock.json"
+    },
     layout_strategy = "center",
     theme = 'dropdown',
     mappings = {
