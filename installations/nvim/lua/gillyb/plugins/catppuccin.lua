@@ -24,8 +24,12 @@ return {
       gitsigns = true,
       nvimtree = true,
       treesitter = true,
+      treesitter_context = true,
       telescope = true,
-      mason = true
+      mason = true,
+      lsp_saga = true,
+      fidget = true,
+      nvim_lspconfig = true
     }
   }
 }
