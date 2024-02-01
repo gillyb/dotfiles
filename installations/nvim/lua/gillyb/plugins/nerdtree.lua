@@ -1,4 +1,5 @@
 return {
   -- NERDTree file explorer
-  'scrooloose/nerdtree'
+  'scrooloose/nerdtree',
+  lazy = false
 }
