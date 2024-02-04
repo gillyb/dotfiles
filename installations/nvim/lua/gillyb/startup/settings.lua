@@ -26,6 +26,7 @@ vim.o.showcmd = true
 
 vim.o.splitright = true
 vim.o.splitbelow = true
+vim.o.splitkeep = 'screen'
 
 vim.o.wrap = false
 

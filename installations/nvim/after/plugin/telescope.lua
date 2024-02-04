@@ -79,7 +79,8 @@ require('telescope').setup({
       override_file_sorter = true
     },
     live_grep_args = {
-      auto_quoting = true
+      auto_quoting = true,
+      glob_pattern = '!package-lock.json'
     }
   }
 })
@@ -111,6 +112,7 @@ _G.local_find_files = function()
     }
   })
 end
+
 
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap = true })
