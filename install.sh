@@ -113,9 +113,10 @@ NODE_PACKAGES=('webpack'                     \
                'eslint'                      \
                'jest'                        \
                'concurrently'                \
-               'serverless'                  \
                'neovim'                      \
                'pyright'                     \
+               'next'                        \
+               'serve'                       \
                '@gillyb/nrun'                \
 )
 
@@ -153,6 +154,7 @@ BREW_UTILS=(       \
   'htop'           \
   'diff-so-fancy'  \
   'ncdu'           \
+  'deno'           \
 )
 for package in "${BREW_UTILS[@]}"; do
   minor "Installing '${package}'"
@@ -174,6 +176,7 @@ BREW_CASK_UTILS=(       \
   'chrome'              \
   'sublime-text'        \
   'iterm2'              \
+  'ngrok'               \
   'font-hack-nerd-font' \
   'whatsapp'            \
   'visual-studio-code'  \
@@ -181,7 +184,7 @@ BREW_CASK_UTILS=(       \
   'spotify'             \
   'prusaslicer'         \
   'notion'              \
-  'docker'              \
+  'font-monaspace'      \
 )
 brew tap homebrew/cask-fonts
 for package in "${BREW_CASK_UTILS[@]}"; do

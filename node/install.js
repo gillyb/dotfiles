@@ -82,7 +82,7 @@ const installDirs = files.getDirectoryList(installationsPath);
     await shouldInstall(dirName);
   }
 
-  terminal.green('\n\nAll Done :)\n\n');
+  terminal.green('\n\n ✅  All Done :)\n\n');
 
   process.exit(0);
 })();

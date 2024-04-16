@@ -17,7 +17,7 @@ if [ $? != 0 ]; then
   info "I have 99 problems but not having git ain't one"
   echo
   info "You need git to download this repo and run it"
-  info "Install git and come back to me son"
+  info "On mac run: xcode-select --install"
   echo
   exit 1
 fi

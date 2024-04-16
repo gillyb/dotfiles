@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+source ./helpers.sh
+
+# Creating links to configuration files
+DOTFILES=~/dotfiles
+
+info "Linking tmux configuration files"
+symlink "${DOTFILES}/installations/tmux/.tmux.conf" ~/.config/.tmux.conf
+success "Finished linking configuration file"
+pause
+
+exit 0
