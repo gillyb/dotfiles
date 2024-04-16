@@ -1,8 +1,7 @@
 -- Neodev must be setup before the Lua language server
 require("neodev").setup()
 
--- TODO: Configure luasnip
-
+local luasnip = require('luasnip');
 local lsp = require('lspconfig')
 local cmp = require('cmp')
 cmp.setup({
@@ -21,11 +20,11 @@ cmp.setup({
         and not context.in_syntax_group("Comment"))
     end
   end,
-  --[[ snippet = {
+  snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
-  }, ]]
+  },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -106,6 +105,7 @@ setup('jsonls')
 setup('html')
 setup('cssls')
 setup('clangd')
+setup('tailwindcss')
 setup('lua_ls', {
   settings = {
     Lua = {
