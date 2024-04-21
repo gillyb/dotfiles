@@ -173,7 +173,7 @@ done
 echo ""
 info "Installing some basic utils with brew-cask"
 BREW_CASK_UTILS=(       \
-  'chrome'              \
+  'google-chrome'       \
   'sublime-text'        \
   'iterm2'              \
   'ngrok'               \
