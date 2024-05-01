@@ -127,6 +127,7 @@ spinner() {
 }
 
 
+# load fzf configuration file
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Import local configurations if they exist (mostly for work-related stuff)

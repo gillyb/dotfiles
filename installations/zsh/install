@@ -19,7 +19,8 @@ terminal.yellow('    * Installing powerlevel10k');
 childProcess.execSync('sh -c "$(git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k)"', [], { stdio: 'inherit' });
 files.createSymLink(path.join(currentDir, '.p10k.zsh'), path.join(homedir, '.p10k.zsh'))
 
-terminal.yellow('    * Copying configuration file');
+terminal.yellow('    * Copying configuration files');
 files.createSymLink(path.join(currentDir, '.zshrc'), path.join(homedir, '.zshrc'));
+files.createSymLink(path.join(currentDir, '.fzf.zsh'), path.join(homedir, '.fzf.zsh'));
 
 process.exit(0);
