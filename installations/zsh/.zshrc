@@ -132,16 +132,16 @@ spinner() {
 # Import local configurations if they exist (mostly for work-related stuff)
 [ -f ~/.local.config.sh ] && source ~/.local.config.sh
 
-export PATH=$PATH:/usr/local/bin/:/Users/gbarr/dev/frontend/projects/proxy-tool/.bin/
+export PATH=$PATH:/usr/local/bin/
 # export PATH=$PATH:~/Library/Python/3.8/bin
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/gbarr/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gbarr/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/Users/gbarr/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gbarr/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/gbarr/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gbarr/google-cloud-sdk/completion.zsh.inc'; fi

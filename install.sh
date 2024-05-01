@@ -120,19 +120,19 @@ NODE_PACKAGES=('webpack'                     \
                '@gillyb/nrun'                \
 )
 
-for package in "${NODE_PACKAGES[@]}"; do
-  minor "Installing '${package}'"
-  if ! $DRY_RUN; then
-    eval "sudo npm install -g ${package} ${BE_QUIET}"
-    if [ $? -eq 0 ]; then
-      success "Installed ${package}"
-    else
-      error "Failed to install '${package}'"
-      error "You can try running this script again with --verbose"
-      pause
-    fi
-  fi
-done
+# for package in "${NODE_PACKAGES[@]}"; do
+#   minor "Installing '${package}'"
+#   if ! $DRY_RUN; then
+#     eval "sudo npm install -g ${package} ${BE_QUIET}"
+#     if [ $? -eq 0 ]; then
+#       success "Installed ${package}"
+#     else
+#       error "Failed to install '${package}'"
+#       error "You can try running this script again with --verbose"
+#       pause
+#     fi
+#   fi
+# done
 
 
 

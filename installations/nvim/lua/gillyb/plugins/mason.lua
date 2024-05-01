@@ -1,6 +1,7 @@
 return {
   {
     "williamboman/mason.nvim",
+    enable = false,
     version = "*",
     build = ":MasonUpdate",
     opts = {
@@ -11,6 +12,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    enable = false,
     version = "*",
     opts = { automatic_installation = true },
   },

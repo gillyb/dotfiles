@@ -6,8 +6,8 @@ const childProcess = require('child_process');
 const files = require('./../../node/files');
 const terminal = require('./../../node/terminal');
 
-const currentDir = path.resolve(__dirname);
 const homedir = os.homedir();
+const currentDir = path.join(homedir, '/dotfiles/installations/zsh');
 
 terminal.yellow('    * Installing zsh and zsh-completion');
 childProcess.execSync('brew install zsh zsh-completion', [], { stdio: 'inherit' });
@@ -17,7 +17,7 @@ childProcess.execSync('brew install curl', [], { stdio: 'inherit' });
 
 terminal.yellow('    * Installing powerlevel10k');
 childProcess.execSync('sh -c "$(git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k)"', [], { stdio: 'inherit' });
-files.createSymLink(path.join(currentDir, '.p10k.zsh', path.join(homedir, '.p10k.zsh')))
+files.createSymLink(path.join(currentDir, '.p10k.zsh'), path.join(homedir, '.p10k.zsh'))
 
 terminal.yellow('    * Copying configuration file');
 files.createSymLink(path.join(currentDir, '.zshrc'), path.join(homedir, '.zshrc'));
