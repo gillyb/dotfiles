@@ -90,9 +90,5 @@
 	whitespace = red reverse
 [credential]
 	helper = osxkeychain
-[gpg]
-	format = ssh
-[commit]
-	gpgsign = true
 [help]
 	autocorrect = prompt
