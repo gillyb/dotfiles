@@ -57,6 +57,8 @@
 	email = gillyb@gmail.com
 	name = Gilly Barr
 	signingkey = /Users/gbarr/.ssh/id_ed25519.primary
+[pull]
+	rebase = true
 [core]
   excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '

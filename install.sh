@@ -155,6 +155,7 @@ BREW_UTILS=(       \
   'diff-so-fancy'  \
   'ncdu'           \
   'deno'           \
+  'yarn'           \
 )
 for package in "${BREW_UTILS[@]}"; do
   minor "Installing '${package}'"
@@ -185,6 +186,7 @@ BREW_CASK_UTILS=(       \
   'prusaslicer'         \
   'notion'              \
   'font-monaspace'      \
+  'docker'              \
 )
 brew tap homebrew/cask-fonts
 for package in "${BREW_CASK_UTILS[@]}"; do
