@@ -54,6 +54,8 @@ alias sb='switch_branch'
 alias st='switch_tmux_env'
 
 alias nr='npm_run'
+alias yr='yarn_run'
+alias yb='yarn build'
 
 alias tsnode='npx ts-node'
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
@@ -92,6 +94,10 @@ switch_branch() {
 npm_run() {
   CHOSEN_SCRIPT=`cat package.json | jq '.scripts | keys | .[]' | grep -v '\[' | grep -v '\]' | fzf`
   npm run ${CHOSEN_SCRIPT:1:-1}
+}
+yarn_run() {
+  CHOSEN_SCRIPT=`cat package.json | jq '.scripts | keys | .[]' | grep -v '\[' | grep -v '\]' | fzf`
+  yarn ${CHOSEN_SCRIPT:1:-1}
 }
 
 install_language_servers() {

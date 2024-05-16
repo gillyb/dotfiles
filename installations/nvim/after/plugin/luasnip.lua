@@ -25,7 +25,11 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
-ls.add_snippets('javascript', {
+local function capitalize(str)
+  return (str:gsub('^%l', string.upper))
+end
+
+local js_snippets = {
   -- 'd' to create an empty <div>
   s('d', {
     t('<div className="">'),
@@ -33,14 +37,32 @@ ls.add_snippets('javascript', {
     t('</div>')
   }),
 
-  -- 'us' to add useState
-  s('us', {
-    t('const ['), i(1), t(', set'), i(1), t('] = useState('), i(2), t(');')
+  -- 'state' to add useState
+  s('state', {
+    t('const ['),
+    i(1),
+    f(function (args) return ', set' .. capitalize(args[1][1]) end, {1}),
+    t('] = useState('),
+    i(2),
+    t(');')
   }),
+  -- 'eff' to add useEffect
+  s('eff', { t({ 'useEffect(() => {', '  ', '}, [])' }) }),
+
   -- 'fc' for 'function component'
   s('fc', {
-    t('import {useState} from \'react\';\n\nexport default function '),
+    t({'import {useState} from \'react\';', '', 'export default function '}),
     i(1),
-    t('(props) {\n\nreturn (\n\n\n);\n}')
+    t({'(props) {', '', 'return (', '', '', ');', '}'})
   })
-})
+};
+
+ls.add_snippets('javascript', js_snippets);
+ls.add_snippets('typescript', js_snippets);
+ls.add_snippets('typescriptreact', js_snippets);
+
+
+-- Bind keymaps for luasnip --
+-- Ctrl+L/J to jump forward and back
+vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})

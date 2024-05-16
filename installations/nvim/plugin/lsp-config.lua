@@ -78,6 +78,19 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
   severity_sort = true,
 })
 
+-- Patch 'go to definition' so that we always go to the first result
+local function patch(result)
+  if not vim.tbl_islist(result) or type(result) ~= "table" then
+    return result
+  end
+
+  return { result[1] }
+end
+
+local function handle_gtd(err, result, ctx, ...)
+  vim.lsp.handlers['textDocument/definition'](err, patch(result), ctx, ...)
+end
+
 
 -- Configure gutter icons from lsp diagnostics
 vim.fn.sign_define('DiagnosticSignWarn', {name = 'DiagnosticSignWarn', text = '', texthl = 'DiagnosticSignWarn'})
@@ -95,9 +108,19 @@ local function setup(lang_server, opts)
   lsp[lang_server].setup(merged_opts)
 end
 
-setup('tsserver')
+setup('tsserver', {
+  handlers = {
+    ['textDocument/definition'] = function(err, result, method, ...)
+      if vim.tbl_islist(result) and #result > 1 then
+        local filtered_result = { result[1] }
+        return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+      end
+
+      vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+    end
+  }
+})
 setup('eslint')
-setup('angularls')
 setup('bashls')
 setup('pyright')
 setup('yamlls')
