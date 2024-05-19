@@ -1,5 +1,4 @@
 local actions = require('telescope.actions')
-local lga_actions = require('telescope-live-grep-args.actions')
 
 require('telescope').setup({
   defaults = {
@@ -22,8 +21,6 @@ require('telescope').setup({
         ['jk'] = 'close',
         -- Send all results to a quickfix list
         ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
-        -- Ctrl-u will add quotes to the text, so we can send parameters to ripgrep
-        ['<C-u>'] = lga_actions.quote_prompt()
       }
     }
   },
@@ -78,10 +75,6 @@ require('telescope').setup({
       override_generic_sorter = true,
       override_file_sorter = true
     },
-    live_grep_args = {
-      auto_quoting = true,
-      glob_pattern = '!package-lock.json'
-    }
   }
 })
 
@@ -117,7 +110,7 @@ end
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>Telescope buffers<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gg', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope grep_string<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>tg', '<cmd>Telescope git_status<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { noremap = true })
