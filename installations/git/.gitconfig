@@ -16,6 +16,7 @@
     fa = fetch --all
     mt = mergetool
     d = "diff -- ':(exclude)yarn.lock'"
+    p = pull
     u = pull
     mc = merge --continue
     

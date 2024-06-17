@@ -23,11 +23,12 @@ return {
         scss = formatters.lsp,
         sh = formatters.shfmt,
         terraform = formatters.lsp,
-        -- typescriptreact = formatters.prettierd,
+        typescriptreact = formatters.prettierd,
         yaml = formatters.lsp,
 
         typescript = {
-          formatters.prettierd
+          formatters.prettierd,
+          formatters.lsp
         },
       },
     })

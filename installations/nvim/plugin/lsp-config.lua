@@ -3,8 +3,25 @@ require("neodev").setup()
 
 local luasnip = require('luasnip');
 local lsp = require('lspconfig')
+
+-- TODO: Extract this to separate cmp config file
 local cmp = require('cmp')
+
+local function border(hl_name)
+  return {
+    { "╭", hl_name },
+    { "─", hl_name },
+    { "╮", hl_name },
+    { "│", hl_name },
+    { "╯", hl_name },
+    { "─", hl_name },
+    { "╰", hl_name },
+    { "│", hl_name },
+  }
+end
+
 cmp.setup({
+
   enabled = function()
     -- disable completion in comments
     local context = require('cmp.config.context')
@@ -20,11 +37,24 @@ cmp.setup({
         and not context.in_syntax_group("Comment"))
     end
   end,
+
+  window = {
+    completion = {
+      scrollbar = true,
+      border = border("CmpBorder")
+    },
+    documentation = {
+      border = border "CmpDocBorder",
+      winhighlight = "Normal:CmpDoc",
+    },
+  },
+
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
+
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -52,6 +82,7 @@ cmp.setup({
       end
     end, { 'i', 's' }),
   }),
+
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
@@ -78,18 +109,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
   severity_sort = true,
 })
 
--- Patch 'go to definition' so that we always go to the first result
-local function patch(result)
-  if not vim.tbl_islist(result) or type(result) ~= "table" then
-    return result
-  end
-
-  return { result[1] }
-end
-
-local function handle_gtd(err, result, ctx, ...)
-  vim.lsp.handlers['textDocument/definition'](err, patch(result), ctx, ...)
-end
 
 
 -- Configure gutter icons from lsp diagnostics
@@ -111,6 +130,7 @@ end
 setup('tsserver', {
   handlers = {
     ['textDocument/definition'] = function(err, result, method, ...)
+      -- If there's more than one result, just go to the first
       if vim.tbl_islist(result) and #result > 1 then
         local filtered_result = { result[1] }
         return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)

@@ -30,6 +30,13 @@ local function capitalize(str)
 end
 
 local js_snippets = {
+  -- 'log' to type 'console.log'
+  s('log', {
+    t('console.log(\''),
+    i(0),
+    t('\');')
+  }),
+
   -- 'd' to create an empty <div>
   s('d', {
     t('<div className="">'),
