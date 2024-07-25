@@ -114,6 +114,7 @@ vim.api.nvim_set_keymap('n', '<leader>gg', '<cmd>Telescope live_grep<CR>', { nor
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope grep_string<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>tg', '<cmd>Telescope git_status<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fa', ':lua local_find_files()<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', { noremap = true })
 
 -- Type :Vimrc to edit my personal vimrc files
 vim.cmd('command! Vimrc :lua edit_my_vimrc()<CR>')

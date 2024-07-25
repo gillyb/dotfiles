@@ -57,6 +57,7 @@ vim.cmd('set shortmess+=c')
 -- Kommentary
 vim.api.nvim_set_keymap('n', '<leader>cc', '<Plug>kommentary_line_default', {})
 vim.api.nvim_set_keymap('x', '<leader>cc', '<Plug>kommentary_visual_default vv', {})
+vim.api.nvim_set_keymap('n', '<leader>cp', 'yypk<leader>ccj0', {})
 
 -- Grepper
 -- vim.api.nvim_set_keymap('n', '<leader>gg', ':Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>', { noremap=true })
