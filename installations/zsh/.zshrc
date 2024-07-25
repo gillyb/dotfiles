@@ -69,6 +69,8 @@ alias fix-staged='eslint $(git diff --name-only --cached) --fix'
 # When i have no patience and I just want a super fast commit!
 alias fp='git add . && git c -am "Fast commit baby" --no-verify && git push'
 
+alias xx='exit'
+
 
 # FZF settings
 
