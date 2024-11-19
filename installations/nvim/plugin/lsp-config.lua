@@ -127,7 +127,7 @@ local function setup(lang_server, opts)
   lsp[lang_server].setup(merged_opts)
 end
 
-setup('tsserver', {
+setup('ts_ls', {
   handlers = {
     ['textDocument/definition'] = function(err, result, method, ...)
       -- If there's more than one result, just go to the first

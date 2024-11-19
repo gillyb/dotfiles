@@ -28,7 +28,6 @@ return {
 
         typescript = {
           formatters.prettierd,
-          formatters.lsp
         },
       },
     })

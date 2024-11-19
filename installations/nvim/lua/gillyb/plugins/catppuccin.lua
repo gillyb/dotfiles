@@ -32,7 +32,7 @@ return {
       fidget = true,
       native_lsp = {
         enabled = true
-      }
+      },
     }
   }
 }

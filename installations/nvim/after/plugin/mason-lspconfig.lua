@@ -10,7 +10,7 @@ require('mason-lspconfig').setup({
     'eslint',
     'html',
     'jsonls',
-    'tsserver',
+    'ts_ls',
     'lua_ls',
     'marksman',
     'pyright',

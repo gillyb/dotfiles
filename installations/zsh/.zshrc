@@ -1,6 +1,9 @@
 # Uncomment this (and the line at the end of this file) to profile
 # zmodload zsh/zprof
 
+autoload -Uz compinit
+compinit
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -144,7 +147,11 @@ spinner() {
 export PATH=$PATH:/usr/local/bin/
 # export PATH=$PATH:~/Library/Python/3.8/bin
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
-# export JAVA_HOME=$(/usr/libexec/java_home)
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

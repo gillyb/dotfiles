@@ -51,6 +51,9 @@
     # reset --hard
     hard-reset = reset --hard
 
+    # rerun tests - pushes an empty commit
+    rr = commit -m "rerun" --allow-empty
+
     # Update current branch (assuming i'm not on dev)
     ub = "git checkout dev && git pull && git checkout - && git merge dev"
 

@@ -32,15 +32,15 @@ end
 local js_snippets = {
   -- 'log' to type 'console.log'
   s('log', {
-    t('console.log(\''),
+    t('console.log(`'),
     i(0),
-    t('\');')
+    t('`);')
   }),
 
   -- 'd' to create an empty <div>
   s('d', {
-    t('<div className="">'),
-    i(0),
+    t('<div className='), i(1), t('>'),
+    i(2),
     t('</div>')
   }),
 
@@ -61,6 +61,36 @@ local js_snippets = {
     t({'import {useState} from \'react\';', '', 'export default function '}),
     i(1),
     t({'(props) {', '', 'return (', '', '', ');', '}'})
+  }),
+
+  -- 'ec' for 'export const ...'
+  s('ec', {
+    t({'export const '}), i(1)
+  }),
+
+  -- 'jsp'/'jss' for JSON.parse / JSON.stringify respectively
+  s('jsp', {
+    t('JSON.parse('), i(1), t(')')
+  }),
+  s('jss', {
+    t('JSON.stringify('), i(1), t(')')
+  }),
+
+  -- 'anon' for anonymous function
+  s('anon', {
+    t('('), i(1), t(') => '), i(0)
+  }),
+
+  -- 'if'
+  s('if', {
+    t('if ('), i(1), t(') {'), t({''}),
+    i(0),
+    t({'', '}'})
+  }),
+
+  -- 'doc' to add big js comments
+  s('doc', {
+    t({'/**', ' * '}), i(1), t({'', ' */'})
   })
 };
 
