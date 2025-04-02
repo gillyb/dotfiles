@@ -51,3 +51,8 @@ vim.o.hidden = true
 -- Prevent netrw from loading
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- load builtin cfilter plugin
+vim.cmd([[
+  packadd cfilter
+]])

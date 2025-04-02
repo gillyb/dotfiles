@@ -65,6 +65,7 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
 # jc = "just commit" - for super fast commits
 alias jc='git c -am "HYCYBH"'
+alias empty_commit='git c -m "empty" --allow-empty && git push'
 
 # eslint - fix staged git files
 alias fix-staged='eslint $(git diff --name-only --cached) --fix'
@@ -144,7 +145,7 @@ spinner() {
 # Import local configurations if they exist (mostly for work-related stuff)
 [ -f ~/.local.config.sh ] && source ~/.local.config.sh
 
-export PATH=$PATH:/usr/local/bin/
+export PATH=/Users/gillyb/.volta/bin:$PATH:/usr/local/bin/
 # export PATH=$PATH:~/Library/Python/3.8/bin
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
@@ -173,6 +174,11 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 
 # # Set prompt line format

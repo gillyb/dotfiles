@@ -30,17 +30,34 @@ local function capitalize(str)
 end
 
 local js_snippets = {
+  -- todo comment
+  s('todo', {
+    t('// TODO: '), i(0)
+  }),
+
   -- 'log' to type 'console.log'
   s('log', {
     t('console.log(`'),
-    i(0),
-    t('`);')
+    i(1),
+    t('`);'),
+    i(0)
   }),
+  -- console.info(``);
+  s('linfo', {
+    t('console.info(`'), i(1), t('`);'), i(0)
+  }),
+  s('lwarn', {
+    t('console.warn(`'), i(1), t('`);'), i(0)
+  }),
+  s('ldebug', {
+    t('console.debug(`'), i(1), t('`);'), i(0)
+  }),
+
 
   -- 'd' to create an empty <div>
   s('d', {
     t('<div className='), i(1), t('>'),
-    i(2),
+    i(0),
     t('</div>')
   }),
 
@@ -51,10 +68,13 @@ local js_snippets = {
     f(function (args) return ', set' .. capitalize(args[1][1]) end, {1}),
     t('] = useState('),
     i(2),
-    t(');')
+    t(');'),
+    i(0)
   }),
   -- 'eff' to add useEffect
-  s('eff', { t({ 'useEffect(() => {', '  ', '}, [])' }) }),
+  s('eff', {
+    t({ 'useEffect(() => {', i(1), '}, [', i(2), '])', i(0) })
+  }),
 
   -- 'fc' for 'function component'
   s('fc', {
@@ -70,10 +90,10 @@ local js_snippets = {
 
   -- 'jsp'/'jss' for JSON.parse / JSON.stringify respectively
   s('jsp', {
-    t('JSON.parse('), i(1), t(')')
+    t('JSON.parse('), i(1), t(')'), i(0)
   }),
   s('jss', {
-    t('JSON.stringify('), i(1), t(')')
+    t('JSON.stringify('), i(1), t(')'), i(0)
   }),
 
   -- 'anon' for anonymous function
