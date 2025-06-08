@@ -14,7 +14,7 @@ title "Running install script"
 info "Currently in: ${DOTF}"
 
 
-# Parse input parameters
+# Input parameters
 export DRY_RUN=false
 export VERBOSE=false
 
@@ -120,19 +120,19 @@ NODE_PACKAGES=('webpack'                     \
                '@gillyb/nrun'                \
 )
 
-# for package in "${NODE_PACKAGES[@]}"; do
-#   minor "Installing '${package}'"
-#   if ! $DRY_RUN; then
-#     eval "sudo npm install -g ${package} ${BE_QUIET}"
-#     if [ $? -eq 0 ]; then
-#       success "Installed ${package}"
-#     else
-#       error "Failed to install '${package}'"
-#       error "You can try running this script again with --verbose"
-#       pause
-#     fi
-#   fi
-# done
+for package in "${NODE_PACKAGES[@]}"; do
+  minor "Installing '${package}'"
+  if ! $DRY_RUN; then
+    eval "sudo npm install -g ${package} ${BE_QUIET}"
+    if [ $? -eq 0 ]; then
+      success "Installed ${package}"
+    else
+      error "Failed to install '${package}'"
+      error "You can try running this script again with --verbose"
+      pause
+    fi
+  fi
+done
 
 
 
@@ -177,6 +177,7 @@ BREW_CASK_UTILS=(       \
   'google-chrome'       \
   'sublime-text'        \
   'iterm2'              \
+  'wezterm'             \
   'ngrok'               \
   'font-hack-nerd-font' \
   'whatsapp'            \
@@ -187,6 +188,7 @@ BREW_CASK_UTILS=(       \
   'notion'              \
   'font-monaspace'      \
   'docker'              \
+  'chatgpt'             \
 )
 brew tap homebrew/cask-fonts
 for package in "${BREW_CASK_UTILS[@]}"; do
