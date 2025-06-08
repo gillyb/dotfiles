@@ -14,6 +14,9 @@ return {
       },
     },
     opts = {
+      explorer = {
+        replace_netrw = true,
+      },
       picker = {
         sources = {
           explorer = {

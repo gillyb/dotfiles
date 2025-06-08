@@ -12,6 +12,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # Sets color variable such as $fg, $bg, $color and $reset_color
 autoload colors; colors;
@@ -31,7 +32,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 
 alias vim="nvim"
-alias v="vim"
+alias v="vim ."
 
 alias tn="tmux new -t" # Create a new tmux session easily
 
@@ -149,7 +150,6 @@ export PATH=/Users/gillyb/.volta/bin:$PATH:/usr/local/bin/
 # export PATH=$PATH:~/Library/Python/3.8/bin
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
@@ -191,3 +191,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # zprof
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

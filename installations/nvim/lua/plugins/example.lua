@@ -10,7 +10,6 @@ if true then return {} end
 -- * override the configuration of LazyVim plugins
 return {
 
-  { "akinsho/bufferline.nvim", enabled = false },
   -- add gruvbox
   -- { "ellisonleao/gruvbox.nvim" },
 
