@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+source ./helpers.sh
+
+# Creating links to configuration files
+DOTFILES=~/dotfiles
+
+info "Linking wezterm configuration files"
+symlink "${DOTFILES}/installations/wezterm/.wezterm.lua" ~/.wezterm.lua
+success "Finished linking configuration files"
+
+
+exit 0

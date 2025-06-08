@@ -190,7 +190,6 @@ BREW_CASK_UTILS=(       \
   'docker'              \
   'chatgpt'             \
 )
-brew tap homebrew/cask-fonts
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
@@ -214,7 +213,7 @@ info "  Starting app installations.. "
 echo ""
 node node/install.js
 if [ $? != 0 ]; then
-  error "\nFailed to run node installations.."
+  error "\nFailed to run some node installations.."
   exit 1
 end
 
