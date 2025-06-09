@@ -181,6 +181,7 @@ BREW_CASK_UTILS=(       \
   'ngrok'               \
   'font-hack-nerd-font' \
   'whatsapp'            \
+  'telegram'            \
   'visual-studio-code'  \
   'github'              \
   'spotify'             \
