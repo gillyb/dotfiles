@@ -114,7 +114,6 @@ else
   exit 1
 fi
 
-exit 1
 
 # Install some global node packages
 echo ""
