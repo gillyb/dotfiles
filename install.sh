@@ -81,17 +81,21 @@ fi
 # Install nodejs & npm (using 'nvm')
 # 
 echo ""
-check "Checking if node is installed"
+check "Checking if nvm is installed"
 which -s nvm
 if [ $? != 0 ]; then
   info "nvm is missing"
   info "Installing nvm"
   if ! $DRY_RUN; then
-    # brew install n
     PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
-    # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   fi
   success "nvm installed"
+
+  info "Installing node with nvm"
+  nvm install node
+  success "node installed"
 
   info "Configuring npm global prefix"
   mkdir -p ~/.npm-global/lib
@@ -133,7 +137,7 @@ NODE_PACKAGES=('webpack'                     \
 for package in "${NODE_PACKAGES[@]}"; do
   minor "Installing '${package}'"
   if ! $DRY_RUN; then
-    eval "sudo npm install -g ${package} ${BE_QUIET}"
+    eval "npm install -g ${package} ${BE_QUIET}"
     if [ $? -eq 0 ]; then
       success "Installed ${package}"
     else
