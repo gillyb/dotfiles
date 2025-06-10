@@ -88,7 +88,8 @@ if [ $? != 0 ]; then
   info "Installing nvm"
   if ! $DRY_RUN; then
     # brew install n
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
+    # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
   fi
   success "nvm installed"
 
@@ -108,6 +109,8 @@ else
   error "Failed to install/update nodejs"
   exit 1
 fi
+
+exit 1
 
 # Install some global node packages
 echo ""
