@@ -60,8 +60,10 @@ if [ $? != 0 ]; then
   info "Brew is missing"
   info "Installing brew..."
   if ! $DRY_RUN; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    export PATH=/opt/homebrew/bin:$PATH
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    echo >> ~/.zprofile
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
   success "Done installing brew"
 else
@@ -198,6 +200,7 @@ BREW_CASK_UTILS=(       \
   'font-monaspace'      \
   'docker'              \
   'chatgpt'             \
+  'slack'               \
 )
 for package in "${BREW_CASK_UTILS[@]}"; do
   minor "Installing '${package}'"
