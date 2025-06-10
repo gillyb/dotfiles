@@ -158,7 +158,7 @@ BREW_UTILS=(       \
   'ripgrep'        \
   'jq'             \
   'python'         \
-  'python@3.8'     \
+  'python@3.9'     \
   'htop'           \
   'diff-so-fancy'  \
   'ncdu'           \
