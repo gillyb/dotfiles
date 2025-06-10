@@ -61,7 +61,7 @@ if [ $? != 0 ]; then
   info "Installing brew..."
   if ! $DRY_RUN; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    export PATH=/opt/homebrew/bin:$PATH
   fi
   success "Done installing brew"
 else
