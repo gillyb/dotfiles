@@ -60,7 +60,8 @@ if [ $? != 0 ]; then
   info "Brew is missing"
   info "Installing brew..."
   if ! $DRY_RUN; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
   fi
   success "Done installing brew"
 else
@@ -77,22 +78,28 @@ if [ $? -ne 0 ]; then
 fi
 
 # 
-# Install nodejs & npm (using 'n')
+# Install nodejs & npm (using 'nvm')
 # 
 echo ""
 check "Checking if node is installed"
-which -s n
+which -s nvm
 if [ $? != 0 ]; then
-  info "Node is missing"
-  info "Installing node (with 'n')..."
+  info "nvm is missing"
+  info "Installing nvm"
   if ! $DRY_RUN; then
-    brew install n
+    # brew install n
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
   fi
-  success "node installed"
+  success "nvm installed"
+
+  info "Configuring npm global prefix"
+  mkdir -p ~/.npm-global/lib
+  npm config set prefix '~/.npm-global'
+  export PATH=~/.npm-global/bin:$PATH
 fi
 info "Making sure you have latest version of node"
 if ! $DRY_RUN; then
-  sudo n latest
+  nvm use latest
 fi
 success "Latest node version installed"
 if [ $? -eq 0 ]; then
