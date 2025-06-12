@@ -64,6 +64,8 @@ alias yb='yarn build'
 alias tsnode='npx ts-node'
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
+alias py='python3'
+
 # jc = "just commit" - for super fast commits
 alias jc='git c -am "HYCYBH"'
 alias empty_commit='git c -m "empty" --allow-empty && git push'
@@ -192,8 +194,8 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # zprof
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 #
 # . "$HOME/.local/bin/env"
