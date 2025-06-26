@@ -14,17 +14,23 @@
       "; j": "pane::SplitVertical",
       "; k": "pane::SplitHorizontal",
       "; c a": "editor::ToggleCodeActions",
-      "; s s": "outline::Toggle",
-      "ctrl-a h": "workspace::ActivatePaneLeft",
-      "ctrl-a j": "workspace::ActivatePaneDown",
-      "ctrl-a k": "workspace::ActivatePaneUp",
-      "ctrl-a l": "workspace::ActivatePaneRight"
+      "; s s": "outline::Toggle"
     }
   },
   {
     "context": "vim_mode == insert",
     "bindings": {
       "j k": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual || vim_mode == visual_line",
+    "bindings": {
+      "; c c": "editor::ToggleComments",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
     }
   },
   {

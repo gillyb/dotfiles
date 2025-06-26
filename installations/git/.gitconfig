@@ -48,6 +48,9 @@
     # Undo last local commit (This keeps the changes but removes the commit)
     undo-last-commit = "reset HEAD~"
 
+    # Delete all untracked files
+    rm-untracked = clean -d -f
+
     # reset --hard
     hard-reset = reset --hard
 
