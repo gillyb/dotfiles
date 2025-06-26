@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+source ./helpers.sh
+
+# Creating links to configuration files
+DOTFILES=~/dotfiles
+
+info "Linking zed configuration files"
+symlink "${DOTFILES}/installations/zed/settings.json" ~/.config/zed/settings.json
+symlink "${DOTFILES}/installations/zed/keymap.json" ~/.config/zed/keymap.json
+success "Finished linking configuration files"
+
+
+exit 0
