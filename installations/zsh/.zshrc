@@ -22,6 +22,12 @@ setopt prompt_subst
 # Automatically push previous cd into the stack
 setopt autopushd
 
+# Configure history file - and append to file after each command
+HISTFILE=~/.zsh_history
+HISTSIZE=2000
+SAVEHIST=2000
+export PROMPT_COMMAND="history -a; history -n"
+
 
 
 #         #
@@ -98,8 +104,7 @@ switch_tmux_env() {
   SELECTED_ENV=`tmux ls | awk -F ":" '{print $1}' | fzf` && tmux a -t $SELECTED_ENV
 }
 switch_branch() {
-  SELECTED_BRANCH=`git branch | fzf | xargs` && git checkout $SELECTED_BRANCH
-}
+  SELECTED_BRANCH=`git branch | fzf | xargs` && git checkout $SELECTED_BRANCH }
 npm_run() {
   CHOSEN_SCRIPT=`cat package.json | jq '.scripts | keys | .[]' | grep -v '\[' | grep -v '\]' | fzf`
   npm run ${CHOSEN_SCRIPT:1:-1}
@@ -199,3 +204,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 #
 # . "$HOME/.local/bin/env"
+
+# pnpm
+export PNPM_HOME="/Users/gilly/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
