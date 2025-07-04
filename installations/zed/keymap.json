@@ -11,8 +11,6 @@
     "context": "Workspace",
     "bindings": {
       "; w": "workspace::Save",
-      "; j": "pane::SplitVertical",
-      "; k": "pane::SplitHorizontal",
       "; c a": "editor::ToggleCodeActions",
       "; s s": "outline::Toggle"
     }
@@ -20,17 +18,25 @@
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "j k": "vim::NormalBefore"
+      "j k": "vim::NormalBefore",
+      // Disable 'tab' to accept edit predictions and use shift-tab instead
+      "tab": "editor::Tab",
+      "shift-tab": "editor::AcceptEditPrediction"
     }
   },
   {
     "context": "vim_mode == normal || vim_mode == visual || vim_mode == visual_line",
     "bindings": {
-      "; c c": "editor::ToggleComments",
+      "; q": "pane::CloseActiveItem",
+      "; c c": "vim::ToggleComments",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "; j": "pane::SplitVertical",
+      "; k": "pane::SplitHorizontal",
+      "; c p": ["workspace::SendKeystrokes", "y y ; c c p"],
+      "ctrl-f": ["workspace::SendKeystrokes", ": n o h l s e a r c h enter"]
     }
   },
   {
@@ -38,6 +44,18 @@
     "bindings": {
       "ctrl-k": "editor::MoveLineUp",
       "ctrl-j": "editor::MoveLineDown"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-k": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-l": "project_panel::ToggleFocus"
     }
   }
 ]
