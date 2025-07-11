@@ -48,5 +48,20 @@
         }
       ]
     }
-  }
+  },
+  "file_scan_exclusions": [
+    // The defaults
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    // My custom additions
+    "**/CHANGELOG.md",
+    "**/*.lock"
+  ]
 }

@@ -15,7 +15,7 @@
     f = fetch
     fa = fetch --all
     mt = mergetool
-    d = "diff -- ':(exclude)yarn.lock'"
+    d = "diff -w -- ':(exclude)yarn.lock'" # Ignores whitespace and excludes lock file
     p = pull
     u = pull
     mc = merge --continue
