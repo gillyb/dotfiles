@@ -11,7 +11,16 @@
     "metrics": false,
     "diagnostics": false
   },
+  "cursor_blink": false,
   "vim_mode": true,
+  "vim": {
+    "cursor_shape": {
+      "normal": "block",
+      "insert": "bar",
+      "visual": "block",
+      "replace": "block"
+    }
+  },
   "ui_font_size": 16,
   "buffer_font_family": "Monaspace Argon",
   "buffer_font_size": 15,

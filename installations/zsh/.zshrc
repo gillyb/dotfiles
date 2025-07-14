@@ -197,7 +197,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# zprof
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -212,3 +211,17 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+
+# Fix completions for uv run.
+_uv_run_mod() {
+  if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
+    _arguments '*:filename:_files'
+  else
+    _uv "$@"
+  fi
+}
+compdef _uv_run_mod uv
+
+
+# zprof
