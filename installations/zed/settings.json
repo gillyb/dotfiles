@@ -7,6 +7,13 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "play_sound_when_agent_done": true,
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-latest"
+    }
+  },
   "telemetry": {
     "metrics": false,
     "diagnostics": false
@@ -23,8 +30,8 @@
   },
   "ui_font_size": 16,
   "buffer_font_family": "Monaspace Argon",
-  "buffer_font_size": 15,
-  "buffer_font_weight": 400,
+  "buffer_font_size": 14,
+  "buffer_font_weight": 600,
   "buffer_font_features": {
     "calt": false
   },
@@ -41,13 +48,21 @@
   "use_smartcase_search": true,
   "languages": {
     "Python": {
+      "enable_language_server": true,
       "language_servers": ["pyright", "ruff"],
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+      },
       "format_on_save": "on",
       "formatter": [
         {
           "code_actions": {
             "source.organizeImports.ruff": true,
-            "source.fixAll.ruff": true
+            "source.fixAll.ruff": true,
+            "autoImportCompletions": true
           }
         },
         {
@@ -56,6 +71,16 @@
           }
         }
       ]
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python.analysis": {
+          "autoImportCompletions": true,
+          "diagnosticMode": "workspace"
+        }
+      }
     }
   },
   "file_scan_exclusions": [

@@ -33,7 +33,7 @@
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-l": "workspace::ActivatePaneRight",
-      "; j": "pane::SplitVertical",
+      "; j": "pane::SplitRight",
       "; k": "pane::SplitHorizontal",
       "; c p": ["workspace::SendKeystrokes", "y y ; c c p"],
       "ctrl-f": ["workspace::SendKeystrokes", ": n o h l s e a r c h enter"]
