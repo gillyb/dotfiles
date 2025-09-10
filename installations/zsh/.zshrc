@@ -81,6 +81,8 @@ alias fix-staged='eslint $(git diff --name-only --cached) --fix'
 
 # When i have no patience and I just want a super fast commit!
 alias fp='git add . && git c -am "Fast commit baby" --no-verify && git push'
+# For a quick 'wip' commit
+alias wip='git add . && git c -m "wip" --no-verify && git push --no-verify'
 
 alias xx='exit'
 
@@ -225,3 +227,9 @@ compdef _uv_run_mod uv
 
 
 # zprof
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/gilly/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gilly/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/gilly/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gilly/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
