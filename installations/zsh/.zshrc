@@ -156,6 +156,7 @@ spinner() {
 [ -f ~/.local.config.sh ] && source ~/.local.config.sh
 
 export PATH=~/.npm-global/bin:$PATH:/usr/local/bin/
+export PATH=~/.npm-global/bin:$PATH:~/.local/bin/
 # export PATH=$PATH:~/Library/Python/3.8/bin
 # export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
@@ -229,7 +230,7 @@ compdef _uv_run_mod uv
 # zprof
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/gilly/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gilly/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/gilly/dev/tempo-detections/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gilly/dev/tempo-detections/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/gilly/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gilly/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/gilly/dev/tempo-detections/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gilly/dev/tempo-detections/google-cloud-sdk/completion.zsh.inc'; fi

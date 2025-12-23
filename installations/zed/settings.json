@@ -7,16 +7,17 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "icon_theme": "Catppuccin Mocha",
   "agent": {
     "play_sound_when_agent_done": true,
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-latest"
-    }
+      "model": "claude-sonnet-4-thinking-latest",
+    },
   },
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
   },
   "cursor_blink": false,
   "vim_mode": true,
@@ -25,63 +26,101 @@
       "normal": "block",
       "insert": "bar",
       "visual": "block",
-      "replace": "block"
-    }
+      "replace": "block",
+    },
   },
   "ui_font_size": 16,
   "buffer_font_family": "Monaspace Argon",
   "buffer_font_size": 14,
   "buffer_font_weight": 600,
   "buffer_font_features": {
-    "calt": false
+    "calt": false,
   },
   "theme": {
     "mode": "system",
     "light": "Catppuccin Macchiato",
-    "dark": "One Dark"
+    "dark": "Catppuccin Macchiato",
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "use_smartcase_search": true,
   "languages": {
     "Python": {
       "enable_language_server": true,
-      "language_servers": ["pyright", "ruff"],
+      "language_servers": [
+        "!basedpyright",
+        "!ty",
+        "pyrefly",
+        "!pyright",
+        "ruff",
+      ],
       "inlay_hints": {
         "enabled": true,
         "show_type_hints": true,
         "show_parameter_hints": true,
-        "show_other_hints": true
+        "show_other_hints": true,
       },
       "format_on_save": "on",
       "formatter": [
         {
-          "code_actions": {
-            "source.organizeImports.ruff": true,
-            "source.fixAll.ruff": true,
-            "autoImportCompletions": true
-          }
+          "code_action": "source.organizeImports.ruff",
+        },
+        {
+          "code_action": "source.fixAll.ruff",
+        },
+        {
+          "code_action": "autoImportCompletions",
         },
         {
           "language_server": {
-            "name": "ruff"
-          }
-        }
-      ]
-    }
+            "name": "ruff",
+          },
+        },
+      ],
+    },
   },
   "lsp": {
+    "basedpyright": {
+      "binary": {
+        "path": "~/.local/bin",
+        "arguments": ["--stdio"],
+      },
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python",
+        },
+        "basedpyright.analysis": {
+          "diagnosticMode": "workspace",
+          "inlayHints": {
+            "callArgumentNames": false,
+          },
+        },
+      },
+    },
     "pyright": {
       "settings": {
         "python.analysis": {
           "autoImportCompletions": true,
-          "diagnosticMode": "workspace"
-        }
-      }
-    }
+          "diagnosticMode": "workspace",
+        },
+      },
+    },
+    "pyrefly": {
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python",
+        },
+        "pyrefly": {
+          "project_includes": ["src/**/*.py", "tests/**/*.py"],
+          "project_excludes": ["**/.[!/.]*", "**/*venv/**"],
+          "search_path": ["src"],
+          "ignore_errors_in_generated_code": true,
+        },
+      },
+    },
   },
   "file_scan_exclusions": [
     // The defaults
@@ -96,6 +135,6 @@
     "**/.settings",
     // My custom additions
     "**/CHANGELOG.md",
-    "**/*.lock"
-  ]
+    "**/*.lock",
+  ],
 }

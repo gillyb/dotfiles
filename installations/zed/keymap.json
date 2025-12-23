@@ -36,7 +36,8 @@
       "; j": "pane::SplitRight",
       "; k": "pane::SplitHorizontal",
       "; c p": ["workspace::SendKeystrokes", "y y ; c c p"],
-      "ctrl-f": ["workspace::SendKeystrokes", ": n o h l s e a r c h enter"]
+      "ctrl-f": ["workspace::SendKeystrokes", ": n o h l s e a r c h enter"],
+      "z z": ["workspace::SendKeystrokes", "z z 1 6 ctrl-e"]
     }
   },
   {
