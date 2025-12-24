@@ -1,14 +1,33 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    init = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
+    keys = {
       -- Disable <leader>cc mapping for lsp
-      keys[#keys + 1] = { mode = { "n", "x", "v" }, "<leader>cc", false }
+      { "<leader>cc", false, mode = { "n", "x", "v" } },
+    },
+    init = function()
+      local function uv_python()
+        local python = vim.fn.getcwd() .. "/.venv/bin/python"
+        if vim.fn.executable(python) == 1 then
+          return python
+        end
+      end
+
+      vim.lsp.config("ty", {
+        filetypes = { "python", "py" },
+        root_markers = { ".git", "uv.lock" },
+        settings = {
+          python = {
+            pythonPath = uv_python(),
+          },
+        },
+      })
+
+      -- Required: Enable the language server
+      vim.lsp.enable("ty")
     end,
-    opts = {
-      autoformat = function()
+    opts = function(_, opts)
+      opts.autoformat = function()
         local filename = vim.api.nvim_buf_get_name(0)
 
         local in_ui_modules = string.find(filename, "/dev/ui-modules")
@@ -17,7 +36,9 @@ return {
         end
 
         return true
-      end,
-    },
+      end
+
+      return opts
+    end,
   },
 }

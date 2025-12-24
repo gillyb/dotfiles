@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "linux-cultist/venv-selector.nvim",
   dependencies = {
     "neovim/nvim-lspconfig",
