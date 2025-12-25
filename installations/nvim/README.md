@@ -13,6 +13,13 @@ This loads and configures lazyvim.
 After lazyvim loads its initial settings, it will load the other settings files 
 inside the files `autocmds.lua`, `keymaps.lua` and `options.lua`.  
 
+All files in the `/plugins` folder will be loaded as well.  
+Each plugin file returns a lua table.  
+The first value is the name of the plugin.  
+The rest of the values are settings specific to that plugin.  
+
+You can disable a plugin by adding `enabled = false` to the returned table.
+
 
 
 
