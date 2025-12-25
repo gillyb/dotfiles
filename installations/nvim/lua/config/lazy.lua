@@ -1,7 +1,13 @@
+-- Path to where lazy.nvim is installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+-- Download lazyvim
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  -- Clone lazy.nvim repo
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+
+  -- Error handling
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -14,6 +20,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Initialize configure lazy.nvim
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins

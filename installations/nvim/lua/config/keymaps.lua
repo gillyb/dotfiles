@@ -4,10 +4,11 @@
 
 -- To check what a key is mapped to, inside vim type ':imap _key_'
 
--- escape key
+-- escape key = "jk"
 vim.api.nvim_set_keymap("i", "jk", "<esc>", { noremap = true })
 
 -- Quick edit and reload of my .vimrc settings
+-- $MYVIMRC is `nvim/lua/init.lua`
 vim.api.nvim_set_keymap("n", "<leader>ev", ":e $MYVIMRC<CR>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<leader>sv", ":so $MYVIMRC<CR>", { noremap = false })
 
@@ -33,7 +34,7 @@ vim.api.nvim_set_keymap("n", "<leader>w", ":w<CR>", { noremap = true, silent = t
 -- Hide search highlights
 vim.api.nvim_set_keymap("n", "<C-f>", ":nohls<CR>", { noremap = true, silent = true })
 
--- Modifies '{' and '}' keys so they don't save them in the jumplist
+-- Modifies '{' and '}' keys so they aren't saved in the jumplist
 vim.api.nvim_set_keymap(
   "n",
   "}",
@@ -52,7 +53,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true })
 vim.api.nvim_set_keymap("n", "x", '"_x', { noremap = true })
 
--- lspsaga (Code actions)
+-- lspsaga (Code actions) - These don't currently work, since I don't use lspsaga
 -- TODO: Move these to lsp-config
 vim.api.nvim_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>a", "<cmd>Lspsaga code_action<CR>", {})
@@ -67,14 +68,15 @@ vim.cmd("set shortmess+=c")
 -- Kommentary
 vim.api.nvim_set_keymap("n", "<leader>cc", "gcc", { desc = "Toggle comment" })
 vim.api.nvim_set_keymap("x", "<leader>cc", "gc", {})
-vim.api.nvim_set_keymap("n", "<leader>cp", "yypk<leader>ccj0", {})
+-- Duplicates the current line and comments the original
+vim.api.nvim_set_keymap("n", "<leader>cp", "yypkgccj0", {})
 
 -- Grepper
 -- vim.api.nvim_set_keymap('n', '<leader>gg', ':Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --smart-case<CR>', { noremap=true })
 
 -- Moving lines around
-vim.keymap.set("v", "<C-J>", ":m '>+1<CR>gv", { silent = true })
 vim.keymap.set("v", "<C-K>", ":m '<-2<CR>gv", { silent = true })
+vim.keymap.set("v", "<C-J>", ":m '>+1<CR>gv", { silent = true })
 -- Tab to indent lines (or unindent)
 -- vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap=true })
 -- vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', { noremap=true })
