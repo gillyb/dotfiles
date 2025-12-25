@@ -3,6 +3,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+
     ---@type snacks.Config
     keys = {
       {
@@ -13,10 +14,12 @@ return {
         desc = "Open file picker",
       },
     },
+
     opts = {
       explorer = {
         replace_netrw = true,
       },
+
       picker = {
         sources = {
           explorer = {
@@ -31,6 +34,9 @@ return {
           },
         },
       },
+
+      -- Highlights the word under the cursor and it's usages (from LSP)
+      words = { enabled = true },
     },
   },
 }
