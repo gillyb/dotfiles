@@ -29,14 +29,13 @@ The `opts = {}` parameter is for adding everything that would be added inside a 
 * How to close all buffers completely - "start from scratch"
 * Remove autocomplete for spelling (just regular words)  
 * Remove autocomplete from comments
-* Fix commenting to work with <leader>cc
 * Make grep work on root_dir always  
 * Find file in file explorer  
 * Visually select code block, and expand selection
 * Go to top of code block
-* Keymap - 'o' in quicklist should open file
 * Show hidden files or files that are gitignored in file explorer - and possible show them when using Ctrl+p (file search)
   * If this will show too many files - then at least learn how to explicitly show specific files, like .env files
+* Code folding
 
 * Git
   * how to switch branches
