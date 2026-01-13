@@ -114,6 +114,15 @@ vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
 vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
 vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
 
+-- Quickfix list keymaps (need autocmd to detect filetype = qf)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf", -- Applies quickfix list buffers
+  callback = function()
+    -- Open file when pressing 'o'
+    vim.keymap.set("n", "o", "<CR>", { buffer = true, desc = "Open file", remap = false })
+  end,
+})
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 -- vim.api.nvim_create_autocmd("LspAttach", {
