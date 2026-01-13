@@ -2,7 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     keys = {
-      -- Disable <leader>cc mapping for lsp (so we can use this for toggling comments)
+      -- Disable <leader>cc mapping for lsp
       { "<leader>cc", false, mode = { "n", "x", "v" } },
     },
     init = function()
