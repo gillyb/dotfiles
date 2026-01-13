@@ -13,6 +13,13 @@ return {
         end,
         desc = "Open file picker",
       },
+      {
+        "<leader>bb",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Open buffers",
+      },
     },
 
     opts = {

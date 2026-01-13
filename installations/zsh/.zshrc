@@ -115,6 +115,9 @@ yarn_run() {
   CHOSEN_SCRIPT=`cat package.json | jq '.scripts | keys | .[]' | grep -v '\[' | grep -v '\]' | fzf`
   yarn ${CHOSEN_SCRIPT:1:-1}
 }
+gp() {
+  git add . && git commit -m "$1" && git push
+}
 
 install_language_servers() {
   sudo npm i -g typescript typescript-language-server

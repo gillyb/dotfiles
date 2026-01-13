@@ -4,16 +4,17 @@
     "context": "VimControl && !menu",
     "bindings": {
       "ctrl-p": "file_finder::Toggle",
-      "; n": "pane::RevealInProjectPanel"
-    }
+      "; n": "pane::RevealInProjectPanel",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
       "; w": "workspace::Save",
       "; c a": "editor::ToggleCodeActions",
-      "; s s": "outline::Toggle"
-    }
+      "; s s": "outline::Toggle",
+      "cmd-k": "agent::ToggleFocus",
+    },
   },
   {
     "context": "vim_mode == insert",
@@ -21,8 +22,8 @@
       "j k": "vim::NormalBefore",
       // Disable 'tab' to accept edit predictions and use shift-tab instead
       "tab": "editor::Tab",
-      "shift-tab": "editor::AcceptEditPrediction"
-    }
+      "shift-tab": "editor::AcceptEditPrediction",
+    },
   },
   {
     "context": "vim_mode == normal || vim_mode == visual || vim_mode == visual_line",
@@ -37,26 +38,26 @@
       "; k": "pane::SplitHorizontal",
       "; c p": ["workspace::SendKeystrokes", "y y ; c c p"],
       "ctrl-f": ["workspace::SendKeystrokes", ": n o h l s e a r c h enter"],
-      "z z": ["workspace::SendKeystrokes", "z z 1 6 ctrl-e"]
-    }
+      "z z": ["workspace::SendKeystrokes", "z z 1 6 ctrl-e"],
+    },
   },
   {
     "context": "vim_mode == visual || vim_mode == visual_line",
     "bindings": {
       "ctrl-k": "editor::MoveLineUp",
-      "ctrl-j": "editor::MoveLineDown"
-    }
+      "ctrl-j": "editor::MoveLineDown",
+    },
   },
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-k": "terminal_panel::ToggleFocus"
-    }
+      "ctrl-k": "terminal_panel::ToggleFocus",
+    },
   },
   {
     "context": "ProjectPanel",
     "bindings": {
-      "ctrl-l": "project_panel::ToggleFocus"
-    }
-  }
+      "ctrl-l": "project_panel::ToggleFocus",
+    },
+  },
 ]

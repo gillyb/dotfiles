@@ -11,8 +11,8 @@
   "agent": {
     "play_sound_when_agent_done": true,
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-sonnet-4-thinking-latest",
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
     },
   },
   "telemetry": {
