@@ -9,11 +9,19 @@
 {
   "icon_theme": "Catppuccin Mocha",
   "agent": {
+    "enable_feedback": false,
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest",
+    },
     "play_sound_when_agent_done": true,
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5-mini",
     },
+  },
+  "project_panel": {
+    "auto_reveal_entries": false,
   },
   "telemetry": {
     "metrics": false,

@@ -229,6 +229,10 @@ _uv_run_mod() {
 }
 compdef _uv_run_mod uv
 
+# Lint format for uv python repos
+alias uvlint="uv run -m ruff format"
+alias uvclean="uv cache clean && rm -rf .venv && uv sync --all-packages"
+
 
 # zprof
 
