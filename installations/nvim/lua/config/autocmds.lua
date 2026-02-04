@@ -14,3 +14,12 @@
 --     vim.api.nvim_set_keymap("n", "o", "<CR>", { buffer = true, desc = "Open file" })
 --   end,
 -- })
+
+-- Set .env files to be filetype=env
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { ".env" },
+  callback = function()
+    vim.bo.filetype = "env" -- Use vim.bo to set buffer-local option
+  end,
+  desc = "Set filetype to env for .env extensions",
+})
