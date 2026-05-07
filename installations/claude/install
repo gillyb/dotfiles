@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+source ./helpers.sh
+
+info "Installing claude code"
+curl -fsSL https://claude.ai/install.sh | bash
+
+success "Finished installing claude code"
+info "Run 'claude' in the terminal to login"
+
+pause
+
+exit 0

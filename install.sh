@@ -163,6 +163,7 @@ BREW_UTILS=(       \
   'python@3.9'     \
   'htop'           \
   'diff-so-fancy'  \
+  'lazygit'        \
   'ncdu'           \
   'deno'           \
   'yarn'           \
@@ -200,6 +201,7 @@ BREW_CASK_UTILS=(       \
   'font-monaspace'      \
   'docker'              \
   'chatgpt'             \
+  'claude'              \
   'slack'               \
 )
 for package in "${BREW_CASK_UTILS[@]}"; do

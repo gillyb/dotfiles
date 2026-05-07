@@ -17,7 +17,6 @@ export BOLD="\033[1m"
 
 export HOURGLASS="⏳ "
 
-
 # display methods (header/bullet/info/success/error) {{{1
 indent() {
   printf "    $*"
@@ -130,11 +129,15 @@ install_plugin() {
   fi
 }
 
+reload_profile() {
+  source ~/.zshrc
+}
+
 # Create a symbolic link.
 # Usage: symlink <src-file> <link-file>
 symlink() {
-  source=$1    # This is the file that exists already
-  target=$2    # This is the link we want to create
+  source=$1 # This is the file that exists already
+  target=$2 # This is the link we want to create
 
   info "Linking $source      ==> ${target}... "
   if [ -e "$target" ]; then
@@ -165,5 +168,5 @@ symlink() {
 }
 
 current_dir() {
-  $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )
+  $(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)
 }
