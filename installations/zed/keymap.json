@@ -14,6 +14,7 @@
       "; c a": "editor::ToggleCodeActions",
       "; s s": "outline::Toggle",
       "cmd-k": "agent::ToggleFocus",
+      "alt-shift-b": "git::Blame",
     },
   },
   {
@@ -55,9 +56,10 @@
     },
   },
   {
-    "context": "ProjectPanel",
+    "context": "ProjectPanel && not_editing",
     "bindings": {
       "ctrl-l": "project_panel::ToggleFocus",
+      "o": "project_panel::OpenPermanent",
     },
   },
 ]

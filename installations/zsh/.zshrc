@@ -39,6 +39,7 @@ alias ...="cd ../.."
 
 alias vim="nvim"
 alias v="vim ."
+alias lg="lazygit"
 
 alias tn="tmux new -t" # Create a new tmux session easily
 
@@ -72,6 +73,10 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
 alias py='python3'
 
+# Format json that's in my clipboard
+alias format_json='pbpaste | jq . | pbcopy'
+alias format_json_sq='pbpaste | sed "s/'"'"'/\"/g" | jq . | pbcopy'
+
 # jc = "just commit" - for super fast commits
 alias jc='git c -am "HYCYBH"'
 alias empty_commit='git c -m "empty" --allow-empty && git push'
@@ -84,6 +89,7 @@ alias fp='git add . && git c -am "Fast commit baby" --no-verify && git push'
 # For a quick 'wip' commit
 alias wip='git add . && git c -m "wip" --no-verify && git push --no-verify'
 
+# Close tmux or terminal split/tab
 alias xx='exit'
 
 
@@ -234,10 +240,13 @@ alias uvlint="uv run -m ruff format"
 alias uvclean="uv cache clean && rm -rf .venv && uv sync --all-packages"
 
 
-# zprof
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/gilly/dev/tempo-detections/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gilly/dev/tempo-detections/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gilly/dev/tempo-detections/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gilly/dev/tempo-detections/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# This needs to be at the end of the file to measure the time it takes to load
+# zprof
