@@ -73,7 +73,7 @@ const installDirs = files.getDirectoryList(installationsPath);
         return Promise.resolve();
       }
 
-      return install(dirName);
+      return await install(dirName);
     });
   }
 
