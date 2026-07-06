@@ -124,6 +124,7 @@ NODE_PACKAGES=('webpack'
   'next'
   'serve'
   '@gillyb/nrun'
+  'ruby'  # I need this later for neovim
 )
 
 for package in "${NODE_PACKAGES[@]}"; do
