@@ -192,7 +192,6 @@ BREW_CASK_UTILS=(
   'prusaslicer'
   'notion'
   'font-monaspace'
-  'claude'
   'slack'
 )
 for package in "${BREW_CASK_UTILS[@]}"; do
