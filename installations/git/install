@@ -12,13 +12,12 @@ symlink "${DOTFILES}/installations/git/.gitconfig" ~/.gitconfig
 symlink "${DOTFILES}/installations/git/.gitignore_global" ~/.gitignore_global
 success "Finished linking configuration files"
 
-
 # Creating ssh key for github
 GIT_USER="gillyb@gmail.com"
 SSH_FILE=~/.ssh/id_ed25519_github
 
 info "Setting up ssh keys for github"
-mkdir ~/.ssh
+mkdir -p ~/.ssh
 ssh-keygen -t ed25519 -C ${GIT_USER} -f ${SSH_FILE} -P ""
 eval "$(ssh-agent -s)"
 touch ~/.ssh/config
@@ -28,9 +27,9 @@ Host github.com
   UseKeychain yes
   IdentityFile ${SSH_FILE}
 EOL
-ssh-add -K $SSH_FILE
+ssh-add --apple-use-keychain "$SSH_FILE"
 
-pbcopy < $SSH_FILE.pub
+pbcopy <$SSH_FILE.pub
 info "ssh key copied to clipboard"
 info "Now go to https://github.com/settings/keys and add the key to your account"
 pause

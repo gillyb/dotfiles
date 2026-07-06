@@ -16,7 +16,9 @@ const getDirectoryList = dir => {
  * Create a symbolic link
  **/
 const createSymLink = (existingFilePath, newFilePath) => {
-  terminal.yellow(`    symlink: ${newFilePath} --> ${existingFilePath}`); 
+  if (fs.existsSync(newFilePath) || fs.lstatSync(newFilePath, { throwIfNoEntry: false })) {
+    fs.rmSync(newFilePath, { force: true });
+  }
   fs.symlinkSync(existingFilePath, newFilePath);
 };
 
