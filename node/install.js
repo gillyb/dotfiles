@@ -67,7 +67,7 @@ const installDirs = files.getDirectoryList(installationsPath);
                     terminal.separator());
     }
 
-    await terminal.confirmAction('Would you like to install?', () => {
+    await terminal.confirmAction('Would you like to install?', async () => {
       if (DRY_RUN) {
         terminal.yellow('  --> dry run: skipping installation');
         return Promise.resolve();
