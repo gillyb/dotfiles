@@ -199,8 +199,6 @@ BREW_CASK_UTILS=(       \
   'prusaslicer'         \
   'notion'              \
   'font-monaspace'      \
-  'docker'              \
-  'chatgpt'             \
   'claude'              \
   'slack'               \
 )
