@@ -27,6 +27,12 @@
     },
   },
   {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "S": ["workspace::SendKeystrokes", "S tab"],
+    },
+  },
+  {
     "context": "vim_mode == normal || vim_mode == visual || vim_mode == visual_line",
     "bindings": {
       "; q": "pane::CloseActiveItem",
