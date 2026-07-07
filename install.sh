@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Hello world
+
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -uo pipefail
 
@@ -124,7 +126,7 @@ NODE_PACKAGES=('webpack'
   'next'
   'serve'
   '@gillyb/nrun'
-  'ruby'  # I need this later for neovim
+  'ruby' # I need this later for neovim
 )
 
 for package in "${NODE_PACKAGES[@]}"; do
