@@ -39,6 +39,7 @@ The `opts = {}` parameter is for adding everything that would be added inside a 
   * If this will show too many files - then at least learn how to explicitly show specific files, like .env files
 
 * Code folding - can be done with: 'z a'
+* Open a terminal window with: '<C-/>'
 
 * Git
   * how to switch branches
