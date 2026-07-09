@@ -10,15 +10,20 @@ leader key: `;`
 ### Shortcuts  
 
 **Vim Configurations**  
-`:Vimrc` - Telescope to vim configuration files  
-`:PackerInstall` - Install / Uninstall plugins  
-`:PackerUpdate` - Update plugins  
+
+In the terminal type `dotfiles` to go to the dotfiles directory, and hit `v` to open neovim.  
+
+Inside neovim:  
+* type `:Lazy` to see which plugins are installed and enabled
+* type `:Mason` to see which language servers are installed
+
 
 **Files**  
 `Ctrl+p` - Open telescope file finder  
 `<leader>bb` - Open telescope for open buffers  
 `<leader>n` - Find file in nerd tree  
 `<leader>w` - Save file  
+`<leader>q` - Close buffer (file)
 
 **Code (lsp)**  
 `gd` - Go to definition  
@@ -43,6 +48,8 @@ leader key: `;`
 **Editing**  
 `ciw` - Change inner word  
 `diw` - Delete inner word  
+`ci(` - Change inside parenthesis
+`ci<` - Change inside brackets
 `u` - Undo last change  
 `r` - Redo change  
 

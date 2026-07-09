@@ -20,16 +20,27 @@ return {
         end,
         desc = "Open buffers",
       },
+      {
+        "<leader>e",
+        function()
+          Snacks.explorer.reveal()
+        end,
+        desc = "Find current file in explorer",
+      },
     },
 
     opts = {
       explorer = {
         replace_netrw = true,
+        follow_file = false,
+        hidden = true,
       },
 
       picker = {
         sources = {
           explorer = {
+            hidden = true,
+            follow_file = false, -- don't auto-jump to the current buffer
             win = {
               list = {
                 keys = {
