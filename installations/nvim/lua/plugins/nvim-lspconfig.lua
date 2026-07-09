@@ -23,24 +23,35 @@ return {
       vim.lsp.enable("ty")
       vim.lsp.enable("vtsls")
     end,
-    opts = function(_, opts)
-      opts.servers["*"].keys = {
-        -- Disable <leader>cc mapping for lsp (so we can use this for toggling comments)
-        { "<leader>cc", false, mode = { "n", "x", "v" } },
-      }
 
-      -- opts.autoformat = function()
-      --   local filename = vim.api.nvim_buf_get_name(0)
-      --
-      --   local in_ui_modules = string.find(filename, "/dev/ui-modules")
-      --   if in_ui_modules ~= nil then
-      --     return false
-      --   end
-      --
-      --   return true
-      -- end
+    opts = {
+      servers = {
+        ["*"] = {
+          keys = {
+            { "<leader>cc", false, mode = { "n", "x", "v" } },
+          },
+        },
+      },
+    },
 
-      return opts
-    end,
+    -- opts = function(_, opts)
+    --   opts.servers["*"].keys = {
+    --     -- Disable <leader>cc mapping for lsp (so we can use this for toggling comments)
+    --     { "<leader>cc", false, mode = { "n", "x", "v" } },
+    --   }
+    --
+    --   -- opts.autoformat = function()
+    --   --   local filename = vim.api.nvim_buf_get_name(0)
+    --   --
+    --   --   local in_ui_modules = string.find(filename, "/dev/ui-modules")
+    --   --   if in_ui_modules ~= nil then
+    --   --     return false
+    --   --   end
+    --   --
+    --   --   return true
+    --   -- end
+    --
+    --   return opts
+    -- end,
   },
 }
