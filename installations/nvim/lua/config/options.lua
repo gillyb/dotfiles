@@ -53,6 +53,8 @@ vim.o.backup = false
 vim.o.swapfile = false
 vim.o.hidden = true
 
+vim.o.spell = false
+
 -- Prioritize using the last accessed window for quickfix commands
 vim.o.switchbuf = "uselast"
 

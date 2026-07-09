@@ -23,3 +23,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
   desc = "Set filetype to env for .env extensions",
 })
+
+-- Disable LazyVim's default spell check
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")

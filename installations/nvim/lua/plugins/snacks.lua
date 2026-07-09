@@ -21,9 +21,12 @@ return {
         desc = "Open buffers",
       },
       {
-        "<leader>e",
+        "<leader>n",
         function()
-          Snacks.explorer.reveal()
+          local explorer = Snacks.explorer.reveal()
+          if explorer then
+            explorer:focus()
+          end
         end,
         desc = "Find current file in explorer",
       },

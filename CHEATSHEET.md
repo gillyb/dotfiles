@@ -19,9 +19,9 @@ Inside neovim:
 
 
 **Files**  
-`Ctrl+p` - Open telescope file finder  
-`<leader>bb` - Open telescope for open buffers  
-`<leader>n` - Find file in nerd tree  
+`Ctrl+p` - Open file finder  
+`<leader>bb` - Open buffers list  
+`<leader>n` - Find file in file explorer
 `<leader>w` - Save file  
 `<leader>q` - Close buffer (file)
 
@@ -38,6 +38,8 @@ Inside neovim:
 `<leader>a` - Code actions  
 
 `<leader>cc` - Comment/Uncomment line  
+
+`za` - Fold/Unfold code section  
 
 **Splits**  
 `<leader>j` - Split current pane vertically  
@@ -62,6 +64,9 @@ Inside neovim:
 **Lsp**  
 `:LspInfo` - Get lsp status of active language servers  
 `:LsRestart` - Restarts the language server  
+
+Misc  
+`<C-/>` - Opens (or closes) a terminal buffer
 
 
 ## tmux  
