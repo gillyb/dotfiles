@@ -55,6 +55,9 @@ vim.o.hidden = true
 
 vim.o.spell = false
 
+-- Add a border around floating windows (LSP hover, signature help, etc.)
+vim.o.winborder = "rounded"
+
 -- Prioritize using the last accessed window for quickfix commands
 vim.o.switchbuf = "uselast"
 
