@@ -24,9 +24,12 @@ setopt autopushd
 
 # Configure history file - and append to file after each command
 HISTFILE=~/.zsh_history
-HISTSIZE=2000
-SAVEHIST=2000
+HISTSIZE=4000
+SAVEHIST=4000
 export PROMPT_COMMAND="history -a; history -n"
+
+# Share history across all active sessions
+setopt share_history
 
 
 
@@ -91,6 +94,12 @@ alias wip='git add . && git c -m "wip" --no-verify && git push --no-verify'
 
 # Close tmux or terminal split/tab
 alias xx='exit'
+
+# function for convenient branch names
+cb() {
+  local branch_name="$1"
+  git checkout -b gilly/${branch_name}
+}
 
 
 # FZF settings

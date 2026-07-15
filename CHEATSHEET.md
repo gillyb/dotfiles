@@ -68,6 +68,11 @@ Inside neovim:
 Misc  
 `<C-/>` - Opens (or closes) a terminal buffer
 
+Quickfix List  
+`<C-q>` - Open the quickfix list with the current list in it
+`Cfilter <query>` - filter the quickfix list to only entries with `query` in them.
+`Cfilter !<query>` - filter **out** the entries with `query` in them.
+
 
 ## tmux  
 
