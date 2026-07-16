@@ -67,6 +67,7 @@ Inside neovim:
 
 Misc  
 `<C-/>` - Opens (or closes) a terminal buffer
+`<leader>gg` - open lazygit
 
 Quickfix List  
 `<C-q>` - Open the quickfix list with the current list in it
@@ -96,4 +97,5 @@ leader key: `Ctrl+a`
 ## Git stuff
 
 Checkout file from another branch: `git checkout <branch> -- <file>`  
+Create branch: `cb <branch_name>` - will create branch with the name `gilly/<branch_name>`
 
